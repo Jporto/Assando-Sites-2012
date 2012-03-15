@@ -7,17 +7,21 @@ App::uses('AppModel', 'Model');
  */
 class AppModelTestCase extends CakeTestCase {
 
-	/**
-	 * Inicializa os testes
-	 */
+/**
+ * Inicializa os testes
+ * 
+ * @return  void
+ */
 	public function setUp() {
 		parent::setUp();
 		$this->AppModel = ClassRegistry::init('AppModel');
 	}
 
-	/**
-	 * Testa o objeto de AppModel
-	 */
+/**
+ * Testa o objeto de AppModel
+ * 
+ * @return  void
+ */
 	public function testAppModelObject() {
 		$result = $this->AppModel;
 		$expected = 'Model';
@@ -25,9 +29,11 @@ class AppModelTestCase extends CakeTestCase {
 		$this->assertInstanceOf($expected, $result, 'AppModel não é uma instância de Model');
 	}
 
-	/**
-	 * Finaliza os testes
-	 */
+/**
+ * Finaliza os testes
+ * 
+ * @return  void
+ */
 	public function tearDown() {
 		unset($this->AppModel);
 
