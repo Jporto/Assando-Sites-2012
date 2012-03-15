@@ -1,0 +1,9 @@
+# Arquivos de configuração
+/Config/core.php
+/Config/database.php
+
+# Arquivos temporários
+/tmp
+
+# Uploads
+/webroot/files
