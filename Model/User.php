@@ -115,9 +115,6 @@ class User extends AppModel {
  * @return array
  */
 	public function findStudents($findType = 'all', $params = array()) {
-		// Lista de grupos válidos
-		$groups = $this->Group->findStaff();
-
 		// Não há o parâmetro de condições?
 		if (!isset($params['conditions'])) {
 			$params['conditions'] = array();
@@ -125,7 +122,7 @@ class User extends AppModel {
 
 		// Adiciona os parâmetros de busca
 		$params['conditions'] = array_merge(array(
-			'Group.id NOT' => array_keys($groups)
+			'Group.id' => Group::ALUNOS
 		), $params['conditions']);
 
 		return $this->find($findType, $params);
