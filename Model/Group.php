@@ -48,6 +48,29 @@ class Group extends AppModel {
 	public $hasMany = array('User');
 
 /**
+ * Retorna apenas grupos do staff
+ * 
+ * @param  string $findType Tipo de find
+ * @param  array  $params   Parâmetros de busca
+ * 
+ * @return array
+ */
+	public function findStaff($findType = 'list', $params = array()) {
+		// Não há o parâmetro de condições?
+		if (!isset($params['conditions'])) {
+			$params['conditions'] = array();
+		}
+
+		// Adiciona os parâmetros de busca
+		$params['conditions'] = array_merge(array(
+			'Group.staff' => true,
+			'Group.status_id' => true
+		), $params['conditions']);
+
+		return $this->find($findType, $params);
+	}
+
+/**
  * Grupo de alunos
  */
 	const ALUNOS = 1;
