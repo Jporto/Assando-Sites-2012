@@ -16,3 +16,6 @@
 [submodule "Plugin/TwitterBootstrap"]
 	path = Plugin/TwitterBootstrap
 	url = git://github.com/renansaddam/CakePHP-Bootstrap-Plugin.git
+[submodule "webroot/TwitterBootstrap"]
+	path = webroot/TwitterBootstrap
+	url = git://github.com/twitter/bootstrap.git
