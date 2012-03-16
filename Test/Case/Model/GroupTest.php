@@ -37,6 +37,19 @@ class GroupTestCase extends CakeTestCase {
 	}
 
 /**
+ * Testa o Group::findStaff()
+ * 
+ * @return void
+ */
+	public function testFindStaff() {
+		$result = $this->Group->findStaff();
+		$expected = 'array';
+
+		$this->assertInternalType($expected, $result, 'O resultado de Group::findStaff() não é um array');
+		$this->assertCount(2, $result, 'O resultado de Group::findStaff() deve ser igual a dois grupos');
+	}
+
+/**
  * tearDown method
  *
  * @return void
