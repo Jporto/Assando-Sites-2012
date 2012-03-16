@@ -39,6 +39,8 @@ class GroupTestCase extends CakeTestCase {
 /**
  * Testa o Group::findStaff()
  * 
+ * @covers Group::findStaff
+ * 
  * @return void
  */
 	public function testFindStaff() {

@@ -117,6 +117,8 @@ class UserTestCase extends CakeTestCase {
 /**
  * Testa o User::findStaff()
  * 
+ * @covers User::findStaff
+ * 
  * @return void
  */
 	public function testFindStaff() {
