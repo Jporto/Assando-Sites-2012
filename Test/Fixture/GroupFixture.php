@@ -20,7 +20,19 @@ class GroupFixture extends CakeTestFixture {
 	public $records = array(
 		array(
 			'id' => 1,
-			'name' => 'Lorem ipsum dolor sit amet',
+			'name' => 'Alunos',
+			'staff' => 0,
+			'status_id' => 1
+		),
+		array(
+			'id' => 2,
+			'name' => 'Financeiro',
+			'staff' => 1,
+			'status_id' => 1
+		),
+		array(
+			'id' => 3,
+			'name' => 'Administradores',
 			'staff' => 1,
 			'status_id' => 1
 		),

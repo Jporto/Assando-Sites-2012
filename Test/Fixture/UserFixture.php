@@ -20,7 +20,18 @@ class UserFixture extends CakeTestFixture {
 	public $records = array(
 		array(
 			'id' => 1,
-			'group_id' => 1,
+			'group_id' => 3, // Admin
+			'name' => 'Admin',
+			'surname' => 'Ipsum',
+			'email' => 'admin.ipsum@dolor.com',
+			'password' => 'admin',
+			'status_id' => 1,
+			'created' => '2012-03-15 20:44:43',
+			'modified' => '2012-03-15 20:44:43'
+		),
+		array(
+			'id' => 2,
+			'group_id' => 1, // Aluno
 			'name' => 'Lorem',
 			'surname' => 'Ipsum',
 			'email' => 'lorem.ipsum@dolor.com',
