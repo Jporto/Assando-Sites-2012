@@ -52,6 +52,18 @@ class AppModelTestCase extends CakeTestCase {
 	}
 
 /**
+ * Testa o recursive padrão
+ * 
+ * @return  void
+ */
+	public function testRecursive() {
+		$result = $this->AppModel->recursive;
+		$expected = false;
+
+		$this->assertEquals($expected, $result, 'AppModel::$recursive não está desabilitado por padrão');
+	}
+
+/**
  * Testa o User::find('active')
  * 
  * @covers AppModel::_findActive

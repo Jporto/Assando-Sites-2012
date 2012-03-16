@@ -37,6 +37,68 @@ class CourseTestCase extends CakeTestCase {
 	}
 
 /**
+ * Testa se o sluggable behavior está no model
+ * 
+ * @return  void
+ */
+	public function testSluggableBehaviorAttached() {
+		$result = CakePlugin::loaded('Utils');
+		$this->assertTrue($result, 'Utils plugin não está sendo carregado');
+
+		$result = $this->Course->actsAs;
+		$expected = 'Utils.Sluggable';
+
+		$this->assertInternalType('array', $result, 'Course não tem behaviors');
+		$this->assertArrayHasKey($expected, $result, 'Course não tem o Sluggable behavior');
+	}
+
+/**
+ * Testa se o sluggable behavior está funcionando
+ * 
+ * @return  void
+ */
+	public function testSluggableBehavior() {
+		$this->Course->create();
+		$this->Course->save(array(
+			'name' => 'Turma 2011.2 - Curso Avançado'
+		));
+
+		$result = $this->Course->field('slug');
+		$expected = 'turma-2011-2-curso-avancado';
+
+		$this->assertEquals($expected, $result, 'O slug gerado está incorreto');
+	}
+
+/**
+ * Testa se o sluggable behavior está funcionando
+ * 
+ * @return  void
+ */
+	public function testSluggableBehaviorWithRepeatedTitle() {
+		// Primeiro registro
+		$this->Course->create();
+		$this->Course->save(array(
+			'name' => 'Turma 2011.2 - Curso Avançado'
+		));
+
+		$result = $this->Course->field('slug');
+		$expected = 'turma-2011-2-curso-avancado';
+
+		$this->assertEquals($expected, $result, 'O slug gerado está incorreto');
+
+		// Segundo registro
+		$this->Course->create();
+		$this->Course->save(array(
+			'name' => 'Turma 2011.2 - Curso Avançado'
+		));
+
+		$result = $this->Course->field('slug');
+		$expected = 'turma-2011-2-curso-avancado-1';
+
+		$this->assertEquals($expected, $result, 'O slug gerado está incorreto');
+	}
+
+/**
  * tearDown method
  *
  * @return void

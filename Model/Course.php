@@ -12,6 +12,20 @@ App::uses('AppModel', 'Model');
 class Course extends AppModel {
 
 /**
+ * Behaviors
+ * 
+ * @var array
+ */
+	public $actsAs = array(
+		'Utils.Sluggable' => array(
+			'label' => 'name',
+			'slug' => 'slug',
+			'separator' => '-',
+			'update' => true,
+		)
+	);
+
+/**
  * Validation rules
  *
  * @var array

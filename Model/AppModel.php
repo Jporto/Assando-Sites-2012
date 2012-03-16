@@ -37,6 +37,13 @@ class AppModel extends Model {
 	public $actsAs = array('Containable');
 
 /**
+ * Busca recursiva por padrão?
+ * 
+ * @var array
+ */
+	public $recursive = false;
+
+/**
  * Tipos de find
  * 
  * @var array
@@ -69,6 +76,20 @@ class AppModel extends Model {
 		}
 
 		return $query;
+	}
+
+/**
+ * Gera o slug de uma string multibyte
+ * 
+ * @param  string $slug      O slug a ser gerado
+ * @param  string $separator Caractere separador
+ * 
+ * @return string
+ */
+	public function multibyteSlug($slug, $separator) {
+		$slug = (function_exists('mb_strtolower') ? mb_strtolower($slug) : strtolower($slug));
+
+		return Inflector::slug($slug, $separator);
 	}
 
 }
