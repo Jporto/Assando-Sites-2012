@@ -37,6 +37,54 @@ class UserTestCase extends CakeTestCase {
 	}
 
 /**
+ * Verifica as relações de belongsTo
+ * 
+ * @return void
+ */
+	public function testBelongsTo() {
+		$result = $this->User->getAssociated('belongsTo');
+
+		$expected = 'Group';
+		$this->assertContains($expected, $result, 'User não pertence à Group');
+
+		$expected = 'Status';
+		$this->assertContains($expected, $result, 'User não pertence à Status');
+	}
+
+/**
+ * Verifica as relações de hasOne
+ * 
+ * @return void
+ */
+	public function testHasOne() {
+		$result = $this->User->getAssociated('hasOne');
+
+		$expected = 'Information';
+		$this->assertContains($expected, $result, 'User não tem um Information');
+
+		$expected = 'Address';
+		$this->assertContains($expected, $result, 'User não tem um Address');
+
+		$expected = 'HighrisePerson';
+		$this->assertContains($expected, $result, 'User não tem um Address');
+	}
+
+/**
+ * Verifica as relações de hasMany
+ * 
+ * @return void
+ */
+	public function testHasMany() {
+		$result = $this->User->getAssociated('hasMany');
+
+		$expected = 'Payment';
+		$this->assertContains($expected, $result, 'User não tem vários Payment');
+
+		$expected = 'Enrollment';
+		$this->assertContains($expected, $result, 'User não tem vários Enrollment');
+	}
+
+/**
  * tearDown method
  *
  * @return void
