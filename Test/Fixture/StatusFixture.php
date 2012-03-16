@@ -20,7 +20,7 @@ class StatusFixture extends CakeTestFixture {
 	public $records = array(
 		array(
 			'id' => '1',
-			'name' => 'Active',
+			'name' => 'Ativo',
 			'model' => null
 		),
 	);
