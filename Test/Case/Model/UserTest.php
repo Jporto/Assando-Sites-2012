@@ -115,6 +115,18 @@ class UserTestCase extends CakeTestCase {
 	}
 
 /**
+ * Retorno do User::findStaff()
+ * 
+ * @return void
+ */
+	public function testFindStaff() {
+		$result = $this->User->findStaff();
+		$expected = 'array';
+
+		$this->assertInternalType($expected, $result, 'O resultado de User::findStaff() não é um array');
+	}
+
+/**
  * tearDown method
  *
  * @return void
