@@ -32,4 +32,35 @@ App::uses('Controller', 'Controller');
  * @link http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+
+	public $components = array('DebugKit.Toolbar');
+
+/**
+ * Verifica se a requisição possui um prefixo
+ *
+ * @param  string  $prefix Nome do prefixo
+ * 
+ * @return boolean
+ */
+	protected function _isPrefix($prefix) {
+		return (isset($this->request->params['prefix']) && ($this->request->params['prefix'] === $prefix));
+	}
+
+/**
+ * Antes de filtrar
+ * 
+ * 1 - Define o layout do prefixo 'admin'
+ * 
+ * @return void
+ */
+	public function beforeFilter() {
+		if ($this->_isPrefix('admin')) {
+			$this->layout = 'admin';
+
+			array_push($this->helpers, 'TwitterBootstrap.BootstrapForm');
+		}
+
+		return parent::beforeFilter();
+	}
+
 }

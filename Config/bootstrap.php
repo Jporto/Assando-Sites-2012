@@ -25,4 +25,9 @@
 
 Cache::config('default', array('engine' => 'File'));
 
+if (Configure::read('debug')) {
+	CakePlugin::loadAll('DebugKit');
+}
+
 CakePlugin::loadAll('Utils');
+CakePlugin::loadAll('TwitterBootstrap');
