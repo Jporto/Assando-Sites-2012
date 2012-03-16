@@ -28,7 +28,7 @@ Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home
 Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
 // Control Panel
-Router::connect('/admin', array('controller' => 'users', 'action' => 'index'));
+Router::connect('/admin', array('controller' => 'users', 'action' => 'index', 'admin' => true));
 
 
 // Load all plugin routes
