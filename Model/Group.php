@@ -47,4 +47,19 @@ class Group extends AppModel {
  */
 	public $hasMany = array('User');
 
+/**
+ * Grupo de alunos
+ */
+	const ALUNOS = 1;
+
+/**
+ * Grupo de membros do financeiro
+ */
+	const FINANCEIRO = 2;
+
+/**
+ * Grupo de administradores
+ */
+	const ADMINISTRADORES = 3;
+
 }
