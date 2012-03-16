@@ -1,25 +1,64 @@
 <?php
+
 App::uses('AppModel', 'Model');
 
 /**
- * Model de usuários
+ * User Model
  *
- * @property Address $Address
- * @property HighrisePerson $HighrisePerson
- * @property Information $Information
  * @property Group $Group
  * @property Status $Status
+ * @property Address $Address
  * @property Enrollment $Enrollment
+ * @property HighrisePerson $HighrisePerson
+ * @property Information $Information
  * @property Payment $Payment
  */
 class User extends AppModel {
 
 /**
- * Display field
+ * Validation rules
  *
- * @var string
+ * @var array
  */
-	public $displayField = 'name';
+	public $validate = array(
+		'group_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+			),
+		),
+		'name' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+			),
+		),
+		'surname' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+			),
+		),
+		'email' => array(
+			'email' => array(
+				'rule' => array('email'),
+			),
+		),
+		'password' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+			),
+		),
+		'status_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+			),
+		),
+	);
+
+/**
+ * belongsTo associations
+ *
+ * @var array
+ */
+	public $belongsTo = array('Group', 'Status');
 
 /**
  * hasOne associations
@@ -29,17 +68,7 @@ class User extends AppModel {
 	public $hasOne = array(
 		'Address' => array('dependent' => true),
 		'HighrisePerson' => array('dependent' => true),
-		'Information' => array('dependent' => true)
-	);
-
-/**
- * belongsTo associations
- *
- * @var array
- */
-	public $belongsTo = array(
-		'Group',
-		'Status'
+		'Information' => array('dependent' => true),
 	);
 
 /**
@@ -49,7 +78,7 @@ class User extends AppModel {
  */
 	public $hasMany = array(
 		'Enrollment' => array('dependent' => true),
-		'Payment' => array('dependent' => true)
+		'Payment' => array('dependent' => true),
 	);
 
 }

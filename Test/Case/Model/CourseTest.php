@@ -1,18 +1,18 @@
 <?php
-App::uses('User', 'Model');
+App::uses('Course', 'Model');
 
 /**
- * User Test Case
+ * Course Test Case
  *
  */
-class UserTestCase extends CakeTestCase {
+class CourseTestCase extends CakeTestCase {
 
 /**
  * Fixtures
  *
  * @var array
  */
-	public $fixtures = array('app.user', 'app.group', 'app.status', 'app.address', 'app.highrise_person', 'app.information', 'app.enrollment', 'app.course', 'app.lesson', 'app.payment', 'app.payment_gateway');
+	public $fixtures = array('app.course', 'app.status', 'app.enrollment', 'app.lesson');
 
 /**
  * setUp method
@@ -21,7 +21,7 @@ class UserTestCase extends CakeTestCase {
  */
 	public function setUp() {
 		parent::setUp();
-		$this->User = ClassRegistry::init('User');
+		$this->Course = ClassRegistry::init('Course');
 	}
 
 /**
@@ -31,7 +31,7 @@ class UserTestCase extends CakeTestCase {
  */
 	public function testModelObject() {
 		$expected = 'Model';
-		$result = $this->User;
+		$result = $this->Course;
 
 		$this->assertInstanceOf($expected, $result, 'Objeto não extendeu Model');
 	}
@@ -42,7 +42,7 @@ class UserTestCase extends CakeTestCase {
  * @return void
  */
 	public function tearDown() {
-		unset($this->User);
+		unset($this->Course);
 
 		parent::tearDown();
 	}
