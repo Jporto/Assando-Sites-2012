@@ -13,3 +13,6 @@
 [submodule "Plugin/AssetCompress"]
 	path = Plugin/AssetCompress
 	url = git://github.com/markstory/asset_compress.git
+[submodule "Plugin/TwitterBootstrap"]
+	path = Plugin/TwitterBootstrap
+	url = git://github.com/renansaddam/CakePHP-Bootstrap-Plugin.git
