@@ -85,6 +85,36 @@ class UserTestCase extends CakeTestCase {
 	}
 
 /**
+ * Verifica as relações dos models dependentes
+ * 
+ * @depends testHasOne
+ * @depends testHasMany
+ * @dataProvider dependentRelatedModelsProvider
+ * 
+ * @return void
+ */
+	public function testDependentModelRelation($model) {
+		$related = $this->User->getAssociated($model);
+
+		$this->assertTrue($related['dependent'], "{$model} não depende de User");
+	}
+
+/**
+ * Provider de informações sobre a dependencia dos models relacionados
+ * 
+ * @return array
+ */
+	public function dependentRelatedModelsProvider() {
+		return array(
+			array('Address'),
+			array('HighrisePerson'),
+			array('Information'),
+			array('Enrollment'),
+			array('Payment'),
+		);
+	}
+
+/**
  * tearDown method
  *
  * @return void
