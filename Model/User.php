@@ -106,4 +106,29 @@ class User extends AppModel {
 		return $this->find($findType, $params);
 	}
 
+/**
+ * Encontra usuários que são alunos
+ * 
+ * @param  string $findType Tipo de find
+ * @param  array  $params   Parâmetros de busca
+ * 
+ * @return array
+ */
+	public function findStudents($findType = 'all', $params = array()) {
+		// Lista de grupos válidos
+		$groups = $this->Group->findStaff();
+
+		// Não há o parâmetro de condições?
+		if (!isset($params['conditions'])) {
+			$params['conditions'] = array();
+		}
+
+		// Adiciona os parâmetros de busca
+		$params['conditions'] = array_merge(array(
+			'Group.id NOT' => array_keys($groups)
+		), $params['conditions']);
+
+		return $this->find($findType, $params);
+	}
+
 }

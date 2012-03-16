@@ -130,6 +130,27 @@ class UserTestCase extends CakeTestCase {
 	}
 
 /**
+ * Testa o User::findStudents()
+ * 
+ * @covers User::findStudents
+ * 
+ * @return void
+ */
+	public function testFindStudents() {
+		$result = $this->User->findStudents();
+		$expected = 'array';
+
+		$this->assertInternalType($expected, $result, 'O resultado de User::findStudents() não é um array');
+		$this->assertCount(2, $result, 'O resultado de User::findStudents() deve ser apenas um aluno');
+
+		$result = $this->User->findStudents('active');
+		$expected = 'array';
+
+		$this->assertInternalType($expected, $result, 'O resultado de User::findStudents() não é um array');
+		$this->assertCount(1, $result, 'O resultado de User::findStudents() deve ser apenas um aluno');
+	}
+
+/**
  * tearDown method
  *
  * @return void

@@ -28,4 +28,47 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
+
+/**
+ * Behaviors
+ * 
+ * @var array
+ */
+	public $actsAs = array('Containable');
+
+/**
+ * Tipos de find
+ * 
+ * @var array
+ */
+	public $findMethods = array(
+		# Métodos padrões
+		'all' => true, 'first' => true, 'count' => true,
+		'neighbors' => true, 'list' => true, 'threaded' => true,
+
+		# Novos métodos
+		'active' => true
+	);
+
+/**
+ * Encontra apenas registros ativos
+ * 
+ * @param  string $state   Estado da consulta (after/before)
+ * @param  array $query   Dados da consulta
+ * @param  array  $results Resultados encontrados
+ * 
+ * @return array
+ */
+	protected function _findActive($state, $query, $results = array()) {
+		if ($state == 'after') {
+			return $results;
+		}
+
+		if ($this->hasField('status_id')) {
+			$query['conditions'][$this->escapeField('status_id')] = 1;
+		}
+
+		return $query;
+	}
+
 }
