@@ -115,7 +115,7 @@ class UserTestCase extends CakeTestCase {
 	}
 
 /**
- * Retorno do User::findStaff()
+ * Testa o User::findStaff()
  * 
  * @return void
  */
@@ -124,6 +124,7 @@ class UserTestCase extends CakeTestCase {
 		$expected = 'array';
 
 		$this->assertInternalType($expected, $result, 'O resultado de User::findStaff() não é um array');
+		$this->assertCount(1, $result, 'O resultado de User::findStaff() deve ser apenas um usuário');
 	}
 
 /**
