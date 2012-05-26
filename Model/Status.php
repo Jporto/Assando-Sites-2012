@@ -15,17 +15,16 @@ App::uses('AppModel', 'Model');
  */
 class Status extends AppModel {
 
-/**
- * Validation rules
- *
- * @var array
- */
-	public $validate = array(
-		'name' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
-			),
-		),
+	public $useDbConfig = 'arrayDatasource';
+
+	public $records = array(
+		array('id' => 1, 'name' => 'Ativo', 'model' => null),
+		array('id' => 2, 'name' => 'Inscrições abertas', 'model' => 'Course'),
+		array('id' => 3, 'name' => 'Inscrições fechadas', 'model' => 'Course'),
 	);
+
+	const ATIVO = 1;
+	const INSCRICOES_ABERTAS = 2;
+	const INSCRICOES_FECHADAS = 3;
 
 }
