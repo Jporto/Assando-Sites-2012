@@ -173,6 +173,9 @@ class Course extends AppModel {
 				'Course.status_id' => Status::INSCRICOES_ABERTAS,
 				'Course.enrollment_limit > NOW()'
 			),
+			'order' => array(
+				'Course.start' => 'ASC'
+			),
 			'contain' => array('Status')
 		), $params);
 

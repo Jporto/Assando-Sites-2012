@@ -236,7 +236,7 @@ class CourseTestCase extends CakeTestCase {
 			'start' => date(DB_DATETIME_FORMAT, strtotime('+2 weeks')),
 		));
 
-		// Segundo registro (começa hoje)
+		// Terceiro registro (começa hoje)
 		$this->Course->create();
 		$this->Course->save(array(
 			'name' => 'Turma 2012.5',
@@ -244,11 +244,19 @@ class CourseTestCase extends CakeTestCase {
 			'start' => date(DB_DATETIME_FORMAT, strtotime('today')),
 		));
 
-		// Segundo registro (começa em 1 mês)
+		// Quarto registro (começa em 1 mês)
 		$this->Course->create();
 		$this->Course->save(array(
 			'name' => 'Turma 2012.6',
 			'status_id' => Status::INSCRICOES_ABERTAS,
+			'start' => date(DB_DATETIME_FORMAT, strtotime('+1 month')),
+		));
+
+		// Quinto registro (começa em 1 mês mas com inscrições fechadas)
+		$this->Course->create();
+		$this->Course->save(array(
+			'name' => 'Turma 2012.7',
+			'status_id' => Status::INSCRICOES_FECHADAS,
 			'start' => date(DB_DATETIME_FORMAT, strtotime('+1 month')),
 		));
 
