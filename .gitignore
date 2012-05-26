@@ -1,6 +1,7 @@
 # Arquivos de configuração
 /Config/core.php
 /Config/database.php
+/Config/safe.php
 
 # Arquivos temporários
 /tmp

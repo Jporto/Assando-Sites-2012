@@ -22,3 +22,6 @@
 [submodule "Plugin/Datasources"]
 	path = Plugin/Datasources
 	url = git://github.com/cakephp/datasources.git
+[submodule "Vendor/TwitterOAuth"]
+	path = Vendor/TwitterOAuth
+	url = git://github.com/abraham/twitteroauth.git

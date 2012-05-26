@@ -1,7 +1,8 @@
 <?php
 
 App::uses('AppModel', 'Model');
-App::uses('HttpSocket', 'Network/Http');
+
+App::import('Vendor', 'TwitterOAuth/twitteroauth/twitteroauth');
 
 /**
  * Information Model
@@ -90,11 +91,19 @@ class Information extends AppModel {
  * @return boolean
  */
 	public function twitterProfileExists($data) {
-		$HttpSocket = new HttpSocket();
-
 		$profile = array_shift($data);
-		$response = $HttpSocket->get('http://twitter.com/' . $profile, array(), array('redirect' => true));
 
-		return $response->isOk();
+		$TwitterOAuth = new TwitterOAuth(
+			Configure::read('Twitter.Consumer.key'),
+			Configure::read('Twitter.Consumer.secret'),
+			Configure::read('Twitter.Access.token'),
+			Configure::read('Twitter.Access.secret')
+		);
+
+		$TwitterOAuth->get('users/show', array(
+			'screen_name' => $profile
+		));
+
+		return ($TwitterOAuth->http_code == 200);
 	}
 }
