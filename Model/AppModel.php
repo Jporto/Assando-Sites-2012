@@ -21,6 +21,7 @@
  */
 
 App::uses('Model', 'Model');
+App::uses('BrValidation', 'Localized.Lib');
 
 /**
  * Application model
@@ -90,6 +91,28 @@ class AppModel extends Model {
 		$slug = (function_exists('mb_strtolower') ? mb_strtolower($slug) : strtolower($slug));
 
 		return Inflector::slug($slug, $separator);
+	}
+
+/**
+ * Valida telefones
+ * 
+ * @param  string $data O telefone
+ * 
+ * @return boolean
+ */
+	public function phone($data) {
+		return BrValidation::phone(array_shift($data));
+	}
+
+/**
+ * Valida CPF
+ * 
+ * @param  string $data O CPF
+ * 
+ * @return boolean
+ */
+	public function cpf($data) {
+		return BrValidation::cpf(array_shift($data));
 	}
 
 }

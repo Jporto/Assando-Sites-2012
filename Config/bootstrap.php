@@ -31,5 +31,4 @@ if (Configure::read('debug')) {
 	CakePlugin::loadAll('DebugKit');
 }
 
-CakePlugin::loadAll('Utils');
-CakePlugin::loadAll('TwitterBootstrap');
+CakePlugin::loadAll();
