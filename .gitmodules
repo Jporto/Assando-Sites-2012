@@ -19,3 +19,6 @@
 [submodule "webroot/TwitterBootstrap"]
 	path = webroot/TwitterBootstrap
 	url = git://github.com/twitter/bootstrap.git
+[submodule "Plugin/Datasources"]
+	path = Plugin/Datasources
+	url = git://github.com/cakephp/datasources.git

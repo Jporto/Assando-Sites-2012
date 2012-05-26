@@ -8,13 +8,6 @@ App::uses('Status', 'Model');
 class StatusTestCase extends CakeTestCase {
 
 /**
- * Fixtures
- *
- * @var array
- */
-	public $fixtures = array('app.status');
-
-/**
  * setUp method
  *
  * @return void
@@ -22,6 +15,7 @@ class StatusTestCase extends CakeTestCase {
 	public function setUp() {
 		parent::setUp();
 		$this->Status = ClassRegistry::init('Status');
+		$this->Status->useDbConfig = 'arrayDatasource';
 	}
 
 /**
