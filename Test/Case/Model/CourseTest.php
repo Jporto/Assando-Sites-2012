@@ -12,7 +12,7 @@ class CourseTestCase extends CakeTestCase {
  *
  * @var array
  */
-	public $fixtures = array('app.course', 'app.status', 'app.enrollment', 'app.lesson');
+	public $fixtures = array('app.course', 'app.enrollment', 'app.lesson');
 
 /**
  * setUp method
@@ -22,6 +22,7 @@ class CourseTestCase extends CakeTestCase {
 	public function setUp() {
 		parent::setUp();
 		$this->Course = ClassRegistry::init('Course');
+		$this->Course->Status->useDbConfig = 'arrayDatasource';
 	}
 
 /**
@@ -206,6 +207,55 @@ class CourseTestCase extends CakeTestCase {
 		$expected = 200;
 
 		$this->assertEquals($expected, $result, 'O preço atual do curso (que começa em 2 semanas) está incorreto');
+	}
+
+/**
+ * Testa a busca de turmas coms inscrições abertas
+ * 
+ * @return  void
+ */
+	public function testFindOpenCourses() {
+		$result = $this->Course->findOpenCourses('count');
+		$expected = 0;
+
+		$this->assertEquals($expected, $result, 'Foi encontrado um curso com inscrições fechadas');
+
+		// Primeiro registro (começou a um mês)
+		$this->Course->create();
+		$this->Course->save(array(
+			'name' => 'Turma 2012.3',
+			'status_id' => Status::INSCRICOES_FECHADAS,
+			'start' => date(DB_DATETIME_FORMAT, strtotime('-1 month')),
+		));
+
+		// Segundo registro (começa em 2 semanas)
+		$this->Course->create();
+		$this->Course->save(array(
+			'name' => 'Turma 2012.4',
+			'status_id' => Status::INSCRICOES_ABERTAS,
+			'start' => date(DB_DATETIME_FORMAT, strtotime('+2 weeks')),
+		));
+
+		// Segundo registro (começa hoje)
+		$this->Course->create();
+		$this->Course->save(array(
+			'name' => 'Turma 2012.5',
+			'status_id' => Status::INSCRICOES_FECHADAS,
+			'start' => date(DB_DATETIME_FORMAT, strtotime('today')),
+		));
+
+		// Segundo registro (começa em 1 mês)
+		$this->Course->create();
+		$this->Course->save(array(
+			'name' => 'Turma 2012.6',
+			'status_id' => Status::INSCRICOES_ABERTAS,
+			'start' => date(DB_DATETIME_FORMAT, strtotime('+1 month')),
+		));
+
+		$result = $this->Course->findOpenCourses('count');
+		$expected = 2;
+
+		$this->assertEquals($expected, $result, 'Foi encontrado um número incorreto de cursos com inscrições abertas');
 	}
 
 /**

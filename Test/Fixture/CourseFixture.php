@@ -28,7 +28,7 @@ class CourseFixture extends CakeTestFixture {
 			'end' => '2012-03-15 20:44:40',
 			'enrollment_limit' => '2012-03-15 20:44:40',
 			'advanced' => false,
-			'status_id' => 1,
+			'status_id' => 2,
 			'created' => '2012-03-15 20:44:40',
 			'modified' => '2012-03-15 20:44:40'
 		),

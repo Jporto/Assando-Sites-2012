@@ -68,7 +68,13 @@ class Course extends AppModel {
  *
  * @var array
  */
-	public $belongsTo = array('Status');
+	public $belongsTo = array(
+		'Status' => array(
+			'conditions' => array(
+				'Status.model' => 'Course'
+			)
+		)
+	);
 
 /**
  * hasMany associations
@@ -151,6 +157,26 @@ class Course extends AppModel {
  */
 	public function currentPrice() {
 		return $this->_calculatePrice();
+	}
+
+/**
+ * Busca cursos abertos
+ * 
+ * @param  string $find   Tipo de find
+ * @param  array  $params Parâmetros de busca
+ * 
+ * @return array
+ */
+	public function findOpenCourses($find = 'all', $params = array()) {
+		$params = Set::merge(array(
+			'conditions' => array(
+				'Course.status_id' => Status::INSCRICOES_ABERTAS,
+				'Course.enrollment_limit > NOW()'
+			),
+			'contain' => array('Status')
+		), $params);
+
+		return $this->find($find, $params);
 	}
 
 /**
