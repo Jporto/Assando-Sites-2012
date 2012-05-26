@@ -23,6 +23,8 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
+define('DB_DATETIME_FORMAT', 'Y-m-d H:i:s');
+
 Cache::config('default', array('engine' => 'File'));
 
 if (Configure::read('debug')) {

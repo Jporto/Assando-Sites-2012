@@ -80,4 +80,33 @@ class Course extends AppModel {
 		'Lesson' => array('dependent' => true)
 	);
 
+/**
+ * Calcula a data limite de inscrição
+ * 
+ * @return string
+ */
+	protected function _calculateEnrollmentLimit($start) {
+		$courseStart = new DateTime($start);
+		$timeInterval = DateInterval::createFromDateString(Configure::read('Enrollment.limit'));
+
+		$enrollmentLimit = $courseStart->sub($timeInterval);
+		$enrollmentLimit->setTime(23, 59, 59);
+
+		return $enrollmentLimit->format(DB_DATETIME_FORMAT);
+	}
+
+/**
+ * Antes de validar
+ * 
+ * @return boolean
+ */
+	public function beforeSave($options = array()) {
+		if (!isset($this->data[$this->alias]['enrollment_limit']) && isset($this->data[$this->alias]['start'])) {
+			$start = $this->data[$this->alias]['start'];
+			$this->data[$this->alias]['enrollment_limit'] = $this->_calculateEnrollmentLimit($start);
+		}
+
+		return parent::beforeSave($options);
+	}
+
 }
