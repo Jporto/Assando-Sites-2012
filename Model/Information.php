@@ -93,17 +93,23 @@ class Information extends AppModel {
 	public function twitterProfileExists($data) {
 		$profile = array_shift($data);
 
-		$TwitterOAuth = new TwitterOAuth(
-			Configure::read('Twitter.Consumer.key'),
-			Configure::read('Twitter.Consumer.secret'),
-			Configure::read('Twitter.Access.token'),
-			Configure::read('Twitter.Access.secret')
-		);
+		if (!isset($this->TwitterOAuth)) {
+			// Instancia o TwitterOauth
+			$this->TwitterOAuth = new TwitterOAuth(
+				Configure::read('Twitter.Consumer.key'),
+				Configure::read('Twitter.Consumer.secret'),
+				Configure::read('Twitter.Access.token'),
+				Configure::read('Twitter.Access.secret')
+			);
+		}
 
-		$TwitterOAuth->get('users/show', array(
+		// Busca pelo usuário
+		$this->TwitterOAuth->get('users/show', array(
 			'screen_name' => $profile
 		));
 
-		return ($TwitterOAuth->http_code == 200);
+		$returnCode = $this->TwitterOAuth->http_code;
+
+		return ($returnCode == 200);
 	}
 }
