@@ -143,6 +143,72 @@ class CourseTestCase extends CakeTestCase {
 	}
 
 /**
+ * Testa os métodos de cálculo de preço do curso
+ * 
+ * @return  void
+ */
+	public function testPricesWithDiscount() {
+		// Primeiro registro (começa em 2 meses e 1 semana)
+		$this->Course->create();
+		$this->Course->save(array(
+			'name' => 'Turma 2012.3',
+			'price' => 199.50,
+			'start' => date(DB_DATETIME_FORMAT, strtotime('+2 months 1 week')),
+		));
+
+		$result = $this->Course->currentPrice();
+		$expected = 140.0;
+
+		$this->assertEquals($expected, $result, 'O preço atual do curso (que começa em 2 meses e 1 semana) está incorreto');
+
+		// Segundo registro (começa em 1 mês e 1 semana)
+		$this->Course->create();
+		$this->Course->save(array(
+			'name' => 'Turma 2012.4',
+			'price' => 300,
+			'start' => date(DB_DATETIME_FORMAT, strtotime('+1 month 1 week')),
+		));
+
+		$result = $this->Course->currentPrice();
+		$expected = 210;
+
+		$this->assertEquals($expected, $result, 'O preço atual do curso (que começa em 1 mês e 1 semana) está incorreto');
+
+		// Terceiro (começa após o limite de 15 dias)
+		$this->Course->create();
+		$this->Course->save(array(
+			'name' => 'Turma 2012.5',
+			'price' => 50,
+			'start' => date(DB_DATETIME_FORMAT, strtotime('+22 days')),
+		));
+
+		$result = $this->Course->currentPrice();
+		$expected = 43;
+
+		$this->assertEquals($expected, $result, 'O preço atual do curso (que começa em 22 dias) está incorreto');
+	}
+
+/**
+ * Testa os métodos de cálculo de preço do curso sem desconto
+ * 
+ * @return  void
+ */
+	public function testPricesWithoutDiscount() {
+		// Primeiro registro (começa em 2 semanas)
+		$this->Course->create();
+		$this->Course->save(array(
+			'name' => 'Turma 2012.3',
+			'price' => 200,
+			'start' => date(DB_DATETIME_FORMAT, strtotime('+2 weeks')),
+		));
+
+		$result = $this->Course->currentPrice();
+		$expected = 200;
+
+		$this->assertEquals($expected, $result, 'O preço atual do curso (que começa em 2 semanas) está incorreto');
+	}
+
+/**
  * tearDown method
  *
  * @return void

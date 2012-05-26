@@ -85,14 +85,72 @@ class Course extends AppModel {
  * 
  * @return string
  */
-	protected function _calculateEnrollmentLimit($start) {
+	protected function _calculateEnrollmentLimit($start = null) {
+		if (empty($start)) {
+			$start = $this->field('start');
+		}
+
 		$courseStart = new DateTime($start);
 		$timeInterval = DateInterval::createFromDateString(Configure::read('Enrollment.limit'));
 
 		$enrollmentLimit = $courseStart->sub($timeInterval);
 		$enrollmentLimit->setTime(23, 59, 59);
 
-		return $enrollmentLimit->format(DB_DATETIME_FORMAT);
+		return $enrollmentLimit;
+	}
+
+/**
+ * Calcula o preço com desconto de um curso
+ * 
+ * @param  float $price Preco total
+ * @param  int $discount Desconto em (%)
+ * 
+ * @return float
+ */
+	protected function _calculateCoursePriceWithDiscount($price, $discount) {
+		$discount = $price * ($discount / 100);
+		$price = ceil($price - $discount);
+
+		return (float)$price;
+	}
+
+/**
+ * Calcula o preço do curso em uma data específica
+ * 
+ * @param  integeter $when The timestamp
+ * 
+ * @return float
+ */
+	protected function _calculatePrice($when = 'now') {
+		$coursePrice = $this->field('price');
+
+		// Limite de inscrição
+		$enrollmentLimit = $this->_calculateEnrollmentLimit();
+
+		// Timestamps do limite de inscrição e da data de inscrição
+		$enrollmentLimitTimestamp = $enrollmentLimit->getTimestamp();
+		$enrollmentWhenTimestamp = strtotime($when);
+
+		// Procura um desconto
+		foreach (Configure::read('Enrollment.discounts') as $discount) {
+			$discountLimitTimestamp = strtotime('-' . $discount['limit'], $enrollmentLimitTimestamp);
+
+			// Se o limite do desconto for após a data da inscrição
+			if ($discountLimitTimestamp > $enrollmentWhenTimestamp) {
+				return $this->_calculateCoursePriceWithDiscount($coursePrice, $discount['value']);
+			}
+		}
+
+		return $coursePrice;
+	}
+
+/**
+ * Calcula o preço atual do cuso
+ * 
+ * @return float
+ */
+	public function currentPrice() {
+		return $this->_calculatePrice();
 	}
 
 /**
@@ -102,8 +160,10 @@ class Course extends AppModel {
  */
 	public function beforeSave($options = array()) {
 		if (!isset($this->data[$this->alias]['enrollment_limit']) && isset($this->data[$this->alias]['start'])) {
-			$start = $this->data[$this->alias]['start'];
-			$this->data[$this->alias]['enrollment_limit'] = $this->_calculateEnrollmentLimit($start);
+			$courseStart = $this->data[$this->alias]['start'];
+			$enrollmentLimit = $this->_calculateEnrollmentLimit($courseStart);
+
+			$this->data[$this->alias]['enrollment_limit'] = $enrollmentLimit->format(DB_DATETIME_FORMAT);
 		}
 
 		return parent::beforeSave($options);
