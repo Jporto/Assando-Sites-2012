@@ -4,8 +4,10 @@
 	<meta charset="utf-8" />
 	<title>Assando Sites</title>
 
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
+
 	<?php echo $this->Html->css($this->Html->url('/css/estilo.less', true), 'stylesheet/less') ?>
-	<?php echo $this->Html->css($this->Html->url('/css/mobile.less', true), 'stylesheet/less', array('media' => 'screen and (max-width: 400px)')) ?>
+	<?php echo $this->Html->css($this->Html->url('/css/mobile.less', true), 'stylesheet/less', array('media' => 'screen and (max-width: 600px)')) ?>
 
 	<?php echo $this->Html->script('less') ?>
 	<script>less.watch()</script>
@@ -52,10 +54,10 @@
 
 	<!-- principal -->
 	<section role="main">
-		<div class="limite">
-			
-			<!-- inscricoes -->
-			<section class="inscricoes">
+		
+		<!-- inscricoes -->
+		<section class="inscricoes">
+			<div class="limite">
 				<h1>Próxima turma</h1>
 
 				<p>Fim das inscrições: <time>15/07</time></p>
@@ -67,8 +69,11 @@
 					<h2>Inscreva-se</h2>
 					<p>Inscreva-se agora e ganhe 20% de desconto!</p>
 				</a>
-			</section>
-			<!-- /inscricoes -->
+			</div>
+		</section>
+		<!-- /inscricoes -->
+
+		<div class="limite">
 
 			<!-- vantagens -->
 			<section class="vantagens">

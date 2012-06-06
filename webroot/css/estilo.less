@@ -1,6 +1,249 @@
 @import "normalize";
 @import "config";
+@import "mixins";
 
-abbr {
-	cursor: help;
+body {
+	font-size: 1em;
+}
+
+abbr { cursor: help }
+
+nav {
+	ul, li { margin: 0; padding: 0 }
+	a { text-decoration: none }
+}
+
+section h1 { margin-top: 0 }
+
+// Engloba o conteúdo, centralizando-o
+.limite {
+	width: @largura_site;
+	margin: 0 auto;
+	padding: 0 @gutter;
+
+	position: relative;
+}
+
+// Header
+header[role=heading] {
+	background: @amarelo;
+	padding: @espaco_medio 0 @espaco_grande;
+	overflow: hidden;
+
+	// Os elementos ocupam metade da largura
+	hgroup,	nav[role=navigation], .sobre {
+		width: 50%;
+	}
+
+	h1 { margin-top: 0 }
+
+	// Navegação principal
+	nav[role=navigation] {
+		position: absolute;
+		top: 0;
+		right: @gutter;
+
+		text-align: right;
+
+		li {
+			display: inline-block;
+			margin-left: @espaco_pequeno;
+		}
+	}
+
+	// Sobre o curso
+	.sobre {
+		ul, li { magrin: 0; padding: 0 }
+
+		li {
+			display: block;
+			float: left;
+			margin-right: 20px;
+
+			width: 100px;
+			height: 125px;
+
+			text-indent: -9999em;
+			background: @verde;
+			list-style: none;
+
+			.border-radius(12px);
+		}
+	}
+
+}
+
+// Conteúdo
+section[role=main] {
+	overflow: hidden;
+
+	// Faixa de inscrições
+	.inscricoes {
+		background: @amarelo_escuro;
+		padding: @espaco_medio 0 @espaco_grande;
+		overflow: hidden;
+
+		p {
+			width: 160px;
+			float: left;
+			clear: left;
+			margin: 0 @espaco_medio @espaco_pequeno 0;
+
+			time {
+				display: block;
+			}
+
+		}
+
+		p.valor {
+			clear: none;
+			position: absolute;
+
+			top: 59px;
+			left: 200px;
+			text-align: center;
+
+			padding: @espaco_pequeno 0 @espaco_pequeno @espaco_medio;
+			border-left: 1px solid darken(@amarelo_escuro, 10%);
+
+			strong {
+				display: block;
+				font-size: 2em;
+				font-weight: normal;
+
+				span { font-size: .7em }
+			}
+		}
+
+		a.botao {
+			width: 30%;
+			position: absolute;
+			right: @gutter;
+			top: @espaco_pequeno;
+
+			text-align: center;
+			color: #FFF;
+			text-decoration: none;
+
+			background: @vermelho;
+			padding: @espaco_pequeno @espaco_medio;
+
+			p { width: 100% }
+		}
+	}
+
+	.vantagens,
+	.professor {
+		padding: @espaco_medio 0 @espaco_grande;
+		overflow: hidden;
+
+		article {
+			width: 45%;
+			margin-right: 5%;
+			float: left;
+
+			img {
+				float: left;
+				margin: 0 @espaco_pequeno @espaco_pequeno 0;
+			}
+
+			h1 {
+				font-size: 1em;
+			}
+		}
+	}
+
+	.depoimentos,
+	.professor,
+	.newsletter {
+		width: 45%;
+		margin-right: 5%;
+		float: left;
+
+		padding: @espaco_pequeno 0 @espaco_grande;
+	}
+
+	.depoimentos {
+		article {
+			margin-bottom: @espaco_pequeno;
+			padding-bottom: @espaco_pequeno;
+			border-bottom: 1px solid @amarelo_escuro;
+
+			blockquote { margin: 0; padding: 0 }
+			em { font-weight: bold }
+		}
+
+		article:last-child {
+			margin-bottom: 0;
+			border-bottom: none;
+		}
+	}
+
+	.professor,
+	.newsletter {
+		width: (@largura_site / 2);
+		margin-right: 0;
+	}
+
+	.professor {
+		article {
+			width: 100%;
+			margin: 0;
+		}
+	}
+
+	.newsletter {
+		@padding: @espaco_medio;
+
+		width: (@largura_site / 2) - (@padding * 2);
+
+		background: @verde;
+		padding: @padding;
+		margin-top: @espaco_pequeno;
+
+		fieldset { border: none; padding: 0; margin: 0 }
+
+		legend {
+			font-size: 2em;
+			font-weight: bold;
+		}
+	}
+}
+
+// Rodapé
+footer[role=contentinfo] {
+	clear: both;
+	overflow: hidden;
+
+	padding: @espaco_grande 0;
+
+	margin-top: @espaco_grande;
+	background: @cinza_escuro;
+	color: @cinza;
+	font-size: .9em;
+
+	p { margin-bottom: 0 }
+
+	a { text-decoration: none; color: lighten(@cinza, 30%) }
+
+	.pagamento,
+	.creditos {
+		width: 45%;
+		float: left;
+	}
+
+	.creditos {
+		float: right;
+		text-align: right;
+
+		nav {
+
+			ul, li { margin: 0; padding: 0 }
+
+			li {
+				display: inline-block;
+				margin-left: @espaco_pequeno;
+			}
+		}
+	}
 }
