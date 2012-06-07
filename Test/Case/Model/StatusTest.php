@@ -24,10 +24,16 @@ class StatusTestCase extends CakeTestCase {
  * @return void
  */
 	public function testModelObject() {
-		$expected = 'Model';
-		$result = $this->Status;
+		$this->assertInstanceOf('Model', $this->Status, 'Objeto não extendeu Model');
+	}
 
-		$this->assertInstanceOf($expected, $result, 'Objeto não extendeu Model');
+/**
+ * Testa o datasource
+ *
+ * @return void
+ */
+	public function testDatabaseConfig() {
+		$this->assertEquals('arrayDatasource', $this->Status->useDbConfig, 'Status não usa o arrayDatasource');
 	}
 
 /**

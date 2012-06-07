@@ -1,5 +1,6 @@
 <?php
 App::uses('User', 'Model');
+App::uses('AuthComponent', 'Controller/Component');
 
 /**
  * User Test Case
@@ -89,29 +90,24 @@ class UserTestCase extends CakeTestCase {
  * 
  * @depends testHasOne
  * @depends testHasMany
- * @dataProvider dependentRelatedModelsProvider
  * 
  * @return void
  */
 	public function testDependentModelRelation($model) {
-		$related = $this->User->getAssociated($model);
+		$relatedModel = $this->User->getAssociated('Address');
+		$this->assertTrue($relatedModel['dependent'], "Address não depende de User");
 
-		$this->assertTrue($related['dependent'], "{$model} não depende de User");
-	}
+		$relatedModel = $this->User->getAssociated('HighrisePerson');
+		$this->assertTrue($relatedModel['dependent'], "HighrisePerson não depende de User");
 
-/**
- * Provider de informações sobre a dependencia dos models relacionados
- * 
- * @return array
- */
-	public function dependentRelatedModelsProvider() {
-		return array(
-			array('Address'),
-			array('HighrisePerson'),
-			array('Information'),
-			array('Enrollment'),
-			array('Payment'),
-		);
+		$relatedModel = $this->User->getAssociated('Information');
+		$this->assertTrue($relatedModel['dependent'], "Information não depende de User");
+
+		$relatedModel = $this->User->getAssociated('Enrollment');
+		$this->assertTrue($relatedModel['dependent'], "Enrollment não depende de User");
+
+		$relatedModel = $this->User->getAssociated('Payment');
+		$this->assertTrue($relatedModel['dependent'], "Payment não depende de User");
 	}
 
 /**
@@ -138,16 +134,179 @@ class UserTestCase extends CakeTestCase {
  */
 	public function testFindStudents() {
 		$result = $this->User->findStudents();
-		$expected = 'array';
-
-		$this->assertInternalType($expected, $result, 'O resultado de User::findStudents() não é um array');
-		$this->assertCount(2, $result, 'O resultado de User::findStudents() deve ser apenas um aluno');
+		$this->assertInternalType('array', $result, 'O resultado de User::findStudents() não é um array');
+		$this->assertCount(2, $result, 'O resultado de User::findStudents() deve conter 2 registros');
 
 		$result = $this->User->findStudents('active');
-		$expected = 'array';
+		$this->assertInternalType('array', $result, 'O resultado de User::findStudents(active) não é um array');
+		$this->assertCount(1, $result, 'O resultado de User::findStudents(active) deve conter 1 registro');
+	}
 
-		$this->assertInternalType($expected, $result, 'O resultado de User::findStudents() não é um array');
-		$this->assertCount(1, $result, 'O resultado de User::findStudents() deve ser apenas um aluno');
+/**
+ * Testa dados inválidos
+ * 
+ * @return void
+ */
+	public function testInvalidData() {
+		$this->User->create();
+		$this->assertFalse($this->User->save(), 'Foi possível salvar um usuário sem dados');
+
+		// Nome em branco
+		$this->User->create();
+		$this->assertFalse($this->User->save(array(
+			'group_id' => Group::ALUNOS,
+			'name' => '',
+			'surname' => 'Belem',
+			'email' => 'contato@thiagobelem.net'
+		)), 'Foi possível salvar um usuário sem nome');
+		$this->assertArrayHasKey('name', $this->User->validationErrors);
+		$this->assertContains('Digite o nome', $this->User->validationErrors['name']);
+
+		// Sobrenome em branco
+		$this->User->create();
+		$this->assertFalse($this->User->save(array(
+			'group_id' => Group::ALUNOS,
+			'name' => 'Thiago',
+			'surname' => '',
+			'email' => 'contato@thiagobelem.net'
+		)), 'Foi possível salvar um usuário sem sobrenome');
+		$this->assertArrayHasKey('surname', $this->User->validationErrors);
+		$this->assertContains('Digite o sobrenome', $this->User->validationErrors['surname']);
+
+		// Email em branco
+		$this->User->create();
+		$this->assertFalse($this->User->save(array(
+			'group_id' => Group::ALUNOS,
+			'name' => 'Thiago',
+			'surname' => 'Belem',
+			'email' => ''
+		)), 'Foi possível salvar um usuário sem email');
+		$this->assertArrayHasKey('email', $this->User->validationErrors);
+		$this->assertContains('Digite o email', $this->User->validationErrors['email']);
+
+		// Email inválido
+		$this->User->create();
+		$this->assertFalse($this->User->save(array(
+			'group_id' => Group::ALUNOS,
+			'name' => 'Thiago',
+			'surname' => 'Belem',
+			'email' => 'wwww.internet.com'
+		)), 'Foi possível salvar um usuário com email inváido');
+		$this->assertArrayHasKey('email', $this->User->validationErrors);
+		$this->assertContains('Email inválido', $this->User->validationErrors['email']);
+
+		// Senha em branco
+		$this->User->create();
+		$this->assertFalse($this->User->save(array(
+			'group_id' => Group::ALUNOS,
+			'name' => 'Thiago',
+			'surname' => 'Belem',
+			'email' => 'contato@thiagobelem.net',
+			'password' => ''
+		)), 'Foi possível salvar um usuário sem senha');
+		$this->assertArrayHasKey('password', $this->User->validationErrors);
+		$this->assertContains('Digite uma senha', $this->User->validationErrors['password']);
+
+		// Senha insegura (sem letas)
+		$this->User->create();
+		$this->assertFalse($this->User->save(array(
+			'group_id' => Group::ALUNOS,
+			'name' => 'Thiago',
+			'surname' => 'Belem',
+			'email' => 'contato@thiagobelem.net',
+			'password' => '123456'
+		)), 'Foi possível salvar um usuário com uma senha sem letras');
+		$this->assertArrayHasKey('password', $this->User->validationErrors);
+		$this->assertContains('A senha deve conter letras e números', $this->User->validationErrors['password']);
+
+		// Senha insegura (sem números)
+		$this->User->create();
+		$this->assertFalse($this->User->save(array(
+			'group_id' => Group::ALUNOS,
+			'name' => 'Thiago',
+			'surname' => 'Belem',
+			'email' => 'contato@thiagobelem.net',
+			'password' => 'amor'
+		)), 'Foi possível salvar um usuário com uma senha sem números');
+		$this->assertArrayHasKey('password', $this->User->validationErrors);
+		$this->assertContains('A senha deve conter letras e números', $this->User->validationErrors['password']);
+
+		// Senha insegura (tamanho)
+		$this->User->create();
+		$this->assertFalse($this->User->save(array(
+			'group_id' => Group::ALUNOS,
+			'name' => 'Thiago',
+			'surname' => 'Belem',
+			'email' => 'contato@thiagobelem.net',
+			'password' => '1a2b3c'
+		)), 'Foi possível salvar um usuário com uma senha pequena');
+		$this->assertArrayHasKey('password', $this->User->validationErrors);
+		$this->assertContains('A senha deve conter pelo menos 8 caracteres', $this->User->validationErrors['password']);
+	}
+
+/**
+ * Testa dados válidos
+ * 
+ * @return void
+ */
+	public function testValidData() {
+		$this->User->create();
+		$this->assertInternalType('array', $this->User->save(array(
+			'group_id' => Group::ALUNOS,
+			'name' => 'Thiago',
+			'surname' => 'Belem',
+			'email' => 'contato@thiagobelem.net',
+			'password' => uniqid() // random password
+		)), 'Não foi possível salvar um usuário com dados válidos');
+
+		// Tenta criar outro usuário com o mesmo email (dados válidos, mas email repetido)
+		$this->User->create();
+		$this->assertFalse($this->User->save(array(
+			'group_id' => Group::ALUNOS,
+			'name' => 'Fulano',
+			'surname' => 'Silva',
+			'email' => 'contato@thiagobelem.net',
+			'password' => uniqid() // random password
+		)), 'Foi possível salvar um usuário com email repetido');
+	}
+
+/**
+ * Testa a encriptação de senha
+ * 
+ * @return void
+ */
+	public function testPasswordEncryption() {
+		$password = uniqid();
+
+		// Cria um usuário
+		$this->User->create();
+		$this->User->save(array(
+			'group_id' => Group::ALUNOS,
+			'name' => 'Thiago',
+			'surname' => 'Belem',
+			'email' => 'contato@thiagobelem.net',
+			'password' => $password // random password
+		));
+
+		$expected = AuthComponent::password($password);
+		$this->assertEquals($expected, $this->User->field('password'), 'A senha não foi encriptada corretamente');
+
+		// Salva o usuário com a senha vazia (mantendo a atual)
+		$this->assertInternalType('array', $this->User->save(array(
+			'name' => 'Fulano',
+			'password' => ''
+		)), 'Ñão foi possível trocar apenas o nome do usuário');
+
+		$this->assertEquals($expected, $this->User->field('password'), 'A senha vazia foi encriptada');
+
+		// Troca a senha do usuário
+		$password = uniqid();
+		$this->assertInternalType('array', $this->User->save(array(
+			'password' => $password
+		)), 'Ñão foi possível trocar apenas o senha do usuário');
+
+		$expected = AuthComponent::password($password);
+		$this->assertEquals($expected, $this->User->field('password'), 'A nova senha não foi encriptada corretamente');
 	}
 
 /**

@@ -1,5 +1,6 @@
 <?php
 App::uses('Information', 'Model');
+App::uses('HttpSocket', 'Network/Http');
 
 /**
  * Information Test Case
@@ -138,7 +139,25 @@ class InformationTestCase extends CakeTestCase {
 	}
 
 /**
+ * Testa se o projeto consegue se conectar à Internet
+ * 
+ * @return void
+ */
+	public function testOnlineConnection() {
+		$HttpSocket = new HttpSocket(array('timeout' => 5));
+
+		try {
+			$response = $HttpSocket->get('http://google.com/');
+			$this->assertEquals(200, $response->code);
+		} catch (SocketException $SocketException) {
+			$this->markTestSkipped('Não há conexão com a Internet');
+		}
+	}
+
+/**
  * Testa registros com informações válidas
+ *
+ * @depends testOnlineConnection
  * 
  * @return void
  */
@@ -158,6 +177,8 @@ class InformationTestCase extends CakeTestCase {
 
 /**
  * Testa registros com informações válidas mas inexistentes
+ *
+ * @depends testOnlineConnection
  * 
  * @return void
  */

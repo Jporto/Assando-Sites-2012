@@ -30,24 +30,25 @@ class Information extends AppModel {
 			),
 		),
 		'mobile' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
-			),
 			'format' => array(
 				'rule' => array('phone'),
+				'message' => 'Telefone inválido',
 			)
 		),
 		'cpf' => array(
 			'format' => array(
 				'rule' => array('cpf'),
+				'message' => 'CPF inválido',
 			)
 		),
 		'twitter' => array(
 			'format' => array(
 				'rule' => array('twitterProfileFormat'),
+				'message' => 'Twitter inválido',
 			),
 			'exists' => array(
 				'rule' => array('twitterProfileExists'),
+				'message' => 'Este Twitter não existe',
 			)
 		),
 	);

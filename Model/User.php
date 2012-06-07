@@ -1,6 +1,7 @@
 <?php
 
 App::uses('AppModel', 'Model');
+App::uses('AuthComponent', 'Controller/Component');
 
 /**
  * User Model
@@ -24,31 +25,59 @@ class User extends AppModel {
 		'group_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
+				'message' => 'Escolha um grupo',
+				'required' => 'create'
 			),
 		),
 		'name' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
+				'message' => 'Digite o nome',
+				'required' => 'create'
 			),
 		),
 		'surname' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
+				'message' => 'Digite o sobrenome',
+				'required' => 'create'
 			),
 		),
 		'email' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				'message' => 'Digite o email',
+				'required' => 'create'
+			),
 			'email' => array(
 				'rule' => array('email'),
+				'message' => 'Email inválido',
+				'required' => 'create'
+			),
+			'unique' => array(
+				'rule' => array('isUnique'),
+				'message' => 'Email em uso, se você já foi aluno do curso, faça o login'
 			),
 		),
 		'password' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
+				'message' => 'Digite uma senha',
+				'required' => 'create'
+			),
+			'safePassword' => array(
+				'rule' => array('safePassword'),
+				'message' => 'A senha deve conter letras e números',
+			),
+			'minLength' => array(
+				'rule' => array('minLength', 8),
+				'message' => 'A senha deve conter pelo menos 8 caracteres',
 			),
 		),
 		'status_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
+				'message' => 'Escolha um status'
 			),
 		),
 	);
@@ -80,6 +109,27 @@ class User extends AppModel {
 		'Enrollment' => array('dependent' => true),
 		'Payment' => array('dependent' => true),
 	);
+
+/**
+ * Valida senhas seguras
+ * 
+ * @param  array $data Dados sendo salvos
+ * 
+ * @return boolean
+ */
+	public function safePassword($data) {
+		$password = array_shift($data);
+
+		// Deve ter letras
+		if (!preg_match('/[a-z]+/', $password))
+			return false;
+
+		// Deve ter números
+		if (!preg_match('/[0-9]+/', $password))
+			return false;
+
+		return true;
+	}
 
 /**
  * Encontra usuários que não são alunos
@@ -126,6 +176,41 @@ class User extends AppModel {
 		), $params['conditions']);
 
 		return $this->find($findType, $params);
+	}
+
+/**
+ * Antes de validar os dados
+ *
+ * Não salva a senha se ela estiver vazia
+ * 
+ * @return void
+ */
+	public function beforeValidate($options = array()) {
+		// Existe senha mas ela está vazia?
+		if (isset($this->data[$this->alias]['password'])) {
+			if (empty($this->data[$this->alias]['password'])) {
+				// Remove a senha do array
+				unset($this->data[$this->alias]['password']);
+			}
+		}
+
+		return parent::beforeValidate($options);
+	}
+
+/**
+ * Antes de salvar os dados no banco
+ *
+ * Encripta a senha do usuário
+ * 
+ * @return void
+ */
+	public function beforeSave($options = array()) {
+		if (isset($this->data[$this->alias]['password'])) {
+			$password = $this->data[$this->alias]['password'];
+			$this->data[$this->alias]['password'] = AuthComponent::password($password);
+		}
+
+		return parent::beforeSave($options);
 	}
 
 }
