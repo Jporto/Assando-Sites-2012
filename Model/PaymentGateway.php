@@ -10,23 +10,24 @@ App::uses('AppModel', 'Model');
 class PaymentGateway extends AppModel {
 
 /**
- * Validation rules
- *
- * @var array
+ * Array Datasource
+ * 
+ * @var string
  */
-	public $validate = array(
-		'name' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
-			),
-		),
-	);
+	public $useDbConfig = 'arrayDatasource';
 
 /**
- * hasMany associations
- *
+ * Status records
+ * 
  * @var array
  */
-	public $hasMany = array('Payment');
+	public $records = array(
+		array('id' => 1, 'name' => 'PagSeguro'),
+		array('id' => 2, 'name' => 'PayPal'),
+	);
+
+	const PAGSEGURO = 1;
+
+	const PAYPAL = 2;
 
 }

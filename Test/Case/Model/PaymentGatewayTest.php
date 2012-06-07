@@ -8,13 +8,6 @@ App::uses('PaymentGateway', 'Model');
 class PaymentGatewayTestCase extends CakeTestCase {
 
 /**
- * Fixtures
- *
- * @var array
- */
-	public $fixtures = array('app.payment_gateway', 'app.payment');
-
-/**
  * setUp method
  *
  * @return void
@@ -22,6 +15,7 @@ class PaymentGatewayTestCase extends CakeTestCase {
 	public function setUp() {
 		parent::setUp();
 		$this->PaymentGateway = ClassRegistry::init('PaymentGateway');
+		$this->PaymentGateway->useDbConfig = 'arrayDatasource';
 	}
 
 /**
@@ -30,10 +24,16 @@ class PaymentGatewayTestCase extends CakeTestCase {
  * @return void
  */
 	public function testModelObject() {
-		$expected = 'Model';
-		$result = $this->PaymentGateway;
+		$this->assertInstanceOf('Model', $this->PaymentGateway, 'Objeto não extendeu Model');
+	}
 
-		$this->assertInstanceOf($expected, $result, 'Objeto não extendeu Model');
+/**
+ * Testa o datasource
+ *
+ * @return void
+ */
+	public function testDatabaseConfig() {
+		$this->assertEquals('arrayDatasource', $this->PaymentGateway->useDbConfig, 'PaymentGateway não usa o arrayDatasource');
 	}
 
 /**
