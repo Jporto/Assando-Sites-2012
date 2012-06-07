@@ -19,7 +19,6 @@ class Course extends AppModel {
 	public $actsAs = array(
 		'Utils.Sluggable' => array(
 			'label' => 'name',
-			'slug' => 'slug',
 			'separator' => '-',
 			'update' => true,
 		)
@@ -34,11 +33,13 @@ class Course extends AppModel {
 		'code' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
+				'message' => 'Digite o código do curso',
 			),
 		),
 		'name' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
+				'message' => 'Digite o nome do curso',
 			),
 		),
 		'slug' => array(
@@ -49,6 +50,7 @@ class Course extends AppModel {
 		'description' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
+				'message' => 'Digite a descrição do curso',
 			),
 		),
 		'advanced' => array(
@@ -59,6 +61,7 @@ class Course extends AppModel {
 		'status_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
+				'message' => 'Escolha o status do curso',
 			),
 		),
 	);

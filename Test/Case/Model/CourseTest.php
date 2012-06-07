@@ -31,10 +31,7 @@ class CourseTestCase extends CakeTestCase {
  * @return void
  */
 	public function testModelObject() {
-		$expected = 'Model';
-		$result = $this->Course;
-
-		$this->assertInstanceOf($expected, $result, 'Objeto não extendeu Model');
+		$this->assertInstanceOf('Model', $this->Course, 'Objeto não extendeu Model');
 	}
 
 /**
@@ -42,32 +39,21 @@ class CourseTestCase extends CakeTestCase {
  * 
  * @return  void
  */
-	public function testSluggableBehaviorAttached() {
-		$result = CakePlugin::loaded('Utils');
-		$this->assertTrue($result, 'Utils plugin não está sendo carregado');
+	public function testSluggableBehavior() {
+		$this->assertTrue(CakePlugin::loaded('Utils'), 'Utils plugin não foi carregado');
 
 		$result = $this->Course->actsAs;
-		$expected = 'Utils.Sluggable';
-
 		$this->assertInternalType('array', $result, 'Course não tem behaviors');
-		$this->assertArrayHasKey($expected, $result, 'Course não tem o Sluggable behavior');
-	}
+		$this->assertArrayHasKey('Utils.Sluggable', $result, 'Course não tem o Sluggable behavior');
 
-/**
- * Testa se o sluggable behavior está funcionando
- * 
- * @return  void
- */
-	public function testSluggableBehavior() {
+		// Cria um novo curso
 		$this->Course->create();
 		$this->Course->save(array(
 			'name' => 'Turma 2011.2 - Curso Avançado'
 		));
 
 		$result = $this->Course->field('slug');
-		$expected = 'turma-2011-2-curso-avancado';
-
-		$this->assertEquals($expected, $result, 'O slug gerado está incorreto');
+		$this->assertEquals('turma-2011-2-curso-avancado', $result, 'O slug gerado está incorreto');
 	}
 
 /**
@@ -210,7 +196,7 @@ class CourseTestCase extends CakeTestCase {
 	}
 
 /**
- * Testa a busca de turmas coms inscrições abertas
+ * Testa a busca de turmas com inscrições abertas
  * 
  * @return  void
  */
@@ -260,10 +246,17 @@ class CourseTestCase extends CakeTestCase {
 			'start' => date(DB_DATETIME_FORMAT, strtotime('+1 month')),
 		));
 
+		// Total de cursos com inscrições abertas
 		$result = $this->Course->findOpenCourses('count');
-		$expected = 2;
+		$this->assertEquals(2, $result, 'Foi encontrado um número incorreto de cursos com inscrições abertas');
 
-		$this->assertEquals($expected, $result, 'Foi encontrado um número incorreto de cursos com inscrições abertas');
+		// Próximo curso com inscrição aberta
+		$Course = $this->Course->findOpenCourses('first');
+		$this->assertEquals('Turma 2012.4', $Course['Course']['name']);
+
+		// Status do próximo curso com inscrições abertas
+		$this->assertArrayHasKey('Status', $Course, 'O array de resultado não contém Status');
+		$this->assertEquals(Status::INSCRICOES_ABERTAS, $Course['Status']['id'], 'O curso retornado não tem Status ATIVO');
 	}
 
 /**
