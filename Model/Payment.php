@@ -58,6 +58,15 @@ class Payment extends AppModel {
  *
  * @var array
  */
-	public $belongsTo = array('User', 'PaymentGateway', 'Enrollment', 'Status');
+	public $belongsTo = array(
+		'User',
+		'PaymentGateway',
+		'Enrollment',
+		'Status' => array(
+			'conditions' => array(
+				'Status.model' => 'Payment'
+			)
+		)
+	);
 
 }

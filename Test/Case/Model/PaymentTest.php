@@ -1,6 +1,7 @@
 <?php
 App::uses('Payment', 'Model');
 App::uses('PaymentGateway', 'Model');
+App::uses('Status', 'Model');
 
 /**
  * Payment Test Case
@@ -103,10 +104,6 @@ class PaymentTestCase extends CakeTestCase {
 		// Busca o pagamento pela referência
 		$Payment = $this->Payment->findByReference($reference);
 		$this->assertNotEmpty($Payment, 'Não foi possível encontrar um pagamento pela referência');
-
-		// Verifica se o pagamento foi retornado junto com o gateway esperado
-		$this->assertArrayHasKey('PaymentGateway', $Payment, 'O array de resultado não contém PaymentGateway');
-		$this->assertEquals('PagSeguro', $Payment['PaymentGateway']['name'], 'O pagamento retornado não foi através do PagSeguro');
 	}
 
 /**
