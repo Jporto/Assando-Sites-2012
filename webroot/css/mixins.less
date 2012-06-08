@@ -2,4 +2,25 @@
 	-webkit-border-radius: @params;
 	-moz-border-radius: @params;
 	border-radius: @params;
+
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+}
+
+.background-gradient(@from, @to) {
+	background-color: @from;
+
+	background-image: -webkit-gradient(linear, left top, left bottom, from(@from), to(@to));
+	background-image: -webkit-linear-gradient(top, @from, @to);
+	background-image:    -moz-linear-gradient(top, @from, @to);
+	background-image:     -ms-linear-gradient(top, @from, @to);
+	background-image:      -o-linear-gradient(top, @from, @to);
+	background-image:         linear-gradient(top, @from, @to);
+}
+
+.box-shadow(@x, @y, @blur, @spread, @color) {
+	-webkit-box-shadow: @x @y @blur @spread @color;
+	   -moz-box-shadow: @x @y @blur @spread @color;
+			box-shadow: @x @y @blur @spread @color;
 }

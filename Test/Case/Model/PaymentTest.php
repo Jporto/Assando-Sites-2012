@@ -1,5 +1,6 @@
 <?php
 App::uses('Payment', 'Model');
+App::uses('PaymentGateway', 'Model');
 
 /**
  * Payment Test Case
@@ -30,10 +31,82 @@ class PaymentTestCase extends CakeTestCase {
  * @return void
  */
 	public function testModelObject() {
-		$expected = 'Model';
-		$result = $this->Payment;
+		$this->assertInstanceOf('Model', $this->Payment, 'Objeto não extendeu Model');
+	}
 
-		$this->assertInstanceOf($expected, $result, 'Objeto não extendeu Model');
+/**
+ * Valida dados inválidos
+ *
+ * @return void
+ */
+	public function testInvalidData() {
+		$this->Payment->create();
+		$this->assertFalse($this->Payment->save(), 'Foi possível salvar um pagamento sem dados');
+
+		// Sem usuário
+		$this->Payment->create();
+		$this->assertFalse($this->Payment->save(array(
+			'value' => 100,
+			'reference' => uniqid(),
+			'payment_gateway_id' => PaymentGateway::PAGSEGURO,
+		)), 'Foi possível salvar um pagamento sem usuaŕio');
+		$this->assertArrayHasKey('user_id', $this->Payment->validationErrors);
+		$this->assertContains('Informe o aluno', $this->Payment->validationErrors['user_id']);
+
+		// Sem gateway
+		$this->Payment->create();
+		$this->assertFalse($this->Payment->save(array(
+			'user_id' => 1,
+			'value' => 100,
+			'reference' => uniqid(),
+		)), 'Foi possível salvar um pagamento sem gateway');
+		$this->assertArrayHasKey('payment_gateway_id', $this->Payment->validationErrors);
+		$this->assertContains('Informe o gateway de pagamento', $this->Payment->validationErrors['payment_gateway_id']);
+
+		// Sem valor
+		$this->Payment->create();
+		$this->assertFalse($this->Payment->save(array(
+			'user_id' => 1,
+			'reference' => uniqid(),
+			'payment_gateway_id' => PaymentGateway::PAGSEGURO,
+		)), 'Foi possível salvar um pagamento sem valor');
+		$this->assertArrayHasKey('value', $this->Payment->validationErrors);
+		$this->assertContains('Informe o valor', $this->Payment->validationErrors['value']);
+
+		// Sem referência
+		$this->Payment->create();
+		$this->assertFalse($this->Payment->save(array(
+			'user_id' => 1,
+			'value' => 100,
+			'payment_gateway_id' => PaymentGateway::PAGSEGURO,
+		)), 'Foi possível salvar um pagamento sem referência');
+		$this->assertArrayHasKey('reference', $this->Payment->validationErrors);
+		$this->assertContains('Informe a referência', $this->Payment->validationErrors['reference']);
+	}
+
+/**
+ * Valida dados válidos
+ *
+ * @return void
+ */
+	public function testValidData() {
+		$reference = uniqid();
+
+		$this->Payment->create();
+		$this->assertInternalType('array', $this->Payment->save(array(
+			'user_id' => 1,
+			'value' => 100,
+			'reference' => $reference,
+			'payment_gateway_id' => PaymentGateway::PAGSEGURO,
+		)), 'Foi possível salvar um pagamento sem usuaŕio');
+
+		// Busca o pagamento pela referência
+		$Payment = $this->Payment->findByReference($reference);
+		$this->assertNotEmpty($Payment, 'Não foi possível encontrar um pagamento pela referência');
+
+		// Verifica se o pagamento foi retornado junto com o gateway esperado
+		$this->assertArrayHasKey('PaymentGateway', $Payment, 'O array de resultado não contém PaymentGateway');
+		$this->assertEquals('PagSeguro', $Payment['PaymentGateway']['name'], 'O pagamento retornado não foi através do PagSeguro');
 	}
 
 /**

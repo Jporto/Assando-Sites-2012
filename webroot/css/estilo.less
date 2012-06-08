@@ -26,9 +26,10 @@ section h1 { margin-top: 0 }
 
 // Header
 header[role=heading] {
-	background: @amarelo;
 	padding: @espaco_medio 0 @espaco_grande;
 	overflow: hidden;
+
+	background: @amarelo;
 
 	// Os elementos ocupam metade da largura
 	hgroup,	nav[role=navigation], .sobre {
@@ -218,7 +219,9 @@ footer[role=contentinfo] {
 	padding: @espaco_grande 0;
 
 	margin-top: @espaco_grande;
-	background: @cinza_escuro;
+
+	.background-gradient(@cinza_escuro, darken(@cinza_escuro, 5%));
+
 	color: @cinza;
 	font-size: .9em;
 

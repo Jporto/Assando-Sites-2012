@@ -21,16 +21,29 @@ class Payment extends AppModel {
 		'user_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
+				'message' => 'Informe o aluno',
+				'required' => 'create',
 			),
 		),
 		'payment_gateway_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
+				'message' => 'Informe o gateway de pagamento',
+				'required' => 'create',
+			),
+		),
+		'value' => array(
+			'notempty' => array(
+				'rule' => array('decimal'),
+				'message' => 'Informe o valor',
+				'required' => 'create',
 			),
 		),
 		'reference' => array(
 			'notempty' => array(
-				'rule' => array('notempty'),
+				'rule' => array('notEmpty'),
+				'message' => 'Informe a referência',
+				'required' => 'create',
 			),
 		),
 		'status_id' => array(
