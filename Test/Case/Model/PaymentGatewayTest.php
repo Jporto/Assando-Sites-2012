@@ -51,6 +51,10 @@ class PaymentGatewayTestCase extends CakeTestCase {
 		$this->assertEquals(Status::PAGAMENTO_EM_DISPUTA,	$this->PaymentGateway->pagSeguroStatus(5));
 		$this->assertEquals(Status::PAGAMENTO_RESSARCIDO,	$this->PaymentGateway->pagSeguroStatus(6));
 		$this->assertEquals(Status::PAGAMENTO_CANCELADO,	$this->PaymentGateway->pagSeguroStatus(7));
+
+		// Status inválido
+		$this->assertFalse($this->PaymentGateway->pagSeguroStatus(-1));
+		$this->assertFalse($this->PaymentGateway->pagSeguroStatus(10));
 	}
 
 /**

@@ -1,6 +1,6 @@
 <?php
-
 App::uses('AppModel', 'Model');
+App::uses('Status', 'Model');
 
 /**
  * Group Model
@@ -64,7 +64,7 @@ class Group extends AppModel {
 		// Adiciona os parâmetros de busca
 		$params['conditions'] = array_merge(array(
 			'Group.staff' => true,
-			'Group.status_id' => true
+			'Group.status_id' => Status::ATIVO
 		), $params['conditions']);
 
 		return $this->find($findType, $params);

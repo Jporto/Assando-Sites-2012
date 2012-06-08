@@ -55,17 +55,29 @@ class PaymentGateway extends AppModel {
  * @param integer
  */
 	public function pagSeguroStatus($status) {
+		if (!isset($this->_PagSeguroStatuses[$status])) {
+			return false;
+		}
+
 		$PagSeguroStatus = $this->_PagSeguroStatuses[$status];
 
 		switch ($PagSeguroStatus) {
-			case 'INITIATED':		return Status::PAGAMENTO_INICIADO;
-			case 'WAITING_PAYMENT':	return Status::PAGAMENTO_PENDENTE;
-			case 'IN_ANALYSIS':		return Status::PAGAMENTO_EM_ANALISE;
-			case 'PAID':			return Status::PAGAMENTO_CONFIRMADO;
-			case 'AVAILABLE':		return Status::PAGAMENTO_DISPONIVEL;
-			case 'IN_DISPUTE':		return Status::PAGAMENTO_EM_DISPUTA;
-			case 'REFUNDED':		return Status::PAGAMENTO_RESSARCIDO;
-			case 'CANCELLED':		return Status::PAGAMENTO_CANCELADO;
+			case 'INITIATED':
+				return Status::PAGAMENTO_INICIADO;
+			case 'WAITING_PAYMENT':
+				return Status::PAGAMENTO_PENDENTE;
+			case 'IN_ANALYSIS':
+				return Status::PAGAMENTO_EM_ANALISE;
+			case 'PAID':
+				return Status::PAGAMENTO_CONFIRMADO;
+			case 'AVAILABLE':
+				return Status::PAGAMENTO_DISPONIVEL;
+			case 'IN_DISPUTE':
+				return Status::PAGAMENTO_EM_DISPUTA;
+			case 'REFUNDED':
+				return Status::PAGAMENTO_RESSARCIDO;
+			case 'CANCELLED':
+				return Status::PAGAMENTO_CANCELADO;
 		}
 
 		return false;
