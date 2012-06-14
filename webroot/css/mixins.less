@@ -1,7 +1,52 @@
-.border-radius(@params) {
-	-webkit-border-radius: @params;
-	-moz-border-radius: @params;
-	border-radius: @params;
+// ==================================================================
+// Fonts
+// ==================================================================
+
+@import url("http://fonts.googleapis.com/css?family=Gudea|Handlee");
+
+.standard-text() {
+	font: normal 1em/1.2em 'Gudea', sans-serif;
+	color: #302E2D;
+}
+
+.standard-title() {
+	font: normal 1.9em/1.2em 'Handlee', sans-serif;
+	color: @vermelho_escuro;
+}
+
+.standard-subtitle() {
+	font-size: 1em;
+	color: #000;
+}
+
+.content-title() {
+	font: bold 1em/1.2em 'Gudea', sans-serif;
+	color: #000;
+}
+
+.standard-link() {
+	color: @rosa;
+	text-decoration: none;
+
+	&:hover { color: @vermelho }
+}
+
+.menu-link() {
+	font-weight: bold;
+	font-size: .95em;
+	color: #302E2D;
+
+	&:hover { color: @rosa }
+}
+
+// ==================================================================
+// Functions
+// ==================================================================
+
+.border-radius(...) {
+	-webkit-border-radius: @arguments;
+	-moz-border-radius: @arguments;
+	border-radius: @arguments;
 
 	-moz-background-clip: padding;
 	-webkit-background-clip: padding-box;
@@ -19,8 +64,15 @@
 	background-image:         linear-gradient(top, @from, @to);
 }
 
-.box-shadow(@x, @y, @blur, @spread, @color) {
-	-webkit-box-shadow: @x @y @blur @spread @color;
-	   -moz-box-shadow: @x @y @blur @spread @color;
-			box-shadow: @x @y @blur @spread @color;
+.box-shadow(...) {
+	-webkit-box-shadow: @arguments;
+	   -moz-box-shadow: @arguments;
+			box-shadow: @arguments;
+}
+
+.transition(...) {
+	-webkit-transition: @arguments;
+    -moz-transition: @arguments;
+    -o-transition: @arguments;
+    transition: @arguments;
 }

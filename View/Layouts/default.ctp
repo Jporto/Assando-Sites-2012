@@ -4,7 +4,7 @@
 	<meta charset="utf-8" />
 	<title>Assando Sites</title>
 
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 
 	<?php echo $this->Html->css($this->Html->url('/css/estilo.less', true), 'stylesheet/less') ?>
 	<?php echo $this->Html->css($this->Html->url('/css/mobile.less', true), 'stylesheet/less', array('media' => 'screen and (max-width: 600px)')) ?>
@@ -12,11 +12,11 @@
 	<?php echo $this->Html->script('less') ?>
 	<script>less.watch()</script>
 </head>
-<body role="document">
+<body role="document" class="">
 
 	<!-- header -->
 	<header role="heading">
-		<div class="limite">
+		<div class="wrapper">
 
 			<hgroup role="banner">
 				<h1><a href="#" class="logo">Assando Sites</a></h1>
@@ -28,7 +28,7 @@
 				<ul>
 					<li><a href="#">Sobre o curso</a></li>
 					<li><a href="#">CakePHP</a></li>
-					<li><a href="#">Depoimentos</a></li>
+					<li><a href="#">Quem já fez?</a></li>
 					<li><a href="#">Inscreva-se!</a></li>
 				</ul>
 			</nav>
@@ -36,15 +36,15 @@
 
 			<!-- sobre -->
 			<section class="sobre">
-				<p><strong>Assando Sites</strong> é um curso prático de <abbr title="CakePHP, um framework de desenvolvimento rápido em PHP">CakePHP</abbr>, onde você vai aprender a desenvolver sites e portais de forma <strong>rápida e eficiente</strong>.</p>
+				<p>O <strong>Assando Sites</strong> é um curso prático de <dfn title="CakePHP, um framework de desenvolvimento rápido em PHP">CakePHP</dfn>, onde você vai aprender a desenvolver sites e portais de forma <strong>rápida e eficiente</strong>.</p>
 
-				<h5>O curso é composto por:</h5>
+				<h5>Com aulas online, o curso é ministrado através de:</h5>
 				<ul class="recursos">
-					<li class="online">Aulas online e ao vivo</li>
-					<li class="slides">Slides com todo o conteúdo do curso</li>
-					<li class="video">Compartilhamento de tela</li>
-					<li class="audio">Áudio durante todas as aulas</li>
-				</ul>				
+					<li class="online"><strong>Aulas online</strong><span> e ao vivo</span></li>
+					<li class="slides"><strong>Slides</strong><span> com todo o conteúdo do curso</span></li>
+					<li class="audio"><strong>Áudio</strong><span> durante todas as aulas</span></li>
+					<li class="video"><strong>Vídeo</strong><span> das aulas para download</span></li>
+				</ul>
 			</section>
 			<!-- /sobre -->
 
@@ -60,7 +60,7 @@
 
 	<!-- rodapé -->
 	<footer role="contentinfo">
-		<div class="limite">
+		<div class="wrapper">
 
 			<!-- pagamento -->
 			<div class="pagamento">

@@ -1,12 +1,14 @@
 		<!-- inscricoes -->
 		<section class="inscricoes">
-			<div class="limite">
+			<div class="wrapper">
 				<h1>Próxima turma</h1>
 
-				<p>Fim das inscrições: <time>15/07</time></p>
-				<p>Início das aulas: <time>15/07</time></p>
+				<div class="precos">
+					<p class="valor">12x sem juros de <strong><span>R$</span> 37,50</strong> <span class="a-vista">ou R$ 450,00 à vista</span></p>
 
-				<p class="valor">12x sem juros de <strong><span>R$</span> 37,50</strong> <span class="a-vista">ou R$ 450,00 à vista</span></p>
+					<p>Fim das inscrições: <time>15/07</time></p>
+					<p>Início das aulas: <time>15/07</time></p>
+				</div>
 
 				<a href="#" class="botao">
 					<h2>Inscreva-se</h2>
@@ -16,7 +18,7 @@
 		</section>
 		<!-- /inscricoes -->
 
-		<div class="limite">
+		<div class="wrapper">
 
 			<!-- vantagens -->
 			<section class="vantagens">
