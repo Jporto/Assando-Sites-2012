@@ -10,9 +10,9 @@
 .debug {
 	background: transparent url('../img/960_grid_12_col.png') top center repeat-y;
 
-	header[role="heading"] { background: rgba(0, 255, 0, .2) }
-	section[role="main"] { background: rgba(0, 0, 255, .2) }
-	footer[role="contentinfo"] { background: rgba(255, 0, 0, .2) }
+	header[role=heading] { background: rgba(0, 255, 0, .2) }
+	section[role=main] { background: rgba(0, 0, 255, .2) }
+	footer[role=contentinfo] { background: rgba(255, 0, 0, .2) }
 
 	.inscricoes { opacity: .8 }
 }
@@ -34,6 +34,20 @@ nav a { .menu-link }
 nav { ul, li { margin: 0; padding: 0; list-style: none }}
 
 // ==================================================================
+// Default form
+form {
+	input {
+		padding: 6px 5px 4px;
+		.border-radius(6px);
+	}
+
+	input[type=text],
+	input[type=email] {
+		font-family: 'Handlee', sans-serif;
+	}
+}
+
+// ==================================================================
 // Generic classes
 
 .wrapper {
@@ -47,20 +61,26 @@ nav { ul, li { margin: 0; padding: 0; list-style: none }}
 // Header
 // ==================================================================
 
-header[role="heading"] {
+header[role=heading] {
 	background-color: @amarelo_claro;
 	padding: @espaco_medio 0 @espaco_grande;
 
 	// Logo
-	hgroup[role="banner"] {
+	hgroup[role=banner] {
 		.column(6);
 
-		h1 { margin-top: 0 }
+		h1 { margin-top: 0; font-size: 2.5em }
 		h2 { margin-bottom: 0 }
+
+		.logo {
+			color: @rosa;
+
+			&:hover { color: @vermelho }
+		}
 	}
 
 	// Menu
-	nav[role="navigation"] {
+	nav[role=navigation] {
 		.column(6);
 
 		text-align: right;
@@ -146,12 +166,16 @@ header[role="heading"] {
 // Conteúdo
 // ==================================================================
 
-section[role="main"] {
+section[role=main] {
+	background-color: @amarelo_claro;
 
+	// ==================================================================
 	// Faixa de inscrições
 	.inscricoes {
 		background-color: #efece7;
 		padding: @espaco_medio 0 @espaco_medio;
+
+		border-top: 1px solid darken(#efece7, 5%);
 
 		h1 {
 			.column(6);
@@ -227,4 +251,158 @@ section[role="main"] {
 		}
 	}
 
+	// ==================================================================
+	// Vantagens
+	.vantagens {
+		padding: @espaco_medio 0 @espaco_pequeno;
+		.clearfix;
+
+		> h1 { .column(12); margin-bottom: @espaco_pequeno }
+
+		article {
+			.column(5);
+
+			img {
+				width: 140px;
+				float: left;
+				margin-right: @espaco_pequeno;
+			}
+
+			h1 {
+				.content-title;
+				margin-top: 0;
+			}
+
+			&:last-child {
+				.column(6);
+				.push(1);
+			}
+		}
+	}
+
+	// ==================================================================
+	// Depoimentos
+	.depoimentos {
+		.column(5);
+		.pull(1);
+
+		article {
+			margin-bottom: @espaco_pequeno;
+			padding-bottom: @espaco_pequeno;
+			border-bottom: 1px solid darken(@amarelo_claro, 8%);
+
+			&:last-child {
+				border-bottom: none;
+			}
+		}
+
+		blockquote {
+			margin: 0;
+
+			em { .content-title	}
+
+			cite {
+				.content-title;
+				font-style: italic;
+				font-size: .9em;
+			}
+		}
+	}
+
+	// ==================================================================
+	// Professor
+	.professor {
+		.column(6);
+		margin-bottom: @espaco_medio;
+
+		article {
+			img {
+				float: left;
+				margin-right: @espaco_pequeno;
+			}
+
+			h1 {
+				.content-title;
+			}
+		}
+	}
+
+	// ==================================================================
+	// Newsletter
+	.newsletter {
+		.column(6);
+		background-color: @verde_claro;
+		padding: 20px 0;
+
+		.border-radius(12px);
+
+		fieldset {
+			padding: 10px 20px 5px;
+			border: none;
+
+			legend {
+				.standard-title;
+
+				color: #333;
+				font-size: 1.4em;
+			}
+
+			label { display: none }
+
+			input[type=text],
+			input[type=email] {
+				width: 42%;
+				border: 1px solid darken(@verde, 20%);
+			}
+
+			input[type=submit] {
+				padding: 7px 7px 6px;
+				background-color: darken(@verde, 10%);
+				border: none;
+				color: #FFF;
+				font-size: .9em;
+			}
+		}
+	}
+
+}
+
+// ==================================================================
+// Rodapé
+// ==================================================================
+footer[role=contentinfo] {
+	padding: @espaco_medio 0 @espaco_grande;
+
+	background-color: @cinza;
+	color: #FFF;
+
+	// ==================================================================
+	// Pagamento
+	.pagamento {
+		.column(5);
+	}
+
+	// ==================================================================
+	// Créditos
+	.creditos {
+		.column(6);
+		.push(1);
+
+		text-align: right;
+
+		nav { margin-bottom: @espaco_medio }
+
+		li {
+			margin-left: @espaco_pequeno;
+			display: inline-block;
+
+			a { color: #FFF }
+
+			&:last-child a { color: @vermelho }
+
+			a:hover { color: @rosa }
+		}
+
+		.cakephp { font-size: .9em; }
+	}
 }

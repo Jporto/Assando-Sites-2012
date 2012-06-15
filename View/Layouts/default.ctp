@@ -6,9 +6,12 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 
+	<!-- Styles -->
 	<?php echo $this->Html->css($this->Html->url('/css/estilo.less', true), 'stylesheet/less') ?>
 	<?php echo $this->Html->css($this->Html->url('/css/mobile.less', true), 'stylesheet/less', array('media' => 'screen and (max-width: 600px)')) ?>
+	<?php echo $this->fetch('styles') ?>
 
+	<!-- LESS -->
 	<?php echo $this->Html->script('less') ?>
 	<script>less.watch()</script>
 </head>
@@ -19,20 +22,11 @@
 		<div class="wrapper">
 
 			<hgroup role="banner">
-				<h1><a href="#" class="logo">Assando Sites</a></h1>
+				<h1><?php echo $this->Html->link('Assando Sites', '/', array('class' => 'logo')) ?></h1>
 				<h2>Desenvolver com CakePHP é tão fácil quanto assar um bolo!</h2>
 			</hgroup>
 
-			<!-- navegação -->
-			<nav role="navigation">
-				<ul>
-					<li><a href="#">Sobre o curso</a></li>
-					<li><a href="#">CakePHP</a></li>
-					<li><a href="#">Quem já fez?</a></li>
-					<li><a href="#">Inscreva-se!</a></li>
-				</ul>
-			</nav>
-			<!-- /navegação -->
+			<?php echo $this->element('navigation-menu') ?>
 
 			<!-- sobre -->
 			<section class="sobre">
@@ -71,18 +65,9 @@
 			<!-- créditos -->
 			<div class="creditos">
 
-				<!-- navegação -->
-				<nav role="navigation">
-					<ul>
-						<li><a href="#">Sobre o curso</a></li>
-						<li><a href="#">CakePHP</a></li>
-						<li><a href="#">Depoimentos</a></li>
-						<li><a href="#">Inscreva-se!</a></li>
-					</ul>
-				</nav>
-				<!-- /navegação -->
+				<?php echo $this->element('navigation-menu') ?>
 
-				<p class="cakephp">O <abbr title="CakePHP, um framework de desenvolvimento rápido em PHP">CakePHP</abbr>&trade; é de propriedade da <a href="#" title="CakePHP Software Foundation">CSF</a>&reg; e a mesma não tem relação com este curso ou seu conteúdo</p>
+				<p class="cakephp"><dfn title="CakePHP, um framework de desenvolvimento rápido em PHP">CakePHP</dfn>&trade; é de propriedade da <a href="#" title="CakePHP Software Foundation">CSF</a>&reg; e a mesma não tem relação<br />com este curso ou seu conteúdo</p>
 			</div>
 			<!-- créditos -->
 
@@ -90,5 +75,6 @@
 	</footer>
 	<!-- /rodapé -->
 
+	<?php echo $this->fetch('scripts') ?>
 </body>
 </html>
