@@ -1,3 +1,19 @@
+<?php echo $this->start('header') ?>
+<!-- sobre -->
+<section class="sobre">
+	<p>O <strong>Assando Sites</strong> é um curso prático de <dfn title="CakePHP, um framework de desenvolvimento rápido em PHP">CakePHP</dfn>, onde você vai aprender a desenvolver sites e portais de forma <strong>rápida e eficiente</strong>.</p>
+
+	<h5>Com aulas online, o curso é ministrado através de:</h5>
+	<ul class="recursos">
+		<li class="online"><strong>Aulas online</strong><span> e ao vivo</span></li>
+		<li class="slides"><strong>Slides</strong><span> com todo o conteúdo do curso</span></li>
+		<li class="audio"><strong>Áudio</strong><span> durante todas as aulas</span></li>
+		<li class="video"><strong>Vídeo</strong><span> das aulas para download</span></li>
+	</ul>
+</section>
+<!-- /sobre -->
+<?php echo $this->end() ?>
+
 <?php echo $this->element('next-course') ?>
 
 <div class="wrapper">

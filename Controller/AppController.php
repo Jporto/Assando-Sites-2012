@@ -39,7 +39,7 @@ class AppController extends Controller {
  * Verifica se a requisição possui um prefixo
  *
  * @param  string  $prefix Nome do prefixo
- * 
+ *
  * @return boolean
  */
 	protected function _isPrefix($prefix) {
@@ -48,9 +48,9 @@ class AppController extends Controller {
 
 /**
  * Antes de filtrar
- * 
+ *
  * 1 - Define o layout do prefixo 'admin'
- * 
+ *
  * @return void
  */
 	public function beforeFilter() {
@@ -59,6 +59,9 @@ class AppController extends Controller {
 
 			array_push($this->helpers, 'TwitterBootstrap.BootstrapForm');
 		}
+
+		$this->set('bodyClass', sprintf('%s %s %s',
+			strtolower($this->name), strtolower($this->name) . '-' . strtolower($this->action), join(' ', $this->params['pass'])));
 
 		return parent::beforeFilter();
 	}

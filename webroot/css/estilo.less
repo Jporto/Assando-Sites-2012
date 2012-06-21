@@ -63,14 +63,16 @@ form {
 
 header[role=heading] {
 	background-color: @amarelo_claro;
-	padding: @espaco_medio 0 @espaco_grande;
+	padding: @espaco_medio 0 @espaco_medio;
+
+	.wrapper { position: relative }
 
 	// Logo
 	hgroup[role=banner] {
 		.column(6);
 
 		h1 { margin-top: 0; font-size: 2.5em }
-		h2 { margin-bottom: 0 }
+		h2 { margin-bottom: 0; display: none }
 
 		.logo {
 			color: @rosa;
@@ -99,8 +101,13 @@ header[role=heading] {
 
 	// Sobre o curso
 	.sobre {
-		.column(6);
-		.pull(6);
+		.column(9);
+		.pull(3);
+
+		img {
+			position: absolute;
+			right: 60px
+		}
 
 		h5 { .content-title }
 
@@ -167,15 +174,17 @@ header[role=heading] {
 // ==================================================================
 
 section[role=main] {
-	background-color: @amarelo_claro;
+	background-color: #f0ede8;
+	border-top: 1px solid #d8d5d0;
 
 	// ==================================================================
 	// Faixa de inscrições
 	.inscricoes {
-		background-color: #efece7;
+		background-color: #e4e1dc;
 		padding: @espaco_medio 0 @espaco_medio;
 
-		border-top: 1px solid darken(#efece7, 5%);
+		border-top: 1px solid #cdcac6;
+		border-bottom: 1px solid #cdcac6;
 
 		h1 {
 			.column(6);
@@ -405,4 +414,141 @@ footer[role=contentinfo] {
 
 		.cakephp { font-size: .9em; }
 	}
+}
+
+// ==================================================================
+// Pages
+// ==================================================================
+body.pages {
+
+	// ==================================================================
+	// Home
+	&.home {
+		header[role=heading] {
+
+			h2 { display: block }
+
+			.sobre {
+				.column(6);
+				.pull(6);
+
+				&:before {
+					content: " ";
+					background: url('../img/gnomos/header-bolo.png') center center no-repeat;
+					display: block;
+					width: 435px;
+					height: 426px;
+					position: absolute;
+					right: -20px;
+					top: 45px;
+				}
+			}
+		}
+
+		.inscricoes { background: #efece7 }
+
+		section[role=main] {
+			background-color: @amarelo_claro;
+			border-top: none;
+		}
+	}
+
+	// ==================================================================
+	// Sobre o Curso
+	&.about,
+	&.about-advanced {
+		header[role=heading] {
+			padding-bottom: 0;
+
+			.wrapper {
+				@larguraImagem: 200px;
+
+				background-image: url('../img/gnomos/header-modulo-basico.png');
+				background-position: (@total-width - @larguraImagem - 100px) 50px;
+				background-repeat: no-repeat;
+				padding-bottom: @espaco_medio;
+
+				.sobre .inscreva-se {
+					margin-top: @espaco_medio;
+					overflow: hidden;
+
+					a {
+						.border-radius(6px);
+						background: @verde;
+						padding: 10px @espaco_grande;
+						font: normal 1.9em/1.2em 'Handlee', sans-serif;
+						color: #fff;
+						text-transform: lowercase;
+						float: left;
+						display: block;
+						margin-right: @espaco_pequeno;
+					}
+
+					p {
+						padding: 8px 0 8px @espaco_pequeno;
+						float: left;
+						width: 50%;
+						margin: 0;
+						border-left: 1px solid darken(@amarelo_claro, 10%);
+
+						strong {
+							color: darken(@verde, 20%);
+						}
+					}
+				}
+			}
+		}
+
+		section[role=main] {
+			.wrapper {
+
+				h4 { .content-title; margin-bottom: .5em }
+				ul { margin: 0 0 2em }
+
+				.col-1 { .column(6) }
+				.col-2 { .column(5); .push(1) }
+			}
+
+		}
+	}
+
+	&.about-advanced {
+		header[role=heading] {
+			.wrapper {
+				@larguraImagem: 230px;
+
+				background-image: url('../img/gnomos/header-modulo-avancado.png');
+				background-position: (@total-width - @larguraImagem - 30px) 40px;
+			}
+		}
+	}
+
+	// ==================================================================
+	// CakePHP
+	&.cakephp {
+
+		section[role=main] {
+			border-bottom: 1px solid #FFF;
+
+			.wrapper {
+				padding: @espaco_pequeno 0 @espaco_medio;
+			}
+
+			.sobre {
+				.column(7);
+
+				h2 { .content-title }
+
+				.gist { font-size: .8em; line-height: 1.2em }
+			}
+
+			.recursos {
+				.column(5);
+				h3 { .content-title }
+				li { margin-bottom: 10px }
+			}
+
+		}
+	}
+
 }
