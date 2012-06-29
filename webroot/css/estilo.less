@@ -119,7 +119,7 @@ header[role=heading] {
 
 		.recursos {
 			li {
-				background: @verde_claro url('../img/icones/online.png') center 20px no-repeat;
+				background: @verde_claro center 20px no-repeat;
 
 				float: left;
 
@@ -137,6 +137,11 @@ header[role=heading] {
 
 				.border-radius(12px);
 				.transition(background-position, 0.5s, ease-out);
+
+				&.online { background-image: url('../img/icones/online.png') }
+				&.video { background-image: url('../img/icones/video.png') }
+				&.audio { background-image: url('../img/icones/audio.png') }
+				&.slides { background-image: url('../img/icones/slides.png') }
 
 				&:last-child { margin-right: 0 }
 
@@ -389,6 +394,10 @@ footer[role=contentinfo] {
 	// Pagamento
 	.pagamento {
 		.column(5);
+
+		span.pagamento-flag {
+			margin: 0 8px 10px 0;
+		}
 	}
 
 	// ==================================================================
@@ -593,3 +602,37 @@ body.cakeerror {
 		}
 	}
 }
+
+// ==================================================================
+// Pagamento
+// ==================================================================
+.pagamento-flag{
+	background: url('../img/icones/pagamento-flags.png') no-repeat;
+
+	display: inline-block;
+	width: 42px;
+	height: 20px;
+
+	text-indent:-9999px
+}
+.pagamento-pagseguro{background-position: 0 0}
+.pagamento-visa{background-position:-42px 0}
+.pagamento-mastercard{background-position:-84px 0}
+.pagamento-diners{background-position:-126px 0}
+.pagamento-americanexpress{background-position:-168px 0}
+.pagamento-hipercard{background-position:-210px 0}
+.pagamento-aura{background-position:-252px 0}
+.pagamento-elo{background-position:-294px 0}
+.pagamento-personalcard{background-position:-672px 0}
+.pagamento-plenocard{background-position:-336px 0}
+.pagamento-brasilcard{background-position:-756px 0}
+.pagamento-fortbrasil{background-position:-798px 0}
+.pagamento-oipaggo{background-position:-378px 0}
+.pagamento-bradesco{background-position:-420px 0}
+.pagamento-itau{background-position:-462px 0}
+.pagamento-bb{background-position:-504px 0}
+.pagamento-banrisul{background-position:-546px 0}
+.pagamento-hsbc{background-position:-588px 0}
+.pagamento-boleto{background-position:-630px 0}
+.pagamento-pincode{background-position:-714px 0}
+.pagamento-paypal{background-position:-840px 0}

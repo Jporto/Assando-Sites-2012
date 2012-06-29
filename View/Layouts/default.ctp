@@ -46,7 +46,29 @@
 
 			<!-- pagamento -->
 			<div class="pagamento">
-				pagamento
+				<p>O pagamento pode ser feito via PagSeguro ou Paypal:</p>
+
+				<span class="pagamento-flag pagamento-paypal" title="PayPal">PayPal</span>
+				<span class="pagamento-flag pagamento-pagseguro" title="PagSeguro">PagSeguro</span>
+				<span class="pagamento-flag pagamento-visa" title="Visa">Visa</span>
+				<span class="pagamento-flag pagamento-mastercard" title="MasterCard">MasterCard</span>
+				<span class="pagamento-flag pagamento-diners" title="Diners">Diners</span>
+				<span class="pagamento-flag pagamento-americanexpress" title="American Express">American Express</span>
+				<span class="pagamento-flag pagamento-hipercard" title="Hipercard">Hipercard</span>
+				<span class="pagamento-flag pagamento-aura" title="Aura">Aura</span>
+				<span class="pagamento-flag pagamento-elo" title="Elo">Elo</span>
+				<!-- <span class="pagamento-flag pagamento-plenocard" title="PLENOCard">PLENOCard</span>
+				<span class="pagamento-flag pagamento-personalcard" title="PersonalCard">PersonalCard</span>
+				<span class="pagamento-flag pagamento-brasilcard" title="Brasilcard">Brasilcard</span>
+				<span class="pagamento-flag pagamento-fortbrasil" title="FORTBRASIL">FORTBRASIL</span>
+				<span class="pagamento-flag pagamento-oipaggo" title="Oi Paggo">Oi Paggo</span> -->
+				<span class="pagamento-flag pagamento-bradesco" title="Banco Bradesco">Banco Bradesco</span>
+				<span class="pagamento-flag pagamento-itau" title="Banco Itaú">Banco Itaú</span>
+				<span class="pagamento-flag pagamento-bb" title="Banco do Brasil">Banco do Brasil</span>
+				<!-- <span class="pagamento-flag pagamento-banrisul" title="Banco Banrisul">Banco Banrisul</span> -->
+				<span class="pagamento-flag pagamento-hsbc" title="Banco HSBC">Banco HSBC</span>
+				<span class="pagamento-flag pagamento-boleto" title="Boleto">Boleto</span>
+				<!-- <span class="pagamento-flag pagamento-pincode" title="PinCode PagSeguro">PinCode</span> -->
 			</div>
 			<!-- pagamento -->
 
