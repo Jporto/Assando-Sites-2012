@@ -526,7 +526,6 @@ body.pages {
 	// ==================================================================
 	// CakePHP
 	&.cakephp {
-
 		section[role=main] {
 			border-bottom: 1px solid #FFF;
 
@@ -551,4 +550,46 @@ body.pages {
 		}
 	}
 
+}
+
+// ==================================================================
+// Erro 404
+// ==================================================================
+body.cakeerror {
+
+	header[role=heading] {
+		h1 { margin: 0 }
+	}
+
+
+	section[role=main] {
+		.wrapper {
+			padding: @espaco_grande * 2 0;
+			min-height: 380px;
+			background: url('../img/gnomos/404.png') left center no-repeat;
+		}
+
+		.content {
+			.column(4);
+			.push(8);
+
+			padding-top: 50px;
+			text-align: center;
+
+			h1, h2 { color: #bb0017 }
+
+			h1 {
+				font-size: 9em;
+				line-height: 1em;
+				margin: 0;
+			}
+
+			h2 {
+				font-size: 2em;
+				margin: 0
+			}
+
+			p { margin-bottom: 2em }
+		}
+	}
 }
