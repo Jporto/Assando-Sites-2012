@@ -1,6 +1,7 @@
 <?php
 
 App::uses('AppModel', 'Model');
+App::uses('Status', 'Model');
 
 /**
  * Course Model

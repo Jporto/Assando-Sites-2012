@@ -20,7 +20,7 @@ class AttachmentFixture extends CakeTestFixture {
 	public $records = array(
 		array(
 			'id' => 1,
-			'lessons_id' => 1,
+			'lesson_id' => 1,
 			'name' => 'Lorem ipsum dolor sit amet',
 			'file' => 'Lorem ipsum dolor sit amet',
 			'status_id' => 1,

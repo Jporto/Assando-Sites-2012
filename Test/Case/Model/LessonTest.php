@@ -1,5 +1,4 @@
 <?php
-App::uses('Lesson', 'Model');
 
 /**
  * Lesson Test Case

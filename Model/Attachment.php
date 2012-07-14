@@ -5,7 +5,7 @@ App::uses('AppModel', 'Model');
 /**
  * Attachment Model
  *
- * @property Lessons $Lessons
+ * @property Lesson $Lesson
  * @property Status $Status
  */
 class Attachment extends AppModel {
@@ -16,7 +16,7 @@ class Attachment extends AppModel {
  * @var array
  */
 	public $validate = array(
-		'lessons_id' => array(
+		'lesson_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric')
 			),
@@ -48,5 +48,5 @@ class Attachment extends AppModel {
  *
  * @var array
  */
-	public $belongsTo = array('Lessons', 'Status');
+	public $belongsTo = array('Lesson', 'Status');
 }

@@ -12,7 +12,7 @@ class AttachmentTestCase extends CakeTestCase {
  *
  * @var array
  */
-	public $fixtures = array('app.attachment', 'app.lessons', 'app.status');
+	public $fixtures = array('app.attachment', 'app.lesson', 'app.status');
 
 /**
  * setUp method

@@ -24,16 +24,8 @@
 // Home
 Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 
-// Sobre
-Router::connect('/sobre-o-curso', array('controller' => 'pages', 'action' => 'display', 'about'));
-Router::connect('/sobre-o-curso/avancado', array('controller' => 'pages', 'action' => 'display', 'about-advanced'));
-
-// Static pages
-// Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
-
 // Control Panel
 Router::connect('/admin', array('controller' => 'users', 'action' => 'index', 'admin' => true));
-
 
 // Load all plugin routes
 CakePlugin::routes();

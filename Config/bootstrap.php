@@ -23,12 +23,35 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
+// Constants
 define('DB_DATETIME_FORMAT', 'Y-m-d H:i:s');
 
+// Enable the Dispatcher filters for plugin assets, and
+// CacheHelper.
+Configure::write('Dispatcher.filters', array(
+	'AssetDispatcher',
+	'CacheDispatcher'
+));
+
+// Add logging configuration.
+CakeLog::config('debug', array(
+	'engine' => 'FileLog',
+	'types' => array('notice', 'info', 'debug'),
+	'file' => 'debug',
+));
+CakeLog::config('error', array(
+	'engine' => 'FileLog',
+	'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
+	'file' => 'error',
+));
+
+
+// Default cache engine
 Cache::config('default', array('engine' => 'File'));
 
-if (Configure::read('debug')) {
-	CakePlugin::loadAll('DebugKit');
-}
+// BRL Currency
+App::uses('CakeNumber', 'Utility');
+CakeNumber::addFormat('BRL', array('before' => 'R$ ', 'thousands' => '.', 'decimals' => ','));
 
+// Plugins
 CakePlugin::loadAll();
