@@ -33,7 +33,12 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 
-	public $components = array('DebugKit.Toolbar');
+/**
+ * Helpers
+ * 
+ * @var array
+ */
+	public $helpers = array('Html', 'Form', 'Time', 'Number');
 
 /**
  * Verifica se a requisição possui um prefixo
@@ -57,7 +62,8 @@ class AppController extends Controller {
 		if ($this->_isPrefix('admin')) {
 			$this->layout = 'admin';
 
-			array_push($this->helpers, 'TwitterBootstrap.BootstrapForm');
+			// Usa o BootstrapFormHelper como FormHelper
+			$this->helpers['Form'] = array('className' => 'TwitterBootstrap.BootstrapForm');
 		}
 
 		$this->set('bodyClass', sprintf('%s %s %s',

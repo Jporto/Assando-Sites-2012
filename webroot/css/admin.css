@@ -1,0 +1,11 @@
+body {
+	padding-bottom: 40px;
+}
+
+.container-fluid .row-fluid {
+	margin-top: 60px;
+}
+
+.sidebar-nav {
+	padding: 9px 0;
+}
