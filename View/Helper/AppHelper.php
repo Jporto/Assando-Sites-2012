@@ -30,4 +30,16 @@ App::uses('Helper', 'View');
  * @package       app.View.Helper
  */
 class AppHelper extends Helper {
+
+	public function gravatar($email, $params = array()) {
+		$params = Hash::merge(array(
+			's' => 100
+		), $params);
+
+		$gravatar = 'http://www.gravatar.com/avatar/' . md5($email);
+		$gravatar .= '?' . http_build_query($params);
+
+		return $gravatar;
+	}
+
 }
