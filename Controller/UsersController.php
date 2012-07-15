@@ -10,12 +10,33 @@ App::uses('AppController', 'Controller');
 class UsersController extends AppController {
 
 /**
+ * Contador de alunos pendentes
+ * 
+ * @return int
+ */
+	public function admin_pendingStudents() {
+		$params = array(
+			'conditions' => array('User.status_id' => Status::ALUNO_PENDENTE)
+		);
+
+		return $this->User->findStudents('count', $params);
+	}
+
+/**
  * admin_index method
  *
  * @return void
  */
 	public function admin_index() {
-		$this->User->recursive = 0;
+		$params = array();
+
+		if (isset($this->params->query['status']))
+			$params = Hash::merge(array(
+				'conditions' => array('User.status_id' => (int)$this->params->query['status'])
+			), $params);
+
+		$this->paginate = $this->User->studentParams($params);
+
 		$this->set('users', $this->paginate());
 	}
 

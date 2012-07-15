@@ -47,8 +47,9 @@ class Status extends AppModel {
 	);
 
 /**
- * Registros ativos
+ * Status básicos
  */
+	const PENDENTE = 0;
 	const ATIVO = 1;
 
 /**
@@ -68,5 +69,11 @@ class Status extends AppModel {
 	const PAGAMENTO_EM_DISPUTA = 15;
 	const PAGAMENTO_RESSARCIDO = 16;
 	const PAGAMENTO_CANCELADO = 17;
+
+/**
+ * Alunos
+ */
+	const ALUNO_PENDENTE = 0;
+	const ALUNO_CONFIRMADO = 1;
 
 }

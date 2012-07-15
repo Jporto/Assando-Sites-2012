@@ -34,11 +34,18 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 
 /**
+ * Components
+ * 
+ * @var array
+ */
+	public $components = array('Session', 'Cookie', 'RequestHandler', 'Email', 'Security');
+
+/**
  * Helpers
  * 
  * @var array
  */
-	public $helpers = array('Html', 'Form', 'Time', 'Number');
+	public $helpers = array('Html', 'Form', 'Time', 'Number', 'Bootstrap');
 
 /**
  * Verifica se a requisição possui um prefixo

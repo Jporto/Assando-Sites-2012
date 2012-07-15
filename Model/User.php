@@ -1,6 +1,7 @@
 <?php
 
 App::uses('AppModel', 'Model');
+App::uses('Group', 'Model');
 App::uses('AuthComponent', 'Controller/Component');
 
 /**
@@ -15,6 +16,22 @@ App::uses('AuthComponent', 'Controller/Component');
  * @property Payment $Payment
  */
 class User extends AppModel {
+
+/**
+ * Virtual fields
+ * 
+ * @var array
+ */
+	public $virtualFields = array(
+		'full_name' => "CONCAT(User.name, ' ', User.surname)"
+	);
+
+/**
+ * Ordem padrão
+ * 
+ * @var array
+ */
+	public $order = array('User.created' => 'DESC');
 
 /**
  * Validation rules
@@ -132,6 +149,42 @@ class User extends AppModel {
 	}
 
 /**
+ * Retorna os parâmetros de busca para usuários que não são alunos
+ * 
+ * @param  array  $params   Parâmetros de busca
+ * 
+ * @return array
+ */
+	public function staffParams($params = array()) {
+		$groups = $this->Group->findStaff();
+
+		$params = Hash::merge(array(
+			'conditions' => array(
+				'Group.id' => array_keys($groups)
+			)
+		), $params);
+
+		return $params;
+	}
+
+/**
+ * Retorna os parâmetros de busca para alunos
+ * 
+ * @param  array  $params   Parâmetros de busca
+ * 
+ * @return array
+ */
+	public function studentParams($params = array()) {
+		$params = Hash::merge(array(
+			'conditions' => array(
+				'Group.id' => Group::ALUNOS
+			)
+		), $params);
+
+		return $params;
+	}
+
+/**
  * Encontra usuários que não são alunos
  * 
  * @param  string $findType Tipo de find
@@ -140,20 +193,7 @@ class User extends AppModel {
  * @return array
  */
 	public function findStaff($findType = 'all', $params = array()) {
-		// Lista de grupos válidos
-		$groups = $this->Group->findStaff();
-
-		// Não há o parâmetro de condições?
-		if (!isset($params['conditions'])) {
-			$params['conditions'] = array();
-		}
-
-		// Adiciona os parâmetros de busca
-		$params['conditions'] = array_merge(array(
-			'Group.id' => array_keys($groups)
-		), $params['conditions']);
-
-		return $this->find($findType, $params);
+		return $this->find($findType, $this->staffParams($params));
 	}
 
 /**
@@ -165,17 +205,7 @@ class User extends AppModel {
  * @return array
  */
 	public function findStudents($findType = 'all', $params = array()) {
-		// Não há o parâmetro de condições?
-		if (!isset($params['conditions'])) {
-			$params['conditions'] = array();
-		}
-
-		// Adiciona os parâmetros de busca
-		$params['conditions'] = array_merge(array(
-			'Group.id' => Group::ALUNOS
-		), $params['conditions']);
-
-		return $this->find($findType, $params);
+		return $this->find($findType, $this->studentParams($params));
 	}
 
 /**

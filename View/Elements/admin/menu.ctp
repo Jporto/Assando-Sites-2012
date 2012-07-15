@@ -1,3 +1,5 @@
+<?php $pendingStudents = $this->element('admin/badges/pending-students') ?>
+
 <div class="navbar navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container-fluid">
@@ -27,12 +29,12 @@
 					<!-- Alunos -->
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-							<i class="icon-user icon-white"></i> Alunos <span class="badge badge-warning">2</span> <span class="caret visible-desktop"></span>
+							<i class="icon-user icon-white"></i> Alunos <?php echo $pendingStudents ?> <span class="caret visible-desktop"></span>
 						</a>
 						<ul class="dropdown-menu">
-							<li><?php echo $this->Html->link('<i class="icon-user"></i> Inscritos', '#', array('escape' => false)) ?></li>
-							<li><?php echo $this->Html->link('<i class="icon-ok"></i> Confirmados', '#', array('escape' => false)) ?></li>
-							<li><?php echo $this->Html->link('<i class="icon-warning-sign"></i> Pendentes <span class="badge badge-warning">2</span>', '#', array('escape' => false)) ?></li>
+							<li><?php echo $this->Html->link('<i class="icon-user"></i> Inscritos', array('controller' => 'users', 'action' => 'index'), array('escape' => false)) ?></li>
+							<li><?php echo $this->Html->link('<i class="icon-ok"></i> Confirmados', array('controller' => 'users', 'action' => 'index', '?' => array('status' => Status::ALUNO_CONFIRMADO)), array('escape' => false)) ?></li>
+							<li><?php echo $this->Html->link('<i class="icon-warning-sign"></i> Pendentes ' . $pendingStudents, array('controller' => 'users', 'action' => 'index', '?' => array('status' => Status::ALUNO_PENDENTE)), array('escape' => false)) ?></li>
 						</ul>
 					</li>
 					<!-- /Alunos -->
@@ -40,7 +42,7 @@
 					<!-- Pagamentos -->
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-							<i class="icon-barcode icon-white"></i> Pagamentos <span class="badge badge-warning">2</span> <span class="caret visible-desktop"></span>
+							<i class="icon-barcode icon-white"></i> Pagamentos <span class="badge badge-warning pending-payments"></span> <span class="caret visible-desktop"></span>
 						</a>
 						<ul class="dropdown-menu">
 							<li><?php echo $this->Html->link('<i class="icon-barcode"></i> Pagamentos', '#', array('escape' => false)) ?></li>
