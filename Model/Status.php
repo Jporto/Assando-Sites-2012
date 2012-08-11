@@ -30,10 +30,11 @@ class Status extends AppModel {
  */
 	public $records = array(
 		array('id' => 1, 'name' => 'Ativo', 'model' => null),
+		array('id' => 2, 'name' => 'Deletado', 'model' => null),
 
 		# Turmas
-		array('id' => 2, 'name' => 'Inscrições abertas', 'model' => 'Course'),
-		array('id' => 3, 'name' => 'Inscrições fechadas', 'model' => 'Course'),
+		array('id' => 5, 'name' => 'Inscrições abertas', 'model' => 'Course'),
+		array('id' => 6, 'name' => 'Inscrições fechadas', 'model' => 'Course'),
 
 		# Pagamentos
 		array('id' => 10, 'name' => 'Iniciado', 'model' => 'Payment'),
@@ -51,12 +52,20 @@ class Status extends AppModel {
  */
 	const PENDENTE = 0;
 	const ATIVO = 1;
+	const DELETADO = 2;
 
 /**
  * Turmas
  */
-	const INSCRICOES_ABERTAS = 2;
-	const INSCRICOES_FECHADAS = 3;
+	const INSCRICOES_ABERTAS = 5;
+	const INSCRICOES_FECHADAS = 6;
+
+/**
+ * Matrículas
+ */
+	const MATRICULA_PENDENTE = 0;
+	const MATRICULA_CONFIRMADA = 1;
+	const MATRICULA_CANCELADA = 2;
 
 /**
  * Pagamentos
@@ -75,5 +84,6 @@ class Status extends AppModel {
  */
 	const ALUNO_PENDENTE = 0;
 	const ALUNO_CONFIRMADO = 1;
+	const ALUNO_DELETADO = 2;
 
 }

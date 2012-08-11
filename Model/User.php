@@ -23,7 +23,7 @@ class User extends AppModel {
  * @var array
  */
 	public $virtualFields = array(
-		'full_name' => "CONCAT(User.name, ' ', User.surname)"
+		'full_name' => 'CONCAT(User.name, " ", User.surname)'
 	);
 
 /**

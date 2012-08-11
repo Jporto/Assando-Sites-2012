@@ -42,4 +42,8 @@ class AppHelper extends Helper {
 		return $gravatar;
 	}
 
+	public function HEXColor($text) {
+		return '#' . substr(sha1($text), 0, 6);
+	}
+
 }

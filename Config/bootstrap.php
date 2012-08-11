@@ -53,5 +53,7 @@ Cache::config('default', array('engine' => 'File'));
 App::uses('CakeNumber', 'Utility');
 CakeNumber::addFormat('BRL', array('before' => 'R$ ', 'thousands' => '.', 'decimals' => ','));
 
-// Plugins
-CakePlugin::loadAll();
+// Carrega todos os plugins
+CakePlugin::loadAll(array(
+	'OldSite' => array('bootstrap' => true)
+));

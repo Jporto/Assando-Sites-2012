@@ -17,9 +17,21 @@ switch ($user['User']['status_id']) {
 	case Status::ALUNO_CONFIRMADO:
 		$status = $this->TwitterBootstrap->label('Confirmado', 'success');
 		break;
+	case Status::ALUNO_DELETADO:
+		$status = $this->TwitterBootstrap->label('Deletado', 'important');
+		break;
 	default:
 		$status = $this->TwitterBootstrap->label('Pendente', 'warning');
 		break;
+}
+
+$turmas = array();
+foreach ($user['Enrollment'] AS $Enrollment) {
+	$label = $this->TwitterBootstrap->label($Enrollment['Course']['code'], null, array(
+		'style' => 'background: ' . $this->Html->HEXColor($Enrollment['Course']['code'])
+	));
+
+	array_push($turmas, $label);
 }
 
 	?>
@@ -31,7 +43,7 @@ switch ($user['User']['status_id']) {
 		</td>
 		<td class="visible-desktop"><?php echo $this->Html->link($user['User']['email'], 'mailto:' . $user['User']['email']) ?></td>
 		<td><?php echo $status ?></td>
-		<td class="visible-desktop"></td>
+		<td class="visible-desktop"><?php echo join(' ', $turmas) ?></td>
 		<td class="visible-desktop"><?php echo $this->Time->niceShort($user['User']['created']) ?></td>
 	</tr>
 <?php endforeach ?>

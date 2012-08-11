@@ -28,7 +28,12 @@ class UsersController extends AppController {
  * @return void
  */
 	public function admin_index() {
-		$params = array();
+		$params = array(
+			'contain' => array(
+				'Group',
+				'Enrollment' => array('Course')
+			)
+		);
 
 		if (isset($this->params->query['status']))
 			$params = Hash::merge(array(
