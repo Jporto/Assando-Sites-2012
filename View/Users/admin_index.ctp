@@ -38,7 +38,7 @@ foreach ($user['Enrollment'] as $Enrollment) {
 	<tr>
 		<td class="visible-desktop"><?php echo h($user['User']['id']) ?></td>
 		<td>
-			<?php echo $this->Html->image($this->Html->gravatar($user['User']['email'], array('s' => 20, 'd' => 'mm')), array('width' => 20, 'height' => 20, 'title' => $user['User']['full_name'], 'class' => 'avatar visible-desktop')) ?>
+			<?php echo $this->Html->image($this->Html->gravatar($user['User']['email'], array('s' => 20)), array('width' => 20, 'height' => 20, 'title' => $user['User']['full_name'], 'class' => 'avatar visible-desktop')) ?>
 			<?php echo $this->Html->link($user['User']['full_name'], array('action' => 'edit', $user['User']['id'])) ?>
 		</td>
 		<td class="visible-desktop"><?php echo $this->Html->link($user['User']['email'], 'mailto:' . $user['User']['email']) ?></td>

@@ -33,7 +33,8 @@ class AppHelper extends Helper {
 
 	public function gravatar($email, $params = array()) {
 		$params = Hash::merge(array(
-			's' => 100
+			's' => 100,
+			'd' => 'mm'
 		), $params);
 
 		$gravatar = 'http://www.gravatar.com/avatar/' . md5($email);
