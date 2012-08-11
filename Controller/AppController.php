@@ -45,7 +45,7 @@ class AppController extends Controller {
  * 
  * @var array
  */
-	public $helpers = array('Html', 'Form', 'Time', 'Number', 'Bootstrap');
+	public $helpers = array('Html', 'Form', 'Time', 'Number', 'TwitterBootstrap.TwitterBootstrap');
 
 /**
  * Verifica se a requisição possui um prefixo
@@ -70,7 +70,7 @@ class AppController extends Controller {
 			$this->layout = 'admin';
 
 			// Usa o BootstrapFormHelper como FormHelper
-			$this->helpers['Form'] = array('className' => 'TwitterBootstrap.BootstrapForm');
+			$this->helpers['Form'] = array('className' => 'TwitterBootstrap.TwitterBootstrapForm');
 		}
 
 		$this->set('bodyClass', sprintf('%s %s %s',

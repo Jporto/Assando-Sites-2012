@@ -15,10 +15,10 @@ foreach ($users as $user):
 
 switch ($user['User']['status_id']) {
 	case Status::ALUNO_CONFIRMADO:
-		$status = $this->Bootstrap->label('Confirmado', 'success');
+		$status = $this->TwitterBootstrap->label('Confirmado', 'success');
 		break;
 	default:
-		$status = $this->Bootstrap->label('Pendente', 'warning');
+		$status = $this->TwitterBootstrap->label('Pendente', 'warning');
 		break;
 }
 
