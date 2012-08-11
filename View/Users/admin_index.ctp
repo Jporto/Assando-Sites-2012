@@ -26,9 +26,9 @@ switch ($user['User']['status_id']) {
 }
 
 $turmas = array();
-foreach ($user['Enrollment'] AS $Enrollment) {
+foreach ($user['Enrollment'] as $Enrollment) {
 	$label = $this->TwitterBootstrap->label($Enrollment['Course']['code'], null, array(
-		'style' => 'background: ' . $this->Html->HEXColor($Enrollment['Course']['code'])
+		'style' => 'background: ' . $this->Html->hexColor($Enrollment['Course']['code'])
 	));
 
 	array_push($turmas, $label);
