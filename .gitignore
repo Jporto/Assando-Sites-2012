@@ -11,3 +11,8 @@
 
 # Python
 *.pyc
+
+# TwitterBootstrap
+webroot/css/bootstrap-responsive.css
+webroot/css/bootstrap.css
+webroot/js/bootstrap.js
