@@ -5,9 +5,8 @@
 	<title>Painel de Controle</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<?php echo $this->Html->css('bootstrap.min.css') . PHP_EOL ?>
-	<?php echo $this->Html->css('bootstrap-responsive.min.css') . PHP_EOL ?>
-	<?php echo $this->Html->css('admin.css') . PHP_EOL ?>
+	<?php echo $this->Html->css(array('bootstrap.min', 'bootstrap-responsive.min')) ?>
+	<?php echo $this->Html->css('admin') . PHP_EOL ?>
 	<?php echo $this->fetch('css') . PHP_EOL ?>
 </head>
 <body>
@@ -46,7 +45,7 @@
 	<?php echo $this->element('sql_dump') ?>
 
 	<?php echo $this->Html->script('//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js') . PHP_EOL ?>
-	<?php echo $this->Html->script('bootstrap.min.js') . PHP_EOL ?>
+	<?php echo $this->Html->script('bootstrap.min') . PHP_EOL ?>
 	<?php echo $this->fetch('js') . PHP_EOL ?>
 
 </body>
