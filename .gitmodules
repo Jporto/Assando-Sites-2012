@@ -13,12 +13,12 @@
 [submodule "Plugin/AssetCompress"]
 	path = Plugin/AssetCompress
 	url = git://github.com/markstory/asset_compress.git
-[submodule "webroot/TwitterBootstrap"]
-	path = webroot/TwitterBootstrap
-	url = git://github.com/twitter/bootstrap.git
 [submodule "Plugin/Datasources"]
 	path = Plugin/Datasources
 	url = git://github.com/cakephp/datasources.git
 [submodule "Vendor/TwitterOAuth"]
 	path = Vendor/TwitterOAuth
 	url = git://github.com/abraham/twitteroauth.git
+[submodule "Plugin/TwitterBootstrap"]
+	path = Plugin/TwitterBootstrap
+	url = https://github.com/radig/TwitterBootstrap.git

@@ -45,7 +45,13 @@ class AppController extends Controller {
  * 
  * @var array
  */
-	public $helpers = array('Html', 'Form', 'Time', 'Number', 'TwitterBootstrap.TwitterBootstrap');
+	public $helpers = array(
+		'Html' => array('className' => 'TwitterBootstrap.BootstrapHtml'),
+		'Form' => array('className' => 'TwitterBootstrap.BootstrapForm'),
+		'Paginator' => array('className' => 'TwitterBootstrap.BootstrapPaginator'),
+		'Time',
+		'Number'
+	);
 
 /**
  * Verifica se a requisição possui um prefixo
@@ -68,9 +74,6 @@ class AppController extends Controller {
 	public function beforeFilter() {
 		if ($this->_isPrefix('admin')) {
 			$this->layout = 'admin';
-
-			// Usa o BootstrapFormHelper como FormHelper
-			$this->helpers['Form'] = array('className' => 'TwitterBootstrap.TwitterBootstrapForm');
 		}
 
 		$this->set('bodyClass', sprintf('%s %s %s',

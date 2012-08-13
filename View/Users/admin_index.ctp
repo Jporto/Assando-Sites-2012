@@ -15,19 +15,20 @@ foreach ($users as $user):
 
 switch ($user['User']['status_id']) {
 	case Status::ALUNO_CONFIRMADO:
-		$status = $this->TwitterBootstrap->label('Confirmado', 'success');
+		$status = $this->Html->tag('span', 'Confirmado', array('class' => 'label label-success'));
 		break;
 	case Status::ALUNO_DELETADO:
-		$status = $this->TwitterBootstrap->label('Deletado', 'important');
+		$status = $this->Html->tag('span', 'Deletado', array('class' => 'label label-important'));
 		break;
 	default:
-		$status = $this->TwitterBootstrap->label('Pendente', 'warning');
+		$status = $this->Html->tag('span', 'Pendente', array('class' => 'label label-warning'));
 		break;
 }
 
 $turmas = array();
 foreach ($user['Enrollment'] as $Enrollment) {
-	$label = $this->TwitterBootstrap->label($Enrollment['Course']['code'], null, array(
+	$label = $this->Html->tag('span', $Enrollment['Course']['code'], array(
+		'class' => 'label',
 		'style' => 'background: ' . $this->Html->hexColor($Enrollment['Course']['code'])
 	));
 
@@ -49,9 +50,7 @@ foreach ($user['Enrollment'] as $Enrollment) {
 <?php endforeach ?>
 	</table>
 
-	<p><?php echo $this->Paginator->counter(array('format' => __('Página {:page} de {:pages}, mostrando {:current} registros de {:count} no total'))) ?></p>
-
-	<div class="paging"><?php echo $this->Paginator->numbers() ?></div>
+	<div class="paging"><?php echo $this->Paginator->pagination() ?></div>
 </div>
 
 <?php echo $this->start('left-menu') ?>
