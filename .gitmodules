@@ -19,3 +19,6 @@
 [submodule "Plugin/TwitterBootstrap"]
 	path = Plugin/TwitterBootstrap
 	url = git@github.com:TiuTalk/TwitterBootstrap.git
+[submodule "Plugin/Datasources"]
+	path = Plugin/Datasources
+	url = git@github.com:TiuTalk/datasources.git
