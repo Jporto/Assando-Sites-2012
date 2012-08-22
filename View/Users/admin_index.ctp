@@ -3,12 +3,12 @@
 
 	<table class="table table-striped table-bordered">
 	<tr>
-		<th class="visible-desktop"><?php echo $this->Paginator->sort('id', '#') ?></th>
+		<th><?php echo $this->Paginator->sort('id', '#') ?></th>
 		<th><?php echo $this->Paginator->sort('name', 'Nome') ?></th>
-		<th class="visible-desktop"><?php echo $this->Paginator->sort('email') ?></th>
+		<th><?php echo $this->Paginator->sort('email') ?></th>
 		<th><?php echo $this->Paginator->sort('status_id', 'Status') ?></th>
-		<th class="visible-desktop">Turmas</th>
-		<th class="visible-desktop"><?php echo $this->Paginator->sort('created', 'Cadastro') ?></th>
+		<th>Turmas</th>
+		<th><?php echo $this->Paginator->sort('created', 'Cadastro') ?></th>
 	</tr>
 	<?php
 foreach ($users as $user):
@@ -37,15 +37,15 @@ foreach ($user['Enrollment'] as $Enrollment) {
 
 	?>
 	<tr>
-		<td class="visible-desktop"><?php echo h($user['User']['id']) ?></td>
+		<td><?php echo h($user['User']['id']) ?></td>
 		<td>
-			<?php echo $this->Html->image($this->Html->gravatar($user['User']['email'], array('s' => 20)), array('width' => 20, 'height' => 20, 'title' => $user['User']['full_name'], 'class' => 'avatar visible-desktop')) ?>
+			<?php echo $this->Html->image($this->Html->gravatar($user['User']['email'], array('s' => 20)), array('width' => 20, 'height' => 20, 'title' => $user['User']['full_name'], 'class' => 'avatar')) ?>
 			<?php echo $this->Html->link($user['User']['full_name'], array('action' => 'edit', $user['User']['id'])) ?>
 		</td>
-		<td class="visible-desktop"><?php echo $this->Html->link($user['User']['email'], 'mailto:' . $user['User']['email']) ?></td>
+		<td><?php echo $this->Html->link($user['User']['email'], 'mailto:' . $user['User']['email']) ?></td>
 		<td><?php echo $status ?></td>
-		<td class="visible-desktop"><?php echo join(' ', $turmas) ?></td>
-		<td class="visible-desktop"><?php echo $this->Time->niceShort($user['User']['created']) ?></td>
+		<td><?php echo join(' ', $turmas) ?></td>
+		<td><?php echo $this->Time->niceShort($user['User']['created']) ?></td>
 	</tr>
 <?php endforeach ?>
 	</table>

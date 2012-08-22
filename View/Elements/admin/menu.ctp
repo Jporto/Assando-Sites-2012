@@ -1,6 +1,6 @@
 <?php $pendingStudents = $this->element('admin/badges/pending-students') ?>
 
-<div class="navbar navbar-fixed-top">
+<div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container-fluid">
 			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -29,7 +29,7 @@
 					<!-- Alunos -->
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-							<i class="icon-user icon-white"></i> Alunos <?php echo $pendingStudents ?> <span class="caret visible-desktop"></span>
+							<i class="icon-user icon-white"></i> Alunos <?php echo $pendingStudents ?> <b class="caret"></b>
 						</a>
 						<ul class="dropdown-menu">
 							<li><?php echo $this->Html->link('<i class="icon-user"></i> Inscritos', array('controller' => 'users', 'action' => 'index'), array('escape' => false)) ?></li>
@@ -42,7 +42,7 @@
 					<!-- Pagamentos -->
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-							<i class="icon-barcode icon-white"></i> Pagamentos <span class="badge badge-warning pending-payments"></span> <span class="caret visible-desktop"></span>
+							<i class="icon-barcode icon-white"></i> Pagamentos <span class="badge badge-warning pending-payments"></span> <b class="caret"></b>
 						</a>
 						<ul class="dropdown-menu">
 							<li><?php echo $this->Html->link('<i class="icon-barcode"></i> Pagamentos', '#', array('escape' => false)) ?></li>
@@ -54,7 +54,7 @@
 					<!-- Turmas -->
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-							<i class="icon-calendar icon-white"></i> Turmas <span class="caret visible-desktop"></span>
+							<i class="icon-calendar icon-white"></i> Turmas <b class="caret"></b>
 						</a>
 						<ul class="dropdown-menu">
 							<li><?php echo $this->Html->link('<i class="icon-calendar"></i> Turmas', '#', array('escape' => false)) ?></li>
