@@ -12,8 +12,8 @@
 			<?php echo $this->Html->link('Assando Sites', '/admin', array('class' => 'brand')) ?>
 
 			<div class="btn-group pull-right">
-				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-					<i class="icon-user"></i> Thiago Belem <span class="caret visible-desktop"></span>
+				<a class="btn btn-info btn-small dropdown-toggle" data-toggle="dropdown" href="#">
+					<i class="icon-user icon-white"></i> Thiago Belem <span class="caret visible-desktop"></span>
 				</a>
 				<ul class="dropdown-menu">
 					<li><?php echo $this->Html->link('<i class="icon-user"></i> Usuários', '#', array('escape' => false)) ?></li>
@@ -42,11 +42,11 @@
 					<!-- Pagamentos -->
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-							<i class="icon-barcode icon-white"></i> Pagamentos <span class="badge badge-warning pending-payments"></span> <b class="caret"></b>
+							<i class="icon-barcode icon-white"></i> Pagamentos <b class="caret"></b>
 						</a>
 						<ul class="dropdown-menu">
 							<li><?php echo $this->Html->link('<i class="icon-barcode"></i> Pagamentos', '#', array('escape' => false)) ?></li>
-							<li><?php echo $this->Html->link('<i class="icon-gift"></i> Cupons de Desconto', '#', array('escape' => false)) ?></li>
+							<li><?php echo $this->Html->link('<i class="icon-gift"></i> Cupons de desconto', '#', array('escape' => false)) ?></li>
 						</ul>
 					</li>
 					<!-- /Pagamentos -->
@@ -66,7 +66,7 @@
 
 				</ul>
 
-				<?php echo $this->Form->create('User', array('action' => 'index', 'class' => 'navbar-search pull-left', 'type' => 'get')) ?>
+				<?php echo $this->Form->create('User', array('action' => 'index', 'class' => 'navbar-search pull-left')) ?>
 				<?php echo $this->Form->text('search', array('placeholder' => 'Buscar aluno', 'class' => 'search-query span2')) ?>
 				<?php echo $this->Form->end() ?>
 			</div>

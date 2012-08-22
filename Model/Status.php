@@ -36,6 +36,7 @@ class Status extends AppModel {
  * @var array
  */
 	public $records = array(
+		array('id' => 0, 'name' => 'Pendente', 'model' => null),
 		array('id' => 1, 'name' => 'Ativo', 'model' => null),
 		array('id' => 2, 'name' => 'Deletado', 'model' => null),
 

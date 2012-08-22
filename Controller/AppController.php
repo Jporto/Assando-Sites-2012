@@ -85,4 +85,22 @@ class AppController extends Controller {
 		return parent::beforeFilter();
 	}
 
+/**
+ * Antes de renderizar
+ *
+ * 1 - Define o title da página
+ *
+ * @return void
+ */
+	public function beforeRender() {
+		// Título definido?
+		if (isset($this->viewVars['title_for_layout']) && !empty($this->viewVars['title_for_layout'])) {
+			if ($this->_isPrefix('admin')) {
+				$this->viewVars['title_for_layout'] .= ' | Painel de Controle';
+			}
+		}
+
+		return parent::beforeRender();
+	}
+
 }

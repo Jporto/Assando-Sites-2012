@@ -1,6 +1,7 @@
 <?php
 
 App::uses('AppController', 'Controller');
+App::uses('Status', 'Model');
 
 /**
  * Users Controller
@@ -35,10 +36,36 @@ class UsersController extends AppController {
 			)
 		);
 
-		if (isset($this->params->query['status']))
+		$title_for_layout = 'Alunos';
+
+		// Filter?
+		if (isset($this->params->query['status'])) {
+			$this->User->Status->id = (int)$this->params->query['status'];
+			$Status = $this->User->Status->read();
+
 			$params = Hash::merge(array(
-				'conditions' => array('User.status_id' => (int)$this->params->query['status'])
+				'conditions' => array('User.status_id' => $Status['Status']['id'])
 			), $params);
+
+			$title_for_layout .= ' ' . strtolower(Inflector::pluralize($Status['Status']['name']));
+		}
+
+		// Post?
+		if ($this->request->isPost()) {
+			$search = $this->request->data['User']['search'];
+
+			$params = Hash::merge(array(
+				'conditions' => array(
+					'OR' => array(
+						'User.name LIKE' => '%' . $search . '%',
+						'User.surname LIKE' => '%' . $search . '%',
+						'User.email LIKE' => '%' . $search . '%'
+					)
+				)
+			), $params);
+
+			$title_for_layout .= " - Busca por '{$search}'";
+		}
 
 		$this->paginate = $this->User->studentParams($params);
 		$users = $this->paginate();
@@ -49,7 +76,7 @@ class UsersController extends AppController {
 				'class' => 'alert-error'));
 		}
 
-		$this->set(compact('users'));
+		$this->set(compact('users', 'title_for_layout'));
 	}
 
 /**
