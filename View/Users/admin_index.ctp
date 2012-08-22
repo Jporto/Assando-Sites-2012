@@ -4,8 +4,6 @@
   <li class="active">Data</li>
 </ul>
 
-<?php echo $this->Gravatar->image('contato@thiagobelem.net') ?>
-
 <div class="users index">
 	<h2>Alunos</h2>
 
@@ -47,7 +45,7 @@ foreach ($user['Enrollment'] as $Enrollment) {
 	<tr>
 		<td><?php echo h($user['User']['id']) ?></td>
 		<td>
-			<?php echo $this->Gravatar->image($user['User']['email'], array('size' => 20, 'width' => 20, 'height' => 20, 'title' => $user['User']['full_name'], 'class' => 'img-circle')) ?>
+			<?php echo $this->Gravatar->image($user['User']['email'], array('size' => 26, 'width' => 26, 'height' => 26, 'title' => $user['User']['full_name'], 'class' => 'img-circle gravatar')) ?>
 			<?php echo $this->Html->link($user['User']['full_name'], array('action' => 'edit', $user['User']['id'])) ?>
 		</td>
 		<td><?php echo $this->Html->link($user['User']['email'], 'mailto:' . $user['User']['email']) ?></td>

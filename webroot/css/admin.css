@@ -10,11 +10,7 @@ body {
 	padding: 9px 0;
 }
 
-.avatar {
-	-webkit-box-shadow: 0 0 3px 1px #AAA;
-	box-shadow: 0 0 3px 1px #AAA;
-}
-
-table .avatar {
-	margin-right: 5px;
+table .img-circle.gravatar {
+	margin: -3px 5px -3px -3px;
+	float: left;
 }
