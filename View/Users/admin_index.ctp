@@ -1,3 +1,11 @@
+<ul class="breadcrumb">
+  <li><a href="#">Home</a> <span class="divider">/</span></li>
+  <li><a href="#">Library</a> <span class="divider">/</span></li>
+  <li class="active">Data</li>
+</ul>
+
+<?php echo $this->Gravatar->image('contato@thiagobelem.net') ?>
+
 <div class="users index">
 	<h2>Alunos</h2>
 
@@ -39,7 +47,7 @@ foreach ($user['Enrollment'] as $Enrollment) {
 	<tr>
 		<td><?php echo h($user['User']['id']) ?></td>
 		<td>
-			<?php echo $this->Html->image($this->Html->gravatar($user['User']['email'], array('s' => 20)), array('width' => 20, 'height' => 20, 'title' => $user['User']['full_name'], 'class' => 'avatar')) ?>
+			<?php echo $this->Gravatar->image($user['User']['email'], array('size' => 20, 'width' => 20, 'height' => 20, 'title' => $user['User']['full_name'], 'class' => 'img-circle')) ?>
 			<?php echo $this->Html->link($user['User']['full_name'], array('action' => 'edit', $user['User']['id'])) ?>
 		</td>
 		<td><?php echo $this->Html->link($user['User']['email'], 'mailto:' . $user['User']['email']) ?></td>

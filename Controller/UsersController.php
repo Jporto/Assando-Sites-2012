@@ -41,8 +41,15 @@ class UsersController extends AppController {
 			), $params);
 
 		$this->paginate = $this->User->studentParams($params);
+		$users = $this->paginate();
 
-		$this->set('users', $this->paginate());
+		if (empty($users)) {
+			$this->Session->setFlash("Nenhum aluno encontrado", 'alert', array(
+				'plugin' => 'TwitterBootstrap',
+				'class' => 'alert-error'));
+		}
+
+		$this->set(compact('users'));
 	}
 
 /**

@@ -31,18 +31,6 @@ App::uses('Helper', 'View');
  */
 class AppHelper extends Helper {
 
-	public function gravatar($email, $params = array()) {
-		$params = Hash::merge(array(
-			's' => 100,
-			'd' => 'mm'
-		), $params);
-
-		$gravatar = 'http://www.gravatar.com/avatar/' . md5($email);
-		$gravatar .= '?' . http_build_query($params);
-
-		return $gravatar;
-	}
-
 	public function hexColor($text) {
 		return '#' . substr(sha1($text), 0, 6);
 	}
