@@ -19,6 +19,3 @@
 [submodule "Vendor/TwitterOAuth"]
 	path = Vendor/TwitterOAuth
 	url = git://github.com/abraham/twitteroauth.git
-[submodule "Plugin/TwitterBootstrap"]
-	path = Plugin/TwitterBootstrap
-	url = https://github.com/radig/TwitterBootstrap.git
