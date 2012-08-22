@@ -28,6 +28,9 @@
 			<?php endif ?>
 
 			<div class="<?php echo ($this->fetch('left-menu')) ? 'span9' : 'span12' ?>">
+				<?php echo $this->Session->flash() ?>
+				<?php echo $this->Session->flash('auth', array('element' => 'alert', 'params' => array('plugin' => 'TwitterBootstrap'))) ?>
+
 				<?php echo $this->fetch('content') ?>
 			</div>
 		</div>

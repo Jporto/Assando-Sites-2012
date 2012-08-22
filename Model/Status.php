@@ -24,6 +24,13 @@ class Status extends AppModel {
 	public $useDbConfig = 'arrayDatasource';
 
 /**
+ * Display field
+ * 
+ * @var string
+ */
+	public $displayField = 'name';
+
+/**
  * Status records
  * 
  * @var array
