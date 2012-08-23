@@ -1,6 +1,6 @@
 <?php
 App::uses('User', 'Model');
-App::uses('AuthComponent', 'Controller/Component');
+App::uses('Security', 'Utility');
 
 /**
  * User Test Case
@@ -22,7 +22,12 @@ class UserTestCase extends CakeTestCase {
  */
 	public function setUp() {
 		parent::setUp();
+
+		// User model
 		$this->User = ClassRegistry::init('User');
+
+		// Bcrypt
+		Security::setHash('blowfish');
 	}
 
 /**
@@ -288,8 +293,9 @@ class UserTestCase extends CakeTestCase {
 			'password' => $password // random password
 		));
 
-		$expected = AuthComponent::password($password);
-		$this->assertEquals($expected, $this->User->field('password'), 'A senha não foi encriptada corretamente');
+		$storedPassword = $this->User->field('password');
+		$newPassword = Security::hash($password, 'blowfish', $storedPassword);
+		$this->assertEquals($newPassword, $storedPassword, 'A senha não foi encriptada corretamente');
 
 		// Salva o usuário com a senha vazia (mantendo a atual)
 		$this->assertInternalType('array', $this->User->save(array(
@@ -297,7 +303,8 @@ class UserTestCase extends CakeTestCase {
 			'password' => ''
 		)), 'Ñão foi possível trocar apenas o nome do usuário');
 
-		$this->assertEquals($expected, $this->User->field('password'), 'A senha vazia foi encriptada');
+		$storedPassword = $this->User->field('password');
+		$this->assertEquals($newPassword, $storedPassword, 'A senha vazia foi encriptada novamente');
 
 		// Troca a senha do usuário
 		$password = uniqid();
@@ -305,8 +312,9 @@ class UserTestCase extends CakeTestCase {
 			'password' => $password
 		)), 'Ñão foi possível trocar apenas o senha do usuário');
 
-		$expected = AuthComponent::password($password);
-		$this->assertEquals($expected, $this->User->field('password'), 'A nova senha não foi encriptada corretamente');
+		$storedPassword = $this->User->field('password');
+		$newPassword = Security::hash($password, 'blowfish', $storedPassword);
+		$this->assertEquals($newPassword, $storedPassword, 'A nova senha não foi encriptada corretamente');
 	}
 
 /**

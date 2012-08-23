@@ -21,6 +21,7 @@
  */
 
 App::uses('Controller', 'Controller');
+App::uses('Security', 'Utility');
 
 /**
  * Application Controller
@@ -75,6 +76,10 @@ class AppController extends Controller {
  * @return void
  */
 	public function beforeFilter() {
+		// Bcrypt
+		Security::setHash('blowfish');
+
+		// Admin layout
 		if ($this->_isPrefix('admin')) {
 			$this->layout = 'admin';
 		}
