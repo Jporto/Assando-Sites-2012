@@ -27,7 +27,8 @@ class UserTestCase extends CakeTestCase {
 		$this->User = ClassRegistry::init('User');
 
 		// Bcrypt
-		Security::setHash('blowfish');
+		$this->securityHash = 'blowfish';
+		Security::setHash($this->securityHash);
 	}
 
 /**
@@ -294,8 +295,9 @@ class UserTestCase extends CakeTestCase {
 		));
 
 		$storedPassword = $this->User->field('password');
-		$newPassword = Security::hash($password, 'blowfish', $storedPassword);
-		$this->assertEquals($newPassword, $storedPassword, 'A senha não foi encriptada corretamente');
+		$hash = Security::hash($password, $this->securityHash, $storedPassword);
+		$this->assertEquals(60, strlen($storedPassword), 'A senha encriptada não tem 60 caracteres');
+		$this->assertEquals($hash, $storedPassword, 'A senha não foi encriptada corretamente');
 
 		// Salva o usuário com a senha vazia (mantendo a atual)
 		$this->assertInternalType('array', $this->User->save(array(
@@ -304,7 +306,7 @@ class UserTestCase extends CakeTestCase {
 		)), 'Ñão foi possível trocar apenas o nome do usuário');
 
 		$storedPassword = $this->User->field('password');
-		$this->assertEquals($newPassword, $storedPassword, 'A senha vazia foi encriptada novamente');
+		$this->assertEquals($hash, $storedPassword, 'A senha vazia foi encriptada novamente');
 
 		// Troca a senha do usuário
 		$password = uniqid();
@@ -313,8 +315,8 @@ class UserTestCase extends CakeTestCase {
 		)), 'Ñão foi possível trocar apenas o senha do usuário');
 
 		$storedPassword = $this->User->field('password');
-		$newPassword = Security::hash($password, 'blowfish', $storedPassword);
-		$this->assertEquals($newPassword, $storedPassword, 'A nova senha não foi encriptada corretamente');
+		$hash = Security::hash($password, $this->securityHash, $storedPassword);
+		$this->assertEquals($hash, $storedPassword, 'A nova senha não foi encriptada corretamente');
 	}
 
 /**
