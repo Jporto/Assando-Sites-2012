@@ -106,7 +106,8 @@ class Information extends AppModel {
 
 		// Busca pelo usuário
 		$this->TwitterOAuth->get('users/show', array(
-			'screen_name' => $profile
+			'screen_name' => $profile,
+			'include_entities' => false
 		));
 
 		$returnCode = $this->TwitterOAuth->http_code;
