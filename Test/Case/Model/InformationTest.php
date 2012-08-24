@@ -115,13 +115,31 @@ class InformationTestCase extends CakeTestCase {
 		$this->Information->create();
 		$this->assertInternalType('array', $this->Information->save(array(
 			'user_id' => 5,
+			'mobile' => '+55 (21) 3344-4455',
+		)), 'Não foi possível criar um registro com telefone válido');
+
+		$this->Information->create();
+		$this->assertInternalType('array', $this->Information->save(array(
+			'user_id' => 6,
 			'mobile' => '21 33444455',
 		)), 'Não foi possível criar um registro com telefone válido');
 
-		// São Paulo - 9º digito
 		$this->Information->create();
 		$this->assertInternalType('array', $this->Information->save(array(
-			'user_id' => 4,
+			'user_id' => 7,
+			'mobile' => '2133444455',
+		)), 'Não foi possível criar um registro com telefone válido');
+	}
+
+/**
+ * Testa registros com telefone de São Paulo - 9º digito
+ *
+ * @return void
+ */
+	public function testValidMobileSPInput() {
+		$this->Information->create();
+		$this->assertInternalType('array', $this->Information->save(array(
+			'user_id' => 3,
 			'mobile' => '(11) 93344-4455',
 		)), 'Não foi possível criar um registro com telefone válido de São Paulo (9º digito)');
 	}
