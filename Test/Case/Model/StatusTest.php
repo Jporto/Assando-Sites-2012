@@ -91,6 +91,17 @@ class StatusTestCase extends CakeTestCase {
 	}
 
 /**
+ * Testa os status de alunos
+ *
+ * @return void
+ */
+	public function testStudentStatuses() {
+		$this->assertEquals(Status::PENDENTE, Status::ALUNO_PENDENTE);
+		$this->assertEquals(Status::ATIVO, Status::ALUNO_CONFIRMADO);
+		$this->assertEquals(Status::DELETADO, Status::ALUNO_DELETADO);
+	}
+
+/**
  * tearDown method
  *
  * @return void
