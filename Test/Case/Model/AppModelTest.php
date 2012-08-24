@@ -23,7 +23,6 @@ class AppModelTestCase extends CakeTestCase {
 		parent::setUp();
 
 		$this->AppModel = ClassRegistry::init('AppModel');
-		$this->User = ClassRegistry::init('User');
 	}
 
 /**
@@ -58,9 +57,8 @@ class AppModelTestCase extends CakeTestCase {
  */
 	public function testRecursive() {
 		$result = $this->AppModel->recursive;
-		$expected = false;
 
-		$this->assertEquals($expected, $result, 'AppModel::$recursive não está desabilitado por padrão');
+		$this->assertFalse($result, 'AppModel::$recursive não está desabilitado por padrão');
 	}
 
 /**
@@ -71,7 +69,9 @@ class AppModelTestCase extends CakeTestCase {
  * @return void
  */
 	public function testFindActive() {
-		$result = $this->User->find('active');
+		$User = ClassRegistry::init('User');
+
+		$result = $User->find('active');
 		$expected = 'array';
 
 		$this->assertInternalType($expected, $result, "O resultado de AppModel::find('active') não é um array");
