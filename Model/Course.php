@@ -91,19 +91,40 @@ class Course extends AppModel {
 	);
 
 /**
+ * Subtrai um intervalo de uma data
+ * 
+ * @param string|int $start A data inicial
+ * @param string $internval O intervalo
+ * 
+ * @return DateTime
+ */
+	protected function _subtractDate($start, $interval) {
+		if (is_string($start)) {
+			$start = new DateTime($start);
+		} else if (is_integer($start)) {
+			$DateTime = new DateTime();
+			$DateTime->setTimestamp($start);
+
+			$start = $DateTime;
+		}
+
+		// The interval
+		$interval = DateInterval::createFromDateString(trim($interval, '-'));
+
+		return $start->sub($interval);
+	}
+
+/**
  * Calcula a data limite de inscrição
  * 
- * @return string
+ * @return DateTime
  */
 	protected function _calculateEnrollmentLimit($start = null) {
 		if (empty($start)) {
 			$start = $this->field('start');
 		}
 
-		$courseStart = new DateTime($start);
-		$timeInterval = DateInterval::createFromDateString(Configure::read('Enrollment.limit'));
-
-		$enrollmentLimit = $courseStart->sub($timeInterval);
+		$enrollmentLimit = $this->_subtractDate($start, Configure::read('Enrollment.limit'));
 		$enrollmentLimit->setTime(23, 59, 59);
 
 		return $enrollmentLimit;
@@ -143,10 +164,10 @@ class Course extends AppModel {
 
 		// Procura um desconto
 		foreach (Configure::read('Enrollment.discounts') as $discount) {
-			$discountLimitTimestamp = strtotime('-' . $discount['limit'], $enrollmentLimitTimestamp);
+			$discountLimit = $this->_subtractDate($enrollmentLimitTimestamp, $discount['limit']);
 
 			// Se o limite do desconto for após a data da inscrição
-			if ($discountLimitTimestamp > $enrollmentWhenTimestamp) {
+			if ($discountLimit->getTimestamp() > $enrollmentWhenTimestamp) {
 				return $this->_calculateCoursePriceWithDiscount($coursePrice, $discount['value']);
 			}
 		}
