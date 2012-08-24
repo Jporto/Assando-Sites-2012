@@ -21,6 +21,7 @@
  */
 
 App::uses('Model', 'Model');
+App::uses('Status', 'Model');
 App::uses('BrValidation', 'Localized.Lib');
 
 /**
@@ -73,7 +74,7 @@ class AppModel extends Model {
 		}
 
 		if ($this->hasField('status_id')) {
-			$query['conditions'][$this->escapeField('status_id')] = 1;
+			$query['conditions'][$this->escapeField('status_id')] = Status::ATIVO;
 		}
 
 		return $query;
