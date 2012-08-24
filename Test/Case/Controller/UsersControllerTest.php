@@ -6,23 +6,14 @@ App::uses('UsersController', 'Controller');
  */
 class TestUsersController extends UsersController {
 
-/**
- * Auto render
- *
- * @var boolean
- */
 	public $autoRender = false;
 
-/**
- * Redirect action
- *
- * @param mixed $url
- * @param mixed $status
- * @param boolean $exit
- * @return void
- */
 	public function redirect($url, $status = null, $exit = true) {
 		$this->redirectUrl = $url;
+	}
+
+	public function render($action = null, $layout = null, $file = null) {
+		$this->renderedAction = $action;
 	}
 
 }
@@ -99,5 +90,18 @@ class UsersControllerTestCase extends ControllerTestCase {
 		$this->assertInternalType('integer', $result, 'Users/pendingStudents não retorna um inteiro');
 		$this->assertEquals(1, $result, 'Users/pendingStudents não retornou o número correto de alunos pendentes');
 	}
+
+/**
+ * Testa a busca por alunos
+ *
+ * @return void
+ */
+	// public function testAdminSearchStudents() {
+	// 	$data = array('User' => array('search' => 'Ipsum'));
+
+	// 	$result = $this->testAction('/admin', array('return' => 'vars', 'method' => 'post', 'data' => $data));
+
+	// 	$this->assertCount(1, $result['users'], 'Users/index não está retornando o número correto de usuários');
+	// }
 
 }

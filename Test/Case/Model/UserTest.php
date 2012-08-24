@@ -117,24 +117,48 @@ class UserTestCase extends CakeTestCase {
 	}
 
 /**
+ * Testa o User::staffParams()
+ * 
+ * @covers User::staffParams
+ * 
+ * @return void
+ */
+	public function testStaffParams() {
+		$result = $this->User->staffParams();
+		$this->assertInternalType('array', $result, 'O resultado de User::staffParams() não é um array');
+	}
+
+/**
  * Testa o User::findStaff()
  * 
  * @covers User::findStaff
+ * @depends testStaffParams
  * 
  * @return void
  */
 	public function testFindStaff() {
 		$result = $this->User->findStaff();
-		$expected = 'array';
-
-		$this->assertInternalType($expected, $result, 'O resultado de User::findStaff() não é um array');
+		$this->assertInternalType('array', $result, 'O resultado de User::findStaff() não é um array');
 		$this->assertCount(1, $result, 'O resultado de User::findStaff() deve ser apenas um usuário');
+	}
+
+/**
+ * Testa o User::studentParams()
+ * 
+ * @covers User::studentParams
+ * 
+ * @return void
+ */
+	public function testStudentParams() {
+		$result = $this->User->studentParams();
+		$this->assertInternalType('array', $result, 'O resultado de User::studentParams() não é um array');
 	}
 
 /**
  * Testa o User::findStudents()
  * 
  * @covers User::findStudents
+ * @depends testStudentParams
  * 
  * @return void
  */
@@ -256,24 +280,26 @@ class UserTestCase extends CakeTestCase {
  * @return void
  */
 	public function testValidData() {
-		$this->User->create();
-		$this->assertInternalType('array', $this->User->save(array(
+		$data = array(
 			'group_id' => Group::ALUNOS,
 			'name' => 'Thiago',
 			'surname' => 'Belem',
 			'email' => 'contato@thiagobelem.net',
 			'password' => uniqid() // random password
-		)), 'Não foi possível salvar um usuário com dados válidos');
+		);
+		$this->User->create();
+		$this->assertInternalType('array', $this->User->save($data), 'Não foi possível salvar um usuário com dados válidos');
 
 		// Tenta criar outro usuário com o mesmo email (dados válidos, mas email repetido)
-		$this->User->create();
-		$this->assertFalse($this->User->save(array(
+		$data = array(
 			'group_id' => Group::ALUNOS,
 			'name' => 'Fulano',
 			'surname' => 'Silva',
 			'email' => 'contato@thiagobelem.net',
 			'password' => uniqid() // random password
-		)), 'Foi possível salvar um usuário com email repetido');
+		);
+		$this->User->create();
+		$this->assertFalse($this->User->save($data), 'Foi possível salvar um usuário com email repetido');
 	}
 
 /**
