@@ -38,6 +38,21 @@ class PaymentGatewayTestCase extends CakeTestCase {
 	}
 
 /**
+ * Testa os gateways
+ *
+ * @return void
+ */
+	public function testPaymentGateways() {
+		$this->assertCount(2, $this->PaymentGateway->find('all'));
+
+		$Gateway = $this->PaymentGateway->read(null, PaymentGateway::PAGSEGURO);
+		$this->assertEquals('PagSeguro', $Gateway['PaymentGateway']['name']);
+
+		$Gateway = $this->PaymentGateway->read(null, PaymentGateway::PAYPAL);
+		$this->assertEquals('PayPal', $Gateway['PaymentGateway']['name']);
+	}
+
+/**
  * Testa a conversão de status do PagSeguro
  *
  * @return void
@@ -55,6 +70,31 @@ class PaymentGatewayTestCase extends CakeTestCase {
 		// Status inválido
 		$this->assertFalse($this->PaymentGateway->pagSeguroStatus(-1));
 		$this->assertFalse($this->PaymentGateway->pagSeguroStatus(10));
+	}
+
+/**
+ * Testa a conversão de status do PayPal
+ *
+ * @return void
+ */
+	public function testPayPalStatus() {
+		$this->assertEquals(Status::PAGAMENTO_INICIADO,		$this->PaymentGateway->payPalStatus('Created'));
+		$this->assertEquals(Status::PAGAMENTO_EM_ANALISE,	$this->PaymentGateway->payPalStatus('Pending'));
+		$this->assertEquals(Status::PAGAMENTO_CONFIRMADO,	$this->PaymentGateway->payPalStatus('Processed'));
+		$this->assertEquals(Status::PAGAMENTO_DISPONIVEL,	$this->PaymentGateway->payPalStatus('Completed'));
+
+		$this->assertEquals(Status::PAGAMENTO_RESSARCIDO,	$this->PaymentGateway->payPalStatus('Reversed'));
+		$this->assertEquals(Status::PAGAMENTO_RESSARCIDO,	$this->PaymentGateway->payPalStatus('Refunded'));
+
+		$this->assertEquals(Status::PAGAMENTO_CANCELADO,	$this->PaymentGateway->payPalStatus('Denied'));
+		$this->assertEquals(Status::PAGAMENTO_CANCELADO,	$this->PaymentGateway->payPalStatus('Expired'));
+		$this->assertEquals(Status::PAGAMENTO_CANCELADO,	$this->PaymentGateway->payPalStatus('Failed'));
+		$this->assertEquals(Status::PAGAMENTO_CANCELADO,	$this->PaymentGateway->payPalStatus('Voided'));
+		$this->assertEquals(Status::PAGAMENTO_CANCELADO,	$this->PaymentGateway->payPalStatus('Canceled_Reversal'));
+
+		// Status inválido
+		$this->assertFalse($this->PaymentGateway->payPalStatus('Unpaid'));
+		$this->assertFalse($this->PaymentGateway->payPalStatus(1));
 	}
 
 /**
