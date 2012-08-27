@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title><?php echo $title_for_layout ?></title>
+	<title><?php echo $title_for_layout . ' &ndash; Assando Sites - Painel de Controle' ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<?php echo $this->Html->css(array('bootstrap.min', 'bootstrap-responsive.min')) ?>
@@ -45,7 +45,11 @@
 	</div>
 	<!-- /.container-fluid -->
 
-	<?php echo $this->element('sql_dump') ?>
+	<?php if (Configure::read('debug')) { ?>
+	<div class="container-fluid">
+		<?php echo preg_replace('/cake-sql-log/', 'table table-striped table-bordered', $this->element('sql_dump')) ?>
+	</div>
+	<?php } ?>
 
 	<?php echo $this->Html->script('//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js') . PHP_EOL ?>
 	<?php echo $this->Html->script('bootstrap.min') . PHP_EOL ?>

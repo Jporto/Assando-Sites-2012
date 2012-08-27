@@ -47,7 +47,11 @@ class UsersController extends AppController {
 				'conditions' => array('User.status_id' => $Status['Status']['id'])
 			), $params);
 
-			$title_for_layout .= ' ' . strtolower(Inflector::pluralize($Status['Status']['name']));
+			if ($this->User->Status->id == Status::ALUNO_CONFIRMADO) {
+				$title_for_layout .= ' confirmados';
+			} else {
+				$title_for_layout .= ' ' . strtolower(Inflector::pluralize($Status['Status']['name']));
+			}
 		}
 
 		// Post?

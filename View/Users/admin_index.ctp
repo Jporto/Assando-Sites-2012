@@ -1,13 +1,15 @@
-<ul class="breadcrumb">
-  <li><a href="#">Home</a> <span class="divider">/</span></li>
-  <li><a href="#">Library</a> <span class="divider">/</span></li>
-  <li class="active">Data</li>
-</ul>
+<?php
+echo $this->Html->breadcrumb(array(
+	$this->Html->link('Dashboard', '/admin'),
+	$this->Html->link('Alunos', array('action' => 'index')),
+	$title_for_layout,
+));
+?>
 
 <div class="users index">
-	<h2>Alunos</h2>
+	<h2><?php echo $title_for_layout ?></h2>
 
-	<table class="table table-striped table-bordered">
+	<table class="table table-striped table-bordered table-hover">
 	<tr>
 		<th><?php echo $this->Paginator->sort('id', '#') ?></th>
 		<th><?php echo $this->Paginator->sort('name', 'Nome') ?></th>
