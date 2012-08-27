@@ -36,7 +36,7 @@ class UsersController extends AppController {
 			)
 		);
 
-		$title = 'Alunos';
+		$title_for_layout = 'Alunos';
 
 		// Filter?
 		if (isset($this->params->query['status'])) {
@@ -47,7 +47,7 @@ class UsersController extends AppController {
 				'conditions' => array('User.status_id' => $Status['Status']['id'])
 			), $params);
 
-			$title .= ' ' . strtolower(Inflector::pluralize($Status['Status']['name']));
+			$title_for_layout .= ' ' . strtolower(Inflector::pluralize($Status['Status']['name']));
 		}
 
 		// Post?
@@ -64,7 +64,7 @@ class UsersController extends AppController {
 				)
 			), $params);
 
-			$title .= " - Busca por '{$search}'";
+			$title_for_layout .= " - Busca por '{$search}'";
 		}
 
 		$this->paginate = $this->User->studentParams($params);
@@ -76,10 +76,7 @@ class UsersController extends AppController {
 				'class' => 'alert-error'));
 		}
 
-		$this->set(array(
-			'users' => $users,
-			'title_for_layout' => $title
-		));
+		$this->set(compact('users', 'title_for_layout'));
 	}
 
 /**
