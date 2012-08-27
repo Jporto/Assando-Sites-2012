@@ -2,23 +2,6 @@
 App::uses('UsersController', 'Controller');
 
 /**
- * TestUsersController
- */
-class TestUsersController extends UsersController {
-
-	public $autoRender = false;
-
-	public function redirect($url, $status = null, $exit = true) {
-		$this->redirectUrl = $url;
-	}
-
-	public function render($action = null, $layout = null, $file = null) {
-		$this->renderedAction = $action;
-	}
-
-}
-
-/**
  * UsersController Test Case
  *
  */
@@ -38,8 +21,16 @@ class UsersControllerTestCase extends ControllerTestCase {
  */
 	public function setUp() {
 		parent::setUp();
-		$this->Users = new TestUsersController();
-		$this->Users->constructClasses();
+
+		$this->Users = $this->generate('Users', array(
+			'components' => array(
+				'Security' => array('_validatePost'),
+			)
+		));
+
+		$this->Users->Security->expects($this->any())
+			->method('_validatePost')
+			->will($this->returnValue(true));
 	}
 
 /**
@@ -96,12 +87,12 @@ class UsersControllerTestCase extends ControllerTestCase {
  *
  * @return void
  */
-	// public function testAdminSearchStudents() {
-	// 	$data = array('User' => array('search' => 'Ipsum'));
+	public function testAdminSearchStudents() {
+		$data = array('User' => array('search' => 'Ipsum'));
 
-	// 	$result = $this->testAction('/admin', array('return' => 'vars', 'method' => 'post', 'data' => $data));
+		$result = $this->testAction('/admin', array('return' => 'vars', 'method' => 'post', 'data' => $data));
 
-	// 	$this->assertCount(1, $result['users'], 'Users/index não está retornando o número correto de usuários');
-	// }
+		$this->assertCount(1, $result['users'], 'Users/index não está retornando o número correto de usuários');
+	}
 
 }

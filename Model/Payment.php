@@ -34,8 +34,13 @@ class Payment extends AppModel {
 		),
 		'value' => array(
 			'notempty' => array(
-				'rule' => array('decimal'),
+				'rule' => array('notEmpty'),
 				'message' => 'Informe o valor',
+				'required' => 'create',
+			),
+			'decimal' => array(
+				'rule' => array('decimal', true),
+				'message' => 'Informe o valor em forma decimal',
 				'required' => 'create',
 			),
 		),

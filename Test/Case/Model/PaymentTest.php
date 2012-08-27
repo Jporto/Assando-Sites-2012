@@ -47,7 +47,7 @@ class PaymentTestCase extends CakeTestCase {
 		// Sem usuário
 		$this->Payment->create();
 		$this->assertFalse($this->Payment->save(array(
-			'value' => 100,
+			'value' => 100.0,
 			'reference' => uniqid(),
 			'payment_gateway_id' => PaymentGateway::PAGSEGURO,
 		)), 'Foi possível salvar um pagamento sem usuaŕio');
@@ -58,7 +58,7 @@ class PaymentTestCase extends CakeTestCase {
 		$this->Payment->create();
 		$this->assertFalse($this->Payment->save(array(
 			'user_id' => 1,
-			'value' => 100,
+			'value' => 100.0,
 			'reference' => uniqid(),
 		)), 'Foi possível salvar um pagamento sem gateway');
 		$this->assertArrayHasKey('payment_gateway_id', $this->Payment->validationErrors);
@@ -74,11 +74,22 @@ class PaymentTestCase extends CakeTestCase {
 		$this->assertArrayHasKey('value', $this->Payment->validationErrors);
 		$this->assertContains('Informe o valor', $this->Payment->validationErrors['value']);
 
+		// Sem valor decimal
+		$this->Payment->create();
+		$this->assertFalse($this->Payment->save(array(
+			'user_id' => 1,
+			'reference' => uniqid(),
+			'value' => 100,
+			'payment_gateway_id' => PaymentGateway::PAGSEGURO,
+		)), 'Foi possível salvar um pagamento sem valor');
+		$this->assertArrayHasKey('value', $this->Payment->validationErrors);
+		$this->assertContains('Informe o valor em forma decimal', $this->Payment->validationErrors['value']);
+
 		// Sem referência
 		$this->Payment->create();
 		$this->assertFalse($this->Payment->save(array(
 			'user_id' => 1,
-			'value' => 100,
+			'value' => 100.0,
 			'payment_gateway_id' => PaymentGateway::PAGSEGURO,
 		)), 'Foi possível salvar um pagamento sem referência');
 		$this->assertArrayHasKey('reference', $this->Payment->validationErrors);
@@ -96,10 +107,11 @@ class PaymentTestCase extends CakeTestCase {
 		$this->Payment->create();
 		$this->assertInternalType('array', $this->Payment->save(array(
 			'user_id' => 1,
-			'value' => 100,
+			'value' => 100.0,
 			'reference' => $reference,
 			'payment_gateway_id' => PaymentGateway::PAGSEGURO,
-		)), 'Foi possível salvar um pagamento sem usuaŕio');
+			'status_id' => Status::PAGAMENTO_PENDENTE,
+		)), 'Não foi possível salvar um pagamento com dados válidos');
 
 		// Busca o pagamento pela referência
 		$Payment = $this->Payment->findByReference($reference);
