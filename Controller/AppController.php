@@ -39,7 +39,14 @@ class AppController extends Controller {
  * 
  * @var array
  */
-	public $components = array('Session', 'Cookie', 'RequestHandler', 'Email', 'Security');
+	public $components = array(
+		'Session',
+		'Cookie',
+		'RequestHandler',
+		'Email',
+		'Security',
+		'DebugKit.Toolbar'
+	);
 
 /**
  * Helpers
@@ -50,9 +57,7 @@ class AppController extends Controller {
 		'Html' => array('className' => 'TwitterBootstrap.BootstrapHtml'),
 		'Form' => array('className' => 'TwitterBootstrap.BootstrapForm'),
 		'Paginator' => array('className' => 'TwitterBootstrap.BootstrapPaginator'),
-		'Utils.Gravatar' => array(
-			'default' => 'mm'
-		),
+		'Utils.Gravatar' => array('default' => 'mm'),
 		'Time',
 		'Number'
 	);
