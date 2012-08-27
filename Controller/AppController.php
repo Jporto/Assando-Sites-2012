@@ -44,8 +44,7 @@ class AppController extends Controller {
 		'Cookie',
 		'RequestHandler',
 		'Email',
-		'Security',
-		'DebugKit.Toolbar'
+		'Security'
 	);
 
 /**

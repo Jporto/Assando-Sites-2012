@@ -45,7 +45,7 @@
 	</div>
 	<!-- /.container-fluid -->
 
-	<?php if (Configure::read('debug') && !isset($this->Toolbar))echo $this->element('sql_dump') ?>
+	<?php echo $this->element('sql_dump') ?>
 
 	<?php echo $this->Html->script('//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js') . PHP_EOL ?>
 	<?php echo $this->Html->script('bootstrap.min') . PHP_EOL ?>
