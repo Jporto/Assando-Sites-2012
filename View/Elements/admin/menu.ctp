@@ -33,8 +33,8 @@
 						</a>
 						<ul class="dropdown-menu">
 							<li><?php echo $this->Html->link('<i class="icon-user"></i> Inscritos', array('controller' => 'users', 'action' => 'index'), array('escape' => false)) ?></li>
-							<li><?php echo $this->Html->link('<i class="icon-ok"></i> Confirmados', array('controller' => 'users', 'action' => 'index', '?' => array('status' => Status::ALUNO_CONFIRMADO)), array('escape' => false)) ?></li>
-							<li><?php echo $this->Html->link('<i class="icon-warning-sign"></i> Pendentes ' . $pendingStudents, array('controller' => 'users', 'action' => 'index', '?' => array('status' => Status::ALUNO_PENDENTE)), array('escape' => false)) ?></li>
+							<li><?php echo $this->Html->link('<i class="icon-ok"></i> Confirmados', array('controller' => 'users', 'action' => 'index', 'status' => Status::ALUNO_CONFIRMADO), array('escape' => false)) ?></li>
+							<li><?php echo $this->Html->link('<i class="icon-warning-sign"></i> Pendentes ' . $pendingStudents, array('controller' => 'users', 'action' => 'index', 'status' => Status::ALUNO_PENDENTE), array('escape' => false)) ?></li>
 						</ul>
 					</li>
 					<!-- /Alunos -->

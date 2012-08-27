@@ -46,6 +46,13 @@ class AppModel extends Model {
 	public $recursive = false;
 
 /**
+ * Cache queries padrão?
+ * 
+ * @var array
+ */
+	public $cacheQueries = true;
+
+/**
  * Tipos de find
  * 
  * @var array

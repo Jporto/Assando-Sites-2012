@@ -23,22 +23,25 @@ foreach ($users as $user):
 
 switch ($user['User']['status_id']) {
 	case Status::ALUNO_CONFIRMADO:
-		$status = $this->Html->tag('span', 'Confirmado', array('class' => 'label label-success'));
+		$status = $this->Html->tag('span', $this->Html->link('Confirmado', array('status' => Status::ALUNO_CONFIRMADO)), array('class' => 'label label-success'));
 		break;
 	case Status::ALUNO_DELETADO:
-		$status = $this->Html->tag('span', 'Deletado', array('class' => 'label label-important'));
+		$status = $this->Html->tag('span', $this->Html->link('Deletado', array('status' => Status::ALUNO_DELETADO)), array('class' => 'label label-important'));
 		break;
 	default:
-		$status = $this->Html->tag('span', 'Pendente', array('class' => 'label label-warning'));
+		$status = $this->Html->tag('span', $this->Html->link('Pendente', array('status' => Status::ALUNO_PENDENTE)), array('class' => 'label label-warning'));
 		break;
 }
 
 $turmas = array();
 foreach ($user['Enrollment'] as $Enrollment) {
-	$label = $this->Html->tag('span', $Enrollment['Course']['code'], array(
-		'class' => 'label',
-		'style' => 'background: ' . $this->Html->hexColor($Enrollment['Course']['code'])
-	));
+	$label = $this->Html->tag('span',
+		$this->Html->link($Enrollment['Course']['code'], array('course' => $Enrollment['Course']['id'])),
+		array(
+			'class' => 'label',
+			'style' => 'background: ' . $this->Html->hexColor($Enrollment['Course']['code'])
+		)
+	);
 
 	array_push($turmas, $label);
 }
@@ -64,13 +67,12 @@ foreach ($user['Enrollment'] as $Enrollment) {
 <?php echo $this->start('left-menu') ?>
 <ul class="nav nav-list">
 	<li class="nav-header">Status</li>
-	<li><?php echo $this->Html->link('Confirmados', array('?' => array('status' => Status::ALUNO_CONFIRMADO))) ?></li>
-	<li><?php echo $this->Html->link('Pendentes ' . $this->element('admin/badges/pending-students'), array('?' => array('status' => Status::ALUNO_PENDENTE)), array('escape' => false)) ?></li>
+	<li><?php echo $this->Html->link('Confirmados', array('status' => Status::ALUNO_CONFIRMADO)) ?></li>
+	<li><?php echo $this->Html->link('Pendentes ' . $this->element('admin/badges/pending-students'), array('status' => Status::ALUNO_PENDENTE), array('escape' => false)) ?></li>
 
 	<li class="nav-header">Turmas</li>
-	<li><?php echo $this->Html->link('Turma 2012.2', '#') ?></li>
-	<li><?php echo $this->Html->link('Turma 2012.3', '#') ?></li>
-	<li><?php echo $this->Html->link('Turma 2012.4', '#') ?></li>
-	<li><?php echo $this->Html->link('Turma 2012.5', '#') ?></li>
+	<?php foreach ($this->requestAction(array('controller' => 'courses', 'action' => 'index')) AS $Course) { ?>
+	<li><?php echo $this->Html->link($Course['Course']['name'], array('course' => $Course['Course']['id'])) ?></li>
+	<?php } ?>
 </ul>
 <?php echo $this->end();

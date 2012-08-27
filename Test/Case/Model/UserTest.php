@@ -25,6 +25,7 @@ class UserTestCase extends CakeTestCase {
 
 		// User model
 		$this->User = ClassRegistry::init('User');
+		$this->User->cacheQueries = false;
 
 		// Bcrypt
 		$this->securityHash = 'blowfish';

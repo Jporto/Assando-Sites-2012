@@ -38,13 +38,15 @@ class UsersController extends AppController {
 
 		$title_for_layout = 'Alunos';
 
-		// Filter?
-		if (isset($this->params->query['status'])) {
-			$this->User->Status->id = (int)$this->params->query['status'];
+		// Status?
+		if (isset($this->params->named['status'])) {
+			$this->User->Status->id = (int)$this->params->named['status'];
 			$Status = $this->User->Status->read();
 
 			$params = Hash::merge(array(
-				'conditions' => array('User.status_id' => $Status['Status']['id'])
+				'conditions' => array(
+					'User.status_id' => ($Status ? (int)$Status['Status']['id'] : Status::ALUNO_PENDENTE)
+				)
 			), $params);
 
 			if ($this->User->Status->id == Status::ALUNO_CONFIRMADO) {
@@ -52,6 +54,25 @@ class UsersController extends AppController {
 			} else {
 				$title_for_layout .= ' ' . strtolower(Inflector::pluralize($Status['Status']['name']));
 			}
+		}
+
+		// Course?
+		if (isset($this->params->named['course'])) {
+			$this->loadModel('Course');
+			$this->Course->id = (int)$this->params->named['course'];
+			$Course = $this->Course->read();
+
+			// Usuários matriculados na turma buscada;
+			$Users = $this->User->Enrollment->find('list', array(
+				'fields' => array('Enrollment.user_id'),
+				'conditions' => array('Enrollment.course_id' => $this->Course->id),
+			));
+
+			$params = Hash::merge(array(
+				'conditions' => array('User.id' => $Users)
+			), $params);
+
+			$title_for_layout .= ' na turma ' . $Course['Course']['code'];
 		}
 
 		// Post?

@@ -26,6 +26,13 @@ class Course extends AppModel {
 	);
 
 /**
+ * Ordem padrão
+ * 
+ * @var array
+ */
+	public $order = array('Course.start' => 'DESC');
+
+/**
  * Validation rules
  *
  * @var array
@@ -205,25 +212,6 @@ class Course extends AppModel {
 		), $params);
 
 		return $this->find($find, $params);
-	}
-
-/**
- * Após encontrar cursos
- * 
- * @param  array  $results Lista de resultados
- * @param  boolean $primary Primeiro model buscado?
- * 
- * @return array
- */
-	public function afterFind($results, $primary = false) {
-		foreach ($results as &$result) {
-			if (isset($result[$this->alias]) && isset($result[$this->alias]['id'])) {
-				$this->id = $result[$this->alias]['id'];
-				$result[$this->alias]['current_price'] = $this->currentPrice();
-			}
-		}
-
-		return parent::afterFind($results, $primary);
 	}
 
 /**
