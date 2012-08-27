@@ -23,7 +23,6 @@ class CourseTestCase extends CakeTestCase {
 		parent::setUp();
 		$this->Course = ClassRegistry::init('Course');
 		$this->Course->Status->useDbConfig = 'arrayDatasource';
-
 		$this->Course->cacheQueries = false;
 	}
 
