@@ -70,25 +70,4 @@ class UsersControllerTestCase extends ControllerTestCase {
 		$this->assertEquals(1, $result, 'Users/pendingStudents não retornou o número correto de alunos pendentes');
 	}
 
-/**
- * Testa a listagem de usuários
- *
- * @return void
- */
-	public function testAdminIndexConfirmed() {
-		$url = '/admin/status:' . Status::ALUNO_CONFIRMADO;
-		$result = $this->testAction($url, array('return' => 'vars', 'method' => 'get'));
-		$this->assertCount(2, $result['users'], 'Users/index não está retornando o número correto de usuários');
-	}
-/**
- * Testa a busca por alunos
- *
- * @return void
- */
-	public function testAdminSearchStudents() {
-		$data = array('User' => array('search' => 'Ipsum'));
-		$result = $this->testAction('/admin', array('return' => 'vars', 'method' => 'post', 'data' => $data));
-		$this->assertCount(1, $result['users'], 'Users/index não está retornando o número correto de usuários');
-	}
-
 }

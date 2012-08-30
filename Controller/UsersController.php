@@ -24,11 +24,14 @@ class UsersController extends AppController {
 	}
 
 /**
- * admin_index method
+ * Lista de alunos
  *
  * @return void
  */
 	public function admin_index() {
+		$title_for_layout = 'Alunos';
+
+		// Parâmetros gerais
 		$params = array(
 			'contain' => array(
 				'Group',
@@ -36,59 +39,32 @@ class UsersController extends AppController {
 			)
 		);
 
-		$title_for_layout = 'Alunos';
-
 		// Status?
 		if (isset($this->params->named['status'])) {
-			$this->User->Status->id = (int)$this->params->named['status'];
-			$Status = $this->User->Status->read();
+			$status = (int)$this->params->named['status'];
+			$params = $this->User->filterByStatusParams($status, $params);
 
-			$params = Hash::merge(array(
-				'conditions' => array(
-					'User.status_id' => ($Status ? (int)$Status['Status']['id'] : Status::ALUNO_PENDENTE)
-				)
-			), $params);
-
-			if ($this->User->Status->id == Status::ALUNO_CONFIRMADO) {
-				$title_for_layout .= ' confirmados';
-			} else {
-				$title_for_layout .= ' ' . strtolower(Inflector::pluralize($Status['Status']['name']));
-			}
+			// Título da página
+			$this->User->Status->id = $status;
+			$title_for_layout .= ' ' . strtolower(Inflector::pluralize($this->User->Status->field('name')));
 		}
 
 		// Course?
 		if (isset($this->params->named['course'])) {
-			$this->loadModel('Course');
-			$this->Course->id = (int)$this->params->named['course'];
-			$Course = $this->Course->read();
+			$course = (int)$this->params->named['course'];
+			$params = $this->User->filterByCourseParams($course, $params);
 
-			// Usuários matriculados na turma buscada;
-			$Users = $this->User->Enrollment->find('list', array(
-				'fields' => array('Enrollment.user_id'),
-				'conditions' => array('Enrollment.course_id' => $this->Course->id),
-			));
-
-			$params = Hash::merge(array(
-				'conditions' => array('User.id' => $Users)
-			), $params);
-
-			$title_for_layout .= ' na turma ' . $Course['Course']['code'];
+			// Título da página
+			$this->User->Enrollment->Course->id = $course;
+			$title_for_layout .= ' na turma ' . $this->User->Enrollment->Course->field('code');
 		}
 
-		// Post?
-		if ($this->request->isPost()) {
+		// Busca?
+		if ($this->request->isPost() && isset($this->request->data['User']['search'])) {
 			$search = $this->request->data['User']['search'];
+			$params = $this->User->searchParams($search, $params);
 
-			$params = Hash::merge(array(
-				'conditions' => array(
-					'OR' => array(
-						'User.name LIKE' => '%' . $search . '%',
-						'User.surname LIKE' => '%' . $search . '%',
-						'User.email LIKE' => '%' . $search . '%'
-					)
-				)
-			), $params);
-
+			// Título da página
 			$title_for_layout .= " contendo '{$search}'";
 		}
 

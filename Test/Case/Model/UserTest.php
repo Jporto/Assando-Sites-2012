@@ -347,6 +347,44 @@ class UserTestCase extends CakeTestCase {
 	}
 
 /**
+ * Testa os parâmetros de filtro por status
+ * 
+ * @return void
+ */
+	public function testFilterByStatusParams() {
+		$this->assertInternalType('array', $this->User->filterByStatusParams());
+		$this->assertInternalType('array', $this->User->filterByStatusParams(Status::ALUNO_CONFIRMADO));
+		$this->assertInternalType('array', $this->User->filterByStatusParams(array(Status::ALUNO_CONFIRMADO, Status::ALUNO_PENDENTE)));
+	}
+
+/**
+ * Testa os parâmetros de filtro por turma
+ * 
+ * @return void
+ */
+	public function testFilterByCourseParams() {
+		$this->assertInternalType('array', $this->User->filterByCourseParams(1));
+		$this->assertInternalType('array', $this->User->filterByCourseParams(array(1, 2)));
+
+		// Turma inválida
+		$this->assertInternalType('array', $this->User->filterByCourseParams('A'));
+	}
+
+/**
+ * Testa os parâmetros de busca
+ * 
+ * @return void
+ */
+	public function testSearchParams() {
+		$params = $this->User->searchParams('amet@dolor.com');
+		$this->assertInternalType('array', $params);
+		$this->assertEquals(1, $this->User->find('count', $params));
+
+		$params = $this->User->searchParams('Śem resultado');
+		$this->assertEquals(0, $this->User->find('count', $params));
+	}
+
+/**
  * tearDown method
  *
  * @return void

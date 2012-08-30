@@ -243,4 +243,69 @@ class User extends AppModel {
 		return parent::beforeSave($options);
 	}
 
+/**
+ * Parâmetros de filtro por uma status
+ * 
+ * @param  array|int $status ID do status
+ * @param  array  $params Parâmetros adicionais
+ * 
+ * @return array
+ */
+	public function filterByStatusParams($status = null, $params = array()) {
+		// Sem parâmetro
+		if (empty($status)) {
+			$status = Status::ALUNO_PENDENTE;
+		}
+
+		return Hash::merge(array(
+			'conditions' => array('User.status_id' => $status)
+		), $params);
+	}
+
+/**
+ * Parâmetros de filtro por uma turma
+ * 
+ * @param  array|int $course ID da turma
+ * @param  array  $params Parâmetros adicionais
+ * 
+ * @return array
+ */
+	public function filterByCourseParams($course, $params = array()) {
+		// Lista de usuários matriculados na turma
+		$Users = $this->Enrollment->find('list', array(
+			'fields' => array('Enrollment.user_id'),
+			'conditions' => array('Enrollment.course_id' => $course),
+		));
+
+		if (empty($Users)) {
+			return $params;
+		}
+
+		return Hash::merge(array(
+			'conditions' => array('User.id' => $Users)
+		), $params);
+	}
+
+/**
+ * Parâmetros de de busca por texto
+ * 
+ * @param  string $search Texto a ser buscado
+ * @param  array  $params Parâmetros adicionais
+ * 
+ * @return array
+ */
+	public function searchParams($search, $params = array()) {
+		$search = '%' . strtolower(trim($search, '%')) . '%';
+
+		return Hash::merge(array(
+			'conditions' => array(
+				'OR' => array(
+					'User.name LIKE' => $search,
+					'User.surname LIKE' => $search,
+					'User.email LIKE' => $search
+				)
+			)
+		), $params);
+	}
+
 }
