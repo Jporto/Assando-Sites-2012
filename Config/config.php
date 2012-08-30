@@ -1,6 +1,10 @@
 <?php
 
 $config = array(
+	'Site' => array(
+		'title' => 'Assando Sites',
+		'description' => '...'
+	),
 	'Enrollment' => array(
 		'limit' => '1 week',
 

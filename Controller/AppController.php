@@ -86,6 +86,11 @@ class AppController extends Controller {
 		// Admin layout
 		if ($this->_isPrefix('admin')) {
 			$this->layout = 'admin';
+
+			// Desabilita o SecurityComponent para admins
+			// if ($this->Auth->user('group_id') && Group::ADMINISTRADORES) {
+				$this->Components->disable('Security');
+			// }
 		}
 
 		$this->set('bodyClass', sprintf('%s %s %s',

@@ -67,12 +67,13 @@ foreach ($user['Enrollment'] as $Enrollment) {
 <?php echo $this->start('left-menu') ?>
 <ul class="nav nav-list">
 	<li class="nav-header">Status</li>
-	<li><?php echo $this->Html->link('Confirmados', array('status' => Status::ALUNO_CONFIRMADO)) ?></li>
-	<li><?php echo $this->Html->link('Pendentes ' . $this->element('admin/badges/pending-students'), array('status' => Status::ALUNO_PENDENTE), array('escape' => false)) ?></li>
+	<li><?php echo $this->Html->link('Pendentes ' . $this->element('admin/badges/pending-students'), array_merge($this->passedArgs, array('status' => Status::ALUNO_PENDENTE)), array('escape' => false)) ?></li>
+	<li><?php echo $this->Html->link('Confirmados', array_merge($this->passedArgs, array('status' => Status::ALUNO_CONFIRMADO))) ?></li>
+	<li><?php echo $this->Html->link('Deletados', array_merge($this->passedArgs, array('status' => Status::ALUNO_DELETADO))) ?></li>
 
 	<li class="nav-header">Turmas</li>
 	<?php foreach ($this->requestAction(array('controller' => 'courses', 'action' => 'index')) AS $Course) { ?>
-	<li><?php echo $this->Html->link($Course['Course']['name'], array('course' => $Course['Course']['id'])) ?></li>
+	<li><?php echo $this->Html->link($Course['Course']['name'], array_merge($this->passedArgs, array('course' => $Course['Course']['id']))) ?></li>
 	<?php } ?>
 </ul>
 <?php echo $this->end();

@@ -89,7 +89,7 @@ class UsersController extends AppController {
 				)
 			), $params);
 
-			$title_for_layout .= " - Busca por '{$search}'";
+			$title_for_layout .= " contendo '{$search}'";
 		}
 
 		$this->paginate = $this->User->studentParams($params);
