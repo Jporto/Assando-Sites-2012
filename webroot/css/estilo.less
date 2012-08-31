@@ -1,1 +1,105 @@
-@import "global.less";
+@import 'global.less';
+
+// ============================================================================
+// Generic styles
+// ============================================================================
+
+body {
+	background: #f1f1f1;
+
+	font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light',
+				 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
+				 sans-serif;
+	font-weight: 300;
+	color: #999999;
+	font-size: 1em;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-family: 'Patrick Hand', cursive;
+	font-weight: bold;
+	color: #666;
+}
+
+h1 { font-size: 2em }
+h2 { font-size: 1.6em }
+h3 { font-size: 1.3em }
+h4, h5, h6 { font-size: 1.1em }
+
+a { text-decoration: none }
+
+.wrap {
+	.row(12);
+	margin: 0 auto;
+	.clearfix;
+}
+
+// ============================================================================
+// Header
+// ============================================================================
+
+header {
+	.gradient-with-image(#a0d8d3, #d1ebe0, url('../img/background-header.png'));
+	padding: 2em 0 2em;
+
+	h1, ul { margin: 0 }
+
+	hgroup {
+		.column(4);
+		.pull(2);
+	}
+
+	nav {
+		.column(6);
+
+		ul { float: right }
+
+		li {
+			display: inline-block;
+			margin-left: 1em;
+
+			a {
+				display: block;
+				color: #fff;
+				height: 2em;
+				line-height: 2em;
+			}
+		}
+
+		.login {
+			margin-right: 1em;
+
+			a {
+				background: rgba(0, 0, 0, .1) url('../img/icons/login.png') 0.45em center no-repeat;
+				padding: 0 0.6em 0 1.7em;
+				border-radius: 6px;
+			}
+		}
+
+		.social {
+			margin-left: 0.5em;
+
+			a {
+				width: 2em;
+				text-indent: -999em;
+
+				background-repeat: no-repeat;
+				background-position: center center;
+			}
+
+			&.twitter a { background-image: url('../img/icons/twitter.png') }
+			&.facebook a { background-image: url('../img/icons/facebook.png') }
+		}
+	}
+}
+
+// ============================================================================
+// Footer
+// ============================================================================
+
+footer {
+	background: #e7e7e7;
+	padding: 2em 0 6em;
+
+	h1, ul { margin: 0 }
+}
