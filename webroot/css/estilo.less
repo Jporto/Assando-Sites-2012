@@ -7,11 +7,9 @@
 body {
 	background: #f1f1f1;
 
-	font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light',
-				 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
-				 sans-serif;
+	font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
 	font-weight: 300;
-	color: #999999;
+	color: @cinza;
 	font-size: 1em;
 }
 
@@ -41,8 +39,10 @@ a { text-decoration: none }
 header {
 	.gradient-with-image(#a0d8d3, #d1ebe0, url('../img/background-header.png'));
 	padding: 2em 0 2em;
+	position: relative;
+	overflow: hidden;
 
-	h1, ul { margin: 0 }
+	h1, ul { margin: 0; padding: 0 }
 
 	hgroup {
 		.column(4);
@@ -91,6 +91,51 @@ header {
 			&.facebook a { background-image: url('../img/icons/facebook.png') }
 		}
 	}
+
+	// ============================================================================
+	// Nuvens
+
+	.nuvem-esquerda() {
+		0% { margin-left: 0% }
+		100% { margin-left: 70% }
+	}
+
+	.nuvem-direita() {
+		0% { margin-left: 0% }
+		100% { margin-left: -70% }
+	}
+
+	@-webkit-keyframes nuvem-esquerda { .nuvem-esquerda }
+	@-moz-keyframes nuvem-esquerda { .nuvem-esquerda }
+	@keyframes nuvem-esquerda { .nuvem-esquerda }
+
+	@-webkit-keyframes nuvem-direita { .nuvem-direita }
+	@-moz-keyframes nuvem-direita { .nuvem-direita }
+	@keyframes nuvem-direita { .nuvem-direita }
+
+	.nuvens {
+		.nuvem {
+			position: absolute;
+		}
+
+		.nuvem-1 { left: 20% }
+		.nuvem-2 { left: 40% }
+		.nuvem-3 { left: 80% }
+		.nuvem-4 { left: 30% }
+		.nuvem-5 { left: 70% }
+	}
+}
+
+// Só anima caso o navegador suporte
+.cssanimations {
+	.nuvem-esquerda { .animation(nuvem-esquerda) }
+	.nuvem-direita { .animation(nuvem-direita) }
+
+	.nuvem-1 { .animation-duration(140s) }
+	.nuvem-2 { .animation-duration(100s) }
+	.nuvem-3 { .animation-duration(80s) }
+	.nuvem-4 { .animation-duration(120s) }
+	.nuvem-5 { .animation-duration(90s) }
 }
 
 // ============================================================================
@@ -100,6 +145,79 @@ header {
 footer {
 	background: #e7e7e7;
 	padding: 2em 0 6em;
+	font-size: .8em;
 
-	h1, ul { margin: 0 }
+	h1, ul { margin: 0; padding: 0 }
+
+	a { color: @cinza_escuro }
+	small { font-size: 1em }
+
+	.about {
+		.column(5);
+		.pull(1);
+
+		h1 {
+			width: 173px;
+			height: 29px;
+			text-indent: -999em;
+			margin-bottom: 1.3em;
+
+			a {
+				display: block;
+				height: 29px;
+
+				background: transparent url('../img/logo-rodape.png') no-repeat;
+			}
+		}
+
+		small.cakephp {
+			display: block;
+			padding: 1em 0 1em 60px;
+			background: transparent url('../img/cakephp-logo-footer.png') left center no-repeat;
+		}
+	}
+
+	.credits {
+		.column(5);
+		.push(1);
+
+		.social {
+			.clearfix;
+			float: right;
+			height: 20px;
+			list-style: none;
+
+			margin-bottom: 2em;
+			clear: both;
+
+			li {
+				height: 20px;
+
+				float: left;
+
+				margin-left: 1em;
+			}
+
+			.google-plus > div { width: 75px !important }
+			.twitter .twitter-share-button { width: 100px !important }
+		}
+
+		small {
+			.clearfix;
+			clear: both;
+			display: block;
+			margin: 2em 0;
+		}
+
+		text-align: right;
+	}
+}
+
+// ============================================================================
+// Home
+// ============================================================================
+.home {
+	header {
+		height: 600px;
+	}
 }

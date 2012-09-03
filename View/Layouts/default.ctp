@@ -29,6 +29,10 @@
 <?php echo $this->fetch('scripts') ?>
 <?php echo $this->Html->script('main.js') ?>
 
+<?php echo $this->Html->script('//apis.google.com/js/plusone.js', array('async')) ?>
+<?php echo $this->Html->script('//platform.twitter.com/widgets.js', array('async')) ?>
+<?php echo $this->Html->script('//connect.facebook.net/pt_BR/all.js#xfbml=1&appId=415576408488922', array('async')) ?>
+
 <?php echo $this->element('google-analytics', array('account' => 'UA-XXX')) ?>
 </body>
 </html>

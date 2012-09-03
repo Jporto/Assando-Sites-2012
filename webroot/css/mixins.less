@@ -11,3 +11,15 @@
 	background-image: @image;
 	.gradient(@from, @to);
 }
+
+.animation(@name, @duration: 300ms, @delay: 0, @iteration: infinite, @ease: linear, @direction: alternate) {
+	-webkit-animation: @name @duration @delay @iteration @ease @direction;
+	-moz-animation:    @name @duration @delay @iteration @ease @direction;
+	animation:    	   @name @duration @delay @iteration @ease @direction;
+}
+
+.animation-duration(@duration: 300ms) {
+	-webkit-animation-duration: @duration;
+	-moz-animation-duration: @duration;
+	animation-duration: @duration;
+}
