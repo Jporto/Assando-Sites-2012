@@ -24,21 +24,7 @@
 	</div>
 
 	<!-- nuvens -->
-	<div class="nuvens">
-	<?php
-	for ($i = 1; $i <= 5; $i++) {
-		$nuvem = rand(1, 2);
-
-		$class = 'nuvem nuvem-' . $i;
-		$class .= ' ' . (($i <= rand(2, 3)) ? 'nuvem-esquerda' : 'nuvem-direita');
-
-		$width = mt_rand(70, 140);
-
-		$style = 'bottom: ' . mt_rand(20, 80) . '%';
-	?>
-	<?php echo $this->Html->image("nuvem{$nuvem}.png", compact('class', 'width', 'style')) ?>
-	<?php } ?>
-	</div>
+	<?php echo $this->element('nuvens') ?>
 	<!-- /nuvens -->
 </header>
 <!-- /header -->
