@@ -4,6 +4,9 @@
 	<meta charset="utf-8" />
 	<title><?php echo Configure::read('Site.title') ?></title>
 
+	<link rel="prefetch" href="//fonts.googleapis.com/" />
+	<link rel="prefetch" href="//ajax.googleapis.com/" />
+
 	<?php echo $this->Html->meta('description', Configure::read('Site.description')) . PHP_EOL ?>
 
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />

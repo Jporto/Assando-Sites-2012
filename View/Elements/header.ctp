@@ -8,6 +8,8 @@
 
 		<?php echo $this->element('menu') ?>
 
+		<?php echo $this->fetch('header-content') ?>
+
 		<!-- ilustrações -->
 		<div class="mesa">
 			<div class="ilustracao ingredientes"><!-- --></div>

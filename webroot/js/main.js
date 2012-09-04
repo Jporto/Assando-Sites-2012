@@ -48,3 +48,6 @@ $('*[data-blink]:visible').each(function() {
 		$element.blink(true);
 	}, blink.delay());
 });
+
+// Links externos abrem numa nova janela/aba
+$('a[rel*=external]').attr('target', '_blank');
