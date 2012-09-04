@@ -5,6 +5,12 @@ $config = array(
 		'title' => 'Assando Sites',
 		'description' => '...'
 	),
+
+	'Social' => array(
+		'Twitter' => 'AssandoSites',
+		'Facebook' => 'AssandoSites'
+	),
+
 	'Enrollment' => array(
 		'limit' => '1 week',
 

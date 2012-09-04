@@ -21,7 +21,9 @@
 
 <?php echo $this->element('header') ?>
 
-<?php echo $this->fetch('content') ?>
+<section class="content">
+	<?php echo $this->fetch('content') ?>
+</section>
 
 <?php echo $this->element('footer') ?>
 

@@ -17,11 +17,11 @@
 				</li>
 
 				<li class="twitter">
-					<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://assando-sites.com.br/" data-text="Assnando Sites - Curso online de #CakePHP" data-via="AssandoSites" data-lang="pt" data-related="AssandoSites">Tweetar</a>
+					<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://assando-sites.com.br/" data-text="Assando Sites - Curso online de #CakePHP" data-via="<?php echo Configure::read('Social.Twitter') ?>" data-lang="pt" data-related="<?php echo Configure::read('Social.Twitter') ?>">Tweetar</a>
 				</li>
 
 				<li class="facebook">
-					<div class="fb-like" data-href="https://www.facebook.com/assandosites" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" data-font="lucida grande"></div>
+					<div class="fb-like" data-href="http://facebook.com/<?php echo Configure::read('Social.Facebook') ?>" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" data-font="lucida grande"></div>
 				</li>
 			</ul>
 

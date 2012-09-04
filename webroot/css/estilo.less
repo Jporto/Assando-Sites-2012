@@ -38,21 +38,33 @@ a { text-decoration: none }
 
 header {
 	.gradient-with-image(#a0d8d3, #d1ebe0, url('../img/background-header.png'));
-	padding: 2em 0 2em;
+	padding: 30px 0 45px;
 	position: relative;
 	overflow: hidden;
+	z-index: 5;
 
 	h1, ul { margin: 0; padding: 0 }
 
 	hgroup {
 		.column(4);
 		.pull(2);
+
+		h1 {
+			width: 215px;
+
+			a {
+				display: block;
+				height: 37px;
+				background: transparent url('../img/logo.png') no-repeat;
+				text-indent: -999em;
+			}
+		}
 	}
 
 	nav {
 		.column(6);
 
-		ul { float: right }
+		ul { float: right; padding-top: 10px }
 
 		li {
 			display: inline-block;
@@ -63,6 +75,8 @@ header {
 				color: #fff;
 				height: 2em;
 				line-height: 2em;
+
+				text-shadow: 0 2px 2px rgba(56, 183, 187, .75);
 			}
 		}
 
@@ -70,9 +84,10 @@ header {
 			margin-right: 1em;
 
 			a {
-				background: rgba(0, 0, 0, .1) url('../img/icons/login.png') 0.45em center no-repeat;
+				background: rgba(0, 0, 0, .1) url('../img/icons/login.png') 0.6em center no-repeat;
 				padding: 0 0.6em 0 1.7em;
 				border-radius: 6px;
+				text-shadow: none;
 			}
 		}
 
@@ -90,6 +105,23 @@ header {
 			&.twitter a { background-image: url('../img/icons/twitter.png') }
 			&.facebook a { background-image: url('../img/icons/facebook.png') }
 		}
+	}
+
+	.wrap { z-index: 20; position: relative }
+
+	// Separador
+	&:after {
+		content: " ";
+		display: block;
+		width: 100%;
+		position: absolute;
+		bottom: 0;
+		z-index: 19;
+
+		border-top: 1px solid darken(#eab559, 5%);
+		padding-top: 28px;
+		background: #eab559 url('../img/separador-header.png') center bottom repeat-x;
+		height: 17px;
 	}
 
 	// ============================================================================
@@ -116,13 +148,76 @@ header {
 	.nuvens {
 		.nuvem {
 			position: absolute;
+			z-index: 10;
 		}
 
 		.nuvem-1 { left: 20% }
 		.nuvem-2 { left: 40% }
 		.nuvem-3 { left: 80% }
-		.nuvem-4 { left: 30% }
-		.nuvem-5 { left: 70% }
+		.nuvem-4 { left: 30%; display: none }
+		.nuvem-5 { left: 70%; display: none }
+	}
+
+	// ============================================================================
+	// Ilustrações (mesa)
+	.mesa {
+		position: absolute;
+		bottom: -22px;
+		z-index: 30;
+
+		.ilustracao {
+			bottom: 0;
+			position: absolute;
+			z-index: 35;
+
+			background-repeat: no-repeat;
+			background-position: center top;
+		}
+
+		.ingredientes {
+			width: 355px;
+			height: 132px;
+			background-image: url('../img/ilustracoes/ingredientes.png');
+			left: 250px;
+		}
+
+		.cerejas {
+			width: 87px;
+			height: 52px;
+			background-image: url('../img/ilustracoes/cerejas.png');
+			left: 585px;
+			bottom: -5px;
+		}
+
+		.gnomos-bolo {
+			width: 499px;
+			height: 378px;
+			left: 480px;
+			bottom: -15px;
+			display: none;
+
+			.gnomo-esquerda {
+				width: 172px;
+				height: 208px;
+				background-image: url('../img/ilustracoes/bolo-topo-gnomo-esquerda.png');
+				bottom: 38px;
+			}
+
+			.bolo {
+				width: 268px;
+				height: 376px;
+				left: 100px;
+				background-image: url('../img/ilustracoes/bolo-topo-bolo.png');
+			}
+
+			.gnomo-direita {
+				width: 194px;
+				height: 305px;
+				background-image: url('../img/ilustracoes/bolo-topo-gnomo-direita.png');
+				right: 0;
+				bottom: 38px;
+			}
+		}
 	}
 }
 
@@ -139,11 +234,20 @@ header {
 }
 
 // ============================================================================
+// Content
+// ============================================================================
+
+section.content {
+	min-height: 100px;
+}
+
+// ============================================================================
 // Footer
 // ============================================================================
 
 footer {
 	background: #e7e7e7;
+	border-top: 1px solid darken(#e7e7e7, 5%);
 	padding: 2em 0 6em;
 	font-size: .8em;
 
@@ -218,6 +322,17 @@ footer {
 // ============================================================================
 .home {
 	header {
-		height: 600px;
+		.wrap {
+			height: 645px - 60px;
+		}
+
+		.mesa {
+			.ingredientes { left: 140px; }
+			.gnomos-bolo { display: block }
+			.cerejas { left: 885px; }
+		}
+
+		.nuvem-4 { display: block }
+		.nuvem-5 { display: block }
 	}
 }
