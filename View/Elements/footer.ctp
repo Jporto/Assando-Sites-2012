@@ -25,9 +25,9 @@
 				</li>
 			</ul>
 
-			<small>&copy; Assando Sites 2011 &ndash; todos os direitos reservados</small>
+			<small>&copy; <strong>Assando Sites</strong> 2011 &ndash; Todos os direitos reservados.</small>
 
-			<p>Design e ilustrações por <?php echo $this->Html->link('Leonardo Zem', 'http://www.wupdesign.com/', array('title' => 'Designer e Ilustrador', 'rel' => 'external')) ?></p>
+			<p>Design e ilustrações por <?php echo $this->Html->link('Leonardo Zem', 'http://www.wupdesign.com/', array('title' => 'Designer e Ilustrador', 'rel' => 'external')) ?>, implementação e desenvolvimento por <?php echo $this->Html->link('Thiago Belem', 'http://thiagobelem.net/', array('title' => 'Desenvolvedor', 'rel' => 'author')) ?></p>
 		</div>
 		<!-- /credits -->
 	</div>

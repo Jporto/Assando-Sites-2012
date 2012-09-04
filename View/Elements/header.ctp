@@ -12,9 +12,9 @@
 		<div class="mesa">
 			<div class="ilustracao ingredientes"><!-- --></div>
 			<div class="ilustracao gnomos-bolo">
-				<div class="ilustracao gnomo-esquerda"><!-- --></div>
+				<div class="ilustracao gnomo-esquerda" data-blink="true"><!-- --></div>
 				<div class="ilustracao bolo"><!-- --></div>
-				<div class="ilustracao gnomo-direita"><!-- --></div>
+				<div class="ilustracao gnomo-direita" data-blink="true"><!-- --></div>
 			</div>
 			<div class="ilustracao cerejas"><!-- --></div>
 		</div>

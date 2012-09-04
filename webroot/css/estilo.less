@@ -43,6 +43,12 @@ header {
 	overflow: hidden;
 	z-index: 5;
 
+	.wrap {
+		position: relative;
+		z-index: 20;
+		min-height: 260px - 30px - 45px;
+	}
+
 	h1, ul { margin: 0; padding: 0 }
 
 	hgroup {
@@ -107,7 +113,20 @@ header {
 		}
 	}
 
-	.wrap { z-index: 20; position: relative }
+	// Mesa
+	&:before {
+		content: " ";
+		display: block;
+		width: 100%;
+		position: absolute;
+		bottom: 0;
+		z-index: 19;
+
+		background: #eab559;
+		height: 29px + 17px;
+
+		-webkit-box-shadow: inset 0 10px 10px -6px darken(#eab559, 18%);
+	}
 
 	// Separador
 	&:after {
@@ -118,9 +137,7 @@ header {
 		bottom: 0;
 		z-index: 19;
 
-		border-top: 1px solid darken(#eab559, 5%);
-		padding-top: 28px;
-		background: #eab559 url('../img/separador-header.png') center bottom repeat-x;
+		background: url('../img/separador-header.png') center bottom repeat-x;
 		height: 17px;
 	}
 
@@ -149,6 +166,7 @@ header {
 		.nuvem {
 			position: absolute;
 			z-index: 10;
+			opacity: .7;
 		}
 
 		.nuvem-1 { left: 20% }
@@ -201,6 +219,8 @@ header {
 				height: 208px;
 				background-image: url('../img/ilustracoes/bolo-topo-gnomo-esquerda.png');
 				bottom: 38px;
+
+				&.blink { background-position: 0 -227px }
 			}
 
 			.bolo {
@@ -216,6 +236,8 @@ header {
 				background-image: url('../img/ilustracoes/bolo-topo-gnomo-direita.png');
 				right: 0;
 				bottom: 38px;
+
+				&.blink { background-position: 0 -332px }
 			}
 		}
 	}
@@ -226,11 +248,17 @@ header {
 	.nuvem-esquerda { .animation(nuvem-esquerda) }
 	.nuvem-direita { .animation(nuvem-direita) }
 
-	.nuvem-1 { .animation-duration(140s) }
-	.nuvem-2 { .animation-duration(100s) }
-	.nuvem-3 { .animation-duration(80s) }
-	.nuvem-4 { .animation-duration(120s) }
-	.nuvem-5 { .animation-duration(90s) }
+	// .nuvem-1 { .animation-duration(140s) }
+	// .nuvem-2 { .animation-duration(100s) }
+	// .nuvem-3 { .animation-duration(80s) }
+	// .nuvem-4 { .animation-duration(120s) }
+	// .nuvem-5 { .animation-duration(90s) }
+
+	.nuvem-1 { .animation-duration(280s) }
+	.nuvem-2 { .animation-duration(200s) }
+	.nuvem-3 { .animation-duration(160s) }
+	.nuvem-4 { .animation-duration(240s) }
+	.nuvem-5 { .animation-duration(150s) }
 }
 
 // ============================================================================
