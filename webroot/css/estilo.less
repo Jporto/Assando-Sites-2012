@@ -5,7 +5,7 @@
 // ============================================================================
 
 body {
-	background: #f1f1f1;
+	background: #f1f1f1 url('../img/background.png');
 
 	font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
 	font-weight: 300;
@@ -37,7 +37,7 @@ a { text-decoration: none }
 // Elementos
 // ============================================================================
 
-.botao {
+.button {
 	font-family: 'Patrick Hand', cursive;
 	font-weight: bold;
 	color: #FFF;
@@ -55,7 +55,7 @@ a { text-decoration: none }
 		border-radius: 8px;
 	}
 
-	&.botao-verde {
+	&.green {
 		.gradient(#8cc63f, #3bb54a);
 		text-shadow: 0 2px 2px #2d8f2f;
 		border-radius: 8px;
@@ -175,46 +175,46 @@ header {
 	// ============================================================================
 	// Nuvens
 
-	.nuvem-esquerda() {
+	.cloud-left() {
 		0% { margin-left: 0% }
 		100% { margin-left: 70% }
 	}
 
-	.nuvem-direita() {
+	.cloud-right() {
 		0% { margin-left: 0% }
 		100% { margin-left: -70% }
 	}
 
-	@-webkit-keyframes nuvem-esquerda { .nuvem-esquerda }
-	@-moz-keyframes nuvem-esquerda { .nuvem-esquerda }
-	@keyframes nuvem-esquerda { .nuvem-esquerda }
+	@-webkit-keyframes cloud-left { .cloud-left }
+	@-moz-keyframes cloud-left { .cloud-left }
+	@keyframes cloud-left { .cloud-left }
 
-	@-webkit-keyframes nuvem-direita { .nuvem-direita }
-	@-moz-keyframes nuvem-direita { .nuvem-direita }
-	@keyframes nuvem-direita { .nuvem-direita }
+	@-webkit-keyframes cloud-right { .cloud-right }
+	@-moz-keyframes cloud-right { .cloud-right }
+	@keyframes cloud-right { .cloud-right }
 
-	.nuvens {
-		.nuvem {
+	.clouds {
+		.cloud {
 			position: absolute;
 			z-index: 10;
 			opacity: .7;
 		}
 
-		.nuvem-1 { left: 20% }
-		.nuvem-2 { left: 40% }
-		.nuvem-3 { left: 80% }
-		.nuvem-4 { left: 30%; display: none }
-		.nuvem-5 { left: 70%; display: none }
+		.cloud-1 { left: 20% }
+		.cloud-2 { left: 40% }
+		.cloud-3 { left: 80% }
+		.cloud-4 { left: 30%; display: none }
+		.cloud-5 { left: 70%; display: none }
 	}
 
 	// ============================================================================
 	// Ilustrações (mesa)
-	.mesa {
+	.table {
 		position: absolute;
 		bottom: -22px;
 		z-index: 30;
 
-		.ilustracao {
+		.illustration {
 			bottom: 0;
 			position: absolute;
 			z-index: 35;
@@ -223,14 +223,14 @@ header {
 			background-position: center top;
 		}
 
-		.ingredientes {
+		.ingredients {
 			width: 355px;
 			height: 132px;
 			background-image: url('../img/ilustracoes/ingredientes.png');
 			left: 250px;
 		}
 
-		.cerejas {
+		.cherries {
 			width: 87px;
 			height: 52px;
 			background-image: url('../img/ilustracoes/cerejas.png');
@@ -238,14 +238,14 @@ header {
 			bottom: -5px;
 		}
 
-		.gnomos-bolo {
+		.gnomes-cake {
 			width: 499px;
 			height: 378px;
 			left: 480px;
 			bottom: -15px;
 			display: none;
 
-			.gnomo-esquerda {
+			.gnome-left {
 				width: 172px;
 				height: 208px;
 				background-image: url('../img/ilustracoes/bolo-topo-gnomo-esquerda.png');
@@ -254,14 +254,14 @@ header {
 				&.blink { background-position: 0 -227px }
 			}
 
-			.bolo {
+			.cake {
 				width: 268px;
 				height: 376px;
 				left: 105px;
 				background-image: url('../img/ilustracoes/bolo-topo-bolo.png');
 			}
 
-			.gnomo-direita {
+			.gnome-right {
 				width: 194px;
 				height: 305px;
 				background-image: url('../img/ilustracoes/bolo-topo-gnomo-direita.png');
@@ -276,20 +276,20 @@ header {
 
 // Só anima caso o navegador suporte
 .cssanimations {
-	.nuvem-esquerda { .animation(nuvem-esquerda) }
-	.nuvem-direita { .animation(nuvem-direita) }
+	.cloud-left { .animation(cloud-left) }
+	.cloud-right { .animation(cloud-right) }
 
-	// .nuvem-1 { .animation-duration(140s) }
-	// .nuvem-2 { .animation-duration(100s) }
-	// .nuvem-3 { .animation-duration(80s) }
-	// .nuvem-4 { .animation-duration(120s) }
-	// .nuvem-5 { .animation-duration(90s) }
+	// .cloud-1 { .animation-duration(140s) }
+	// .cloud-2 { .animation-duration(100s) }
+	// .cloud-3 { .animation-duration(80s) }
+	// .cloud-4 { .animation-duration(120s) }
+	// .cloud-5 { .animation-duration(90s) }
 
-	.nuvem-1 { .animation-duration(280s) }
-	.nuvem-2 { .animation-duration(200s) }
-	.nuvem-3 { .animation-duration(160s) }
-	.nuvem-4 { .animation-duration(240s) }
-	.nuvem-5 { .animation-duration(150s) }
+	.cloud-1 { .animation-duration(280s) }
+	.cloud-2 { .animation-duration(200s) }
+	.cloud-3 { .animation-duration(160s) }
+	.cloud-4 { .animation-duration(240s) }
+	.cloud-5 { .animation-duration(150s) }
 }
 
 // ============================================================================
@@ -381,14 +381,14 @@ footer {
 // ============================================================================
 .home {
 	header {
-		.mesa {
-			.ingredientes { left: 140px }
-			.gnomos-bolo { display: block }
-			.cerejas { left: 885px }
+		.table {
+			.ingredients { left: 140px }
+			.gnomes-cake { display: block }
+			.cherries { left: 885px }
 		}
 
-		.nuvem-4 { display: block }
-		.nuvem-5 { display: block }
+		.cloud-4 { display: block }
+		.cloud-5 { display: block }
 
 		.about {
 			.column(5);
@@ -404,7 +404,7 @@ footer {
 
 				.comment { font-size: .8em; opacity: .5 }
 				.cakephp { color: @cinza_escuro }
-				.bolo { color: @rosa }
+				.cake { color: @rosa }
 			}
 
 			p {

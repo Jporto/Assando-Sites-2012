@@ -10,21 +10,21 @@
 
 		<?php echo $this->fetch('header-content') ?>
 
-		<!-- ilustrações -->
-		<div class="mesa">
-			<div class="ilustracao ingredientes"><!-- --></div>
-			<div class="ilustracao gnomos-bolo">
-				<div class="ilustracao gnomo-esquerda" data-blink="true"><!-- --></div>
-				<div class="ilustracao bolo"><!-- --></div>
-				<div class="ilustracao gnomo-direita" data-blink="true"><!-- --></div>
+		<!-- table -->
+		<div class="table">
+			<div class="illustration ingredients"><!-- --></div>
+			<div class="illustration gnomes-cake">
+				<div class="illustration gnome-left" data-blink="true"><!-- --></div>
+				<div class="illustration cake"><!-- --></div>
+				<div class="illustration gnome-right" data-blink="true"><!-- --></div>
 			</div>
-			<div class="ilustracao cerejas"><!-- --></div>
+			<div class="illustration cherries"><!-- --></div>
 		</div>
-		<!-- /ilustrações -->
+		<!-- /table -->
 	</div>
 
-	<!-- nuvens -->
-	<?php echo $this->element('nuvens') ?>
-	<!-- /nuvens -->
+	<!-- clouds -->
+	<?php echo $this->element('clouds') ?>
+	<!-- /clouds -->
 </header>
 <!-- /header -->

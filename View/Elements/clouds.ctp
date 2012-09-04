@@ -1,4 +1,4 @@
-<div class="nuvens">
+<div class="clouds">
 <?php
 for ($i = 1; $i <= 5; $i++) {
 	$nuvem = rand(1, 2);
@@ -9,8 +9,8 @@ for ($i = 1; $i <= 5; $i++) {
 		'style' => 'bottom: ' . mt_rand(20, 80) . '%',
 	);
 
-	$attributes['class'] = 'nuvem nuvem-' . $i;
-	$attributes['class'] .= ' ' . (($i <= rand(2, 3)) ? 'nuvem-esquerda' : 'nuvem-direita');
+	$attributes['class'] = 'cloud cloud-' . $i;
+	$attributes['class'] .= ' ' . (($i <= rand(2, 3)) ? 'cloud-left' : 'cloud-right');
 ?>
 <?php echo $this->Html->image("nuvem{$nuvem}.png", $attributes) ?>
 <?php } ?>
