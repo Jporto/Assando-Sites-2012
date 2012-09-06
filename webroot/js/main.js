@@ -51,3 +51,12 @@ $('*[data-blink]:visible').each(function() {
 
 // Links externos abrem numa nova janela/aba
 $('a[rel*=external]').attr('target', '_blank');
+
+// Tooltip das badges
+if ($.isFunction($.fn.tipsy)) {
+	$('.badge').css('cursor', 'help').tipsy({
+		// gravity: 's',
+		fade: true,
+		offset: 5
+	});
+}

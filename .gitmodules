@@ -19,3 +19,6 @@
 [submodule "Plugin/Datasources"]
 	path = Plugin/Datasources
 	url = git@github.com:TiuTalk/datasources.git
+[submodule "webroot/js/vendor/tipsy"]
+	path = webroot/js/vendor/tipsy
+	url = https://github.com/jaz303/tipsy.git

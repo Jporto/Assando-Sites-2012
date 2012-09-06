@@ -36,7 +36,7 @@ class AppController extends Controller {
 
 /**
  * Components
- * 
+ *
  * @var array
  */
 	public $components = array(
@@ -49,7 +49,7 @@ class AppController extends Controller {
 
 /**
  * Helpers
- * 
+ *
  * @var array
  */
 	public $helpers = array(

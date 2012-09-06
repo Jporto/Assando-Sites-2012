@@ -46,7 +46,7 @@ a { text-decoration: none }
 	display: inline-block;
 	padding: 5px;
 
-	box-shadow: 2px 2px 2px rgba(56, 183, 187, .5);
+	box-shadow: 0 2px 2px rgba(56, 183, 187, .75);
 
 	span {
 		display: block;
@@ -59,6 +59,43 @@ a { text-decoration: none }
 		.gradient(#8cc63f, #3bb54a);
 		text-shadow: 0 2px 2px #2d8f2f;
 		border-radius: 8px;
+	}
+}
+
+.badge {
+	width: 96px;
+	height: 96px;
+	display: inline-block;
+
+	background: no-repeat;
+
+	&.basic { background-image: url('../img/badges-basico.png') }
+	&.advanced { background-image: url('../img/badges-avancado.png') }
+
+	&.basic {
+		.sprite(@n) {
+			background-position: center ((@n - 1) * -155px) + 2px;
+		}
+		&.eggs { .sprite(1) }
+		&.milk { .sprite(2) }
+		&.flour { .sprite(3) }
+		&.butter { .sprite(4) }
+		&.spoons { .sprite(5) }
+		&.recipient { .sprite(6) }
+		&.microwave { .sprite(7) }
+		&.cake { .sprite(8) }
+	}
+
+	&.advanced {
+		.sprite(@n) {
+			background-position: center (@n - 1) * -161px;
+		}
+		&.dough { .sprite(1) }
+		&.cakes { .sprite(2) }
+		&.cake { .sprite(3) }
+		&.eggs-milk { .sprite(4) }
+		&.mixer { .sprite(5) }
+		&.hat { .sprite(6) }
 	}
 }
 
@@ -256,8 +293,8 @@ header {
 			}
 
 			.cake {
-				width: 268px;
-				height: 376px;
+				width: 273px;
+				height: 393px;
 				left: 105px;
 				background-image: url('../img/ilustracoes/bolo-topo-bolo.png');
 			}
@@ -418,51 +455,126 @@ footer {
 
 	.content {
 
-		.blocks {
-			margin-bottom: 2.5em;
-			.clearfix;
+		.block {
+			background-color: #FFF;
+			box-shadow: 0 8px 6px -6px rgba(0, 0, 0, .3);
 		}
 
-		.block {
-			@padding: 25px;
+		.features {
+			margin-bottom: 2.5em;
+			.clearfix;
 
-			.column(4);
-			width: 320px - @padding * 2;
-			padding: @padding;
-			text-align: center;
-
-			background-color: #FFF;
-			background-repeat: no-repeat;
-			background-position: center bottom;
-			padding-bottom: 206px;
-
-			box-shadow: 0 8px 6px -6px rgba(0, 0, 0, .3);
-
-			h1 {
-				font-size: 1.8em;
-				line-height: 2.2em;
-				vertical-align: middle;
-				margin: 0 0 .5em;
-			}
-
-			p {
-				color: #afafaf;
-			}
-
-			&.learn {
-				background-image: url('../img/ilustracoes/gnomo-livro.png');
-			}
-
-			&.network {
-				background-image: url('../img/ilustracoes/gnomos-networking.png');
-			}
-
-			&.time {
-				background-image: url('../img/ilustracoes/bolo-tempo.png');
+			.block {
+				.column(4);
+				padding: 25px;
+				width: 320px - 25 * 2;
+				text-align: center;
+				background-repeat: no-repeat;
+				background-position: center bottom;
+				padding-bottom: 206px;
 
 				h1 {
-					line-height: 1.1em;
+					font-size: 1.8em;
+					line-height: 2.2em;
+					vertical-align: middle;
+					margin: 0 0 .5em;
 				}
+
+				p {
+					color: #afafaf;
+				}
+
+				&.learn {
+					background-image: url('../img/ilustracoes/gnomo-livro.png');
+				}
+
+				&.network {
+					background-image: url('../img/ilustracoes/gnomos-networking.png');
+				}
+
+				&.time {
+					background-image: url('../img/ilustracoes/bolo-tempo.png');
+
+					h1 {
+						line-height: 1.1em;
+					}
+				}
+			}
+		}
+
+		.newsletter-badges {
+			.column(12);
+			margin-bottom: 60px;
+			text-align: center;
+
+			.newsletter {
+				text-align: left;
+				background: @cinza_escuro url('../img/background-newsletter.png');
+				padding: 1em 0;
+				position: relative;
+				.clearfix;
+				height: 3.75em;
+
+				h3 {
+					.column(5);
+					.push(2);
+
+					color: #fff;
+					display: inline;
+					vertical-align: top;
+					font-size: 1.6em;
+					line-height: 1.3em;
+					text-transform: uppercase;
+					text-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+
+					strong {
+						color: @rosa;
+					}
+
+					&:before {
+						content: " ";
+						display: block;
+						position: absolute;
+						left: 45px;
+						top: -10px;
+
+						width: 79px;
+						height: 98px;
+						background: transparent url('../img/exclamacao.png');
+					}
+				}
+
+				.button {
+					float: right;
+					.pull(1);
+
+					margin-top: .05em;
+					box-shadow: 0 8px 6px -6px rgba(0, 0, 0, .3);
+				}
+
+				&:after {
+					position: absolute;
+					bottom: -9px;
+					width: 100%;
+					height: 9px;
+					background: #FFF url('../img/recorte-cinza-escuro.png') repeat-x;
+				}
+			}
+
+			h4 {
+				font-size: 2.2em;
+				margin: 1em 0 .5em;
+				text-transform: uppercase;
+				color: #999;
+				font-weight: normal;
+
+				a {
+					color: @cinza_escuro;
+				}
+			}
+
+			.badges {
+				margin-bottom: 1.5em;
 			}
 		}
 	}
