@@ -14,7 +14,7 @@ class Course extends AppModel {
 
 /**
  * Behaviors
- * 
+ *
  * @var array
  */
 	public $actsAs = array(
@@ -27,7 +27,7 @@ class Course extends AppModel {
 
 /**
  * Ordem padrão
- * 
+ *
  * @var array
  */
 	public $order = array('Course.start' => 'DESC');
@@ -99,10 +99,10 @@ class Course extends AppModel {
 
 /**
  * Subtrai um intervalo de uma data
- * 
+ *
  * @param string|int $start A data inicial
  * @param string $internval O intervalo
- * 
+ *
  * @return DateTime
  */
 	protected function _subtractDate($start, $interval) {
@@ -123,7 +123,7 @@ class Course extends AppModel {
 
 /**
  * Calcula a data limite de inscrição
- * 
+ *
  * @return DateTime
  */
 	protected function _calculateEnrollmentLimit($start = null) {
@@ -139,10 +139,10 @@ class Course extends AppModel {
 
 /**
  * Calcula o preço com desconto de um curso
- * 
+ *
  * @param  float $price Preco total
  * @param  int $discount Desconto em (%)
- * 
+ *
  * @return float
  */
 	protected function _calculateCoursePriceWithDiscount($price, $discount) {
@@ -154,9 +154,9 @@ class Course extends AppModel {
 
 /**
  * Calcula o preço do curso em uma data específica
- * 
+ *
  * @param  integeter $when The timestamp
- * 
+ *
  * @return float
  */
 	protected function _calculatePrice($when = 'now') {
@@ -184,7 +184,7 @@ class Course extends AppModel {
 
 /**
  * Calcula o preço atual do cuso
- * 
+ *
  * @return float
  */
 	public function currentPrice() {
@@ -193,10 +193,10 @@ class Course extends AppModel {
 
 /**
  * Busca cursos abertos
- * 
+ *
  * @param  string $find   Tipo de find
  * @param  array  $params Parâmetros de busca
- * 
+ *
  * @return array
  */
 	public function findOpenCourses($find = 'all', $params = array()) {
@@ -215,8 +215,57 @@ class Course extends AppModel {
 	}
 
 /**
+ * Busca cursos com inscrições fechadas
+ *
+ * @param  string $find   Tipo de find
+ * @param  array  $params Parâmetros de busca
+ *
+ * @return array
+ */
+	public function findClosedCourses($find = 'all', $params = array()) {
+		$params = Set::merge(array(
+			'conditions' => array(
+				'Course.status_id' => Status::INSCRICOES_FECHADAS,
+				'Course.enrollment_limit <= NOW()'
+			),
+			'order' => array(
+				'Course.start' => 'DESC'
+			),
+			'contain' => array('Status')
+		), $params);
+
+		return $this->find($find, $params);
+	}
+
+/**
+ * Busca o próximo curso (inscrições abertas) ou o útlimo (inscrições fechadas)
+ *
+ * @param  boolean $advanced Modulo avançado?
+ * @param  array  $params Parâmetros de busca
+ *
+ * @return array
+ */
+	public function findNextCourse($advanced = false, $params = array()) {
+		$params = Set::merge(array(
+			'conditions' => array(
+				'Course.advanced' => (bool)$advanced
+			),
+		), $params);
+
+		// Busca um curso com inscrições abertas
+		$Course = $this->findOpenCourses('first', $params);
+
+		// Nenhum curso com inscrições abertas?
+		if (empty($Course)) {
+			$Course = $this->findClosedCourses('first', $params);
+		}
+
+		return $Course;
+	}
+
+/**
  * Antes de validar
- * 
+ *
  * @return boolean
  */
 	public function beforeSave($options = array()) {

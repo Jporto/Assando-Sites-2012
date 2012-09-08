@@ -26,7 +26,7 @@
 <div class="block newsletter-badges">
 	<div class="newsletter">
 		<h3>Quer ser avisado sobre promoções e novas turmas do <strong>Assando Sites</strong>?</h3>
-		<?php echo $this->Html->link($this->Html->tag('span', 'Asinar Newsletter'), '#', array('class' => 'button green', 'escape' => false)) ?>
+		<?php echo $this->Html->link($this->Html->tag('span', 'Asinar Newsletter'), '/newsletter', array('class' => 'button green', 'rel' => 'external', 'escape' => false)) ?>
 	</div>
 
 	<h4>O <?php echo $this->Html->link('conteúdo', array('controller' => 'pages', 'action' => 'display', 'about')) ?> é divido em dois módulos que se complementam</h4>

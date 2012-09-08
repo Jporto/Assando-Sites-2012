@@ -4,9 +4,6 @@
 	<meta charset="utf-8" />
 	<title><?php echo Configure::read('Site.title') ?></title>
 
-	<link rel="prefetch" href="//fonts.googleapis.com/" />
-	<link rel="prefetch" href="//ajax.googleapis.com/" />
-
 	<?php echo $this->Html->meta('description', Configure::read('Site.description')) . PHP_EOL ?>
 
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -14,10 +11,9 @@
 
 	<?php echo $this->Html->meta('favicon.ico', $this->Html->url('/favicon.ico'), array('type' => 'icon')) . PHP_EOL ?>
 
-	<?php echo $this->Html->css($this->Html->url('/css/estilo.less', true), 'stylesheet/less') . PHP_EOL ?>
+	<?php echo $this->Html->css('estilo') ?>
 	<?php echo $this->fetch('styles') ?>
 
-	<?php echo $this->Html->script('vendor/less-1.3.0.min.js') . PHP_EOL ?>
 	<?php echo $this->Html->script('vendor/modernizr-2.6.1.min.js') . PHP_EOL ?>
 </head>
 <body class="<?php if (isset($bodyClass)) echo $bodyClass ?>">

@@ -27,6 +27,9 @@ Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home
 // Control Panel
 Router::connect('/admin', array('controller' => 'users', 'action' => 'index', 'admin' => true));
 
+// Newsletter
+Router::redirect('/newsletter', 'http://eepurl.com/jzZd5', array('status' => 307));
+
 // Load all plugin routes
 CakePlugin::routes();
 

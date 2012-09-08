@@ -8,6 +8,21 @@ App::uses('AppController', 'Controller');
 class CoursesController extends AppController {
 
 /**
+ * Retorna o próximo curso (inscrições abertas) ou o útlimo (inscrições fechadas)
+ *
+ * @throws MethodNotAllowedException If the request isn't a POST
+ *
+ * @return array
+ */
+	public function nextCourse($advanced = false) {
+		if (!isset($this->request->params['requested'])) {
+			throw new MethodNotAllowedException();
+		}
+
+		return $this->Course->findNextCourse($advanced);
+	}
+
+/**
  * admin_index method
  *
  * @return void
@@ -30,9 +45,9 @@ class CoursesController extends AppController {
  * admin_view method
  *
  * @param string $id
- * 
+ *
  * @throws NotFoundException If the course doesn't exist
- * 
+ *
  * @return void
  */
 	public function admin_view($id = null) {
@@ -80,9 +95,9 @@ class CoursesController extends AppController {
  * admin_edit method
  *
  * @param string $id
- * 
+ *
  * @throws NotFoundException If the course doesn't exist
- * 
+ *
  * @return void
  */
 	public function admin_edit($id = null) {
@@ -122,10 +137,10 @@ class CoursesController extends AppController {
  * admin_delete method
  *
  * @param string $id
- * 
+ *
  * @throws MethodNotAllowedException If the request isn't a POST
  * @throws NotFoundException If the course doesn't exist
- * 
+ *
  * @return void
  */
 	public function admin_delete($id = null) {
